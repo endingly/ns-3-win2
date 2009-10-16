@@ -1,0 +1,6 @@
+@node Python
+@chapter Python
+
+@cartouche
+Placeholder chapter
+@end cartouche

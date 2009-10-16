@@ -1,0 +1,6 @@
+@node Statistics
+@chapter Statistics
+
+@cartouche
+Placeholder chapter
+@end cartouche

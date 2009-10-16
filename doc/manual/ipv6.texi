@@ -1,0 +1,6 @@
+@node IPv6 
+@chapter IPv6 
+
+@cartouche
+Placeholder chapter
+@end cartouche

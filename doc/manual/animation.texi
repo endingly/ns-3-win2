@@ -1,0 +1,6 @@
+@node Animation
+@chapter Animation
+
+@cartouche
+Placeholder chapter
+@end cartouche
