@@ -1,6 +1,14 @@
 \.rej$
 \.orig$
 \.o$
+\.obj$
+\.tlog$
+\.log$
+\.sdf$
+\.lastbuildstate$
+\.unsuccessfulbuild$
+\.idb$
+\.pdb$
 ~$
 ^build-dir
 ^build
