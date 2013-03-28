@@ -11,11 +11,9 @@
 /* #undef HAVE_SYS_INT_TYPES_H */
 #define HAVE_SYS_TYPES_H 1
 #define HAVE_SYS_STAT_H 1
-#define HAVE_DIRENT_H 1
 #define HAVE_STDLIB_H 1
 #define HAVE_GETENV 1
 #define HAVE_SIGNAL_H 1
-#define HAVE_PTHREAD_H 1
 /* #undef HAVE_RT */
 
 #endif /* _NS3_CORE_CONFIG_H_WAF */

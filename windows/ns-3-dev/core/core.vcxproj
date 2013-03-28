@@ -180,7 +180,6 @@
     <ClCompile Include="..\..\..\src\core\model\random-variable-stream-helper.cc" />
     <ClCompile Include="..\..\..\src\core\model\random-variable-stream.cc" />
     <ClCompile Include="..\..\..\src\core\model\random-variable.cc" />
-    <ClCompile Include="..\..\..\src\core\model\realtime-simulator-impl.cc" />
     <ClCompile Include="..\..\..\src\core\model\ref-count-base.cc" />
     <ClCompile Include="..\..\..\src\core\model\rng-seed-manager.cc" />
     <ClCompile Include="..\..\..\src\core\model\rng-stream.cc" />
@@ -189,7 +188,6 @@
     <ClCompile Include="..\..\..\src\core\model\simulator.cc" />
     <ClCompile Include="..\..\..\src\core\model\string.cc" />
     <ClCompile Include="..\..\..\src\core\model\synchronizer.cc" />
-    <ClCompile Include="..\..\..\src\core\model\system-path.cc" />
     <ClCompile Include="..\..\..\src\core\model\system-thread.cc" />
     <ClCompile Include="..\..\..\src\core\model\test.cc" />
     <ClCompile Include="..\..\..\src\core\model\time.cc" />

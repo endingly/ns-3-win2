@@ -350,9 +350,6 @@
     <ClCompile Include="..\..\..\src\core\model\random-variable-stream-helper.cc">
       <Filter>model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\core\model\realtime-simulator-impl.cc">
-      <Filter>model</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\core\model\ref-count-base.cc">
       <Filter>model</Filter>
     </ClCompile>
@@ -375,9 +372,6 @@
       <Filter>model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\core\model\synchronizer.cc">
-      <Filter>model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\core\model\system-path.cc">
       <Filter>model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\core\model\system-thread.cc">
