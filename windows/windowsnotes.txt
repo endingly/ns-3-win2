@@ -10,6 +10,8 @@ unix-system-condition.cc
 unix-system-mutex.cc
 unix-system-wall-clock-ms.cc
 wall-clock-synchronizer.cc
+system-path.cc
+real-time-simulator.cc
 
 #Add
 
