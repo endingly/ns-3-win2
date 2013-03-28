@@ -407,9 +407,6 @@
     <ClCompile Include="..\..\..\src\core\model\vector.cc">
       <Filter>model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\core\model\wall-clock-synchronizer.cc">
-      <Filter>model</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\core\model\win32-system-wall-clock-ms.cc">
       <Filter>model</Filter>
     </ClCompile>
