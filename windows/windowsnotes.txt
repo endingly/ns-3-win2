@@ -9,6 +9,7 @@ unix-fd-reader.cc
 unix-system-condition.cc
 unix-system-mutex.cc
 unix-system-wall-clock-ms.cc
+wall-clock-synchronizer.cc
 
 #Add
 

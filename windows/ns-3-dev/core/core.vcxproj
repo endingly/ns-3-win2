@@ -199,7 +199,6 @@
     <ClCompile Include="..\..\..\src\core\model\type-name.cc" />
     <ClCompile Include="..\..\..\src\core\model\uinteger.cc" />
     <ClCompile Include="..\..\..\src\core\model\vector.cc" />
-    <ClCompile Include="..\..\..\src\core\model\wall-clock-synchronizer.cc" />
     <ClCompile Include="..\..\..\src\core\model\win32-system-wall-clock-ms.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
