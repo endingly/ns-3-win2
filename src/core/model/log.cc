@@ -586,8 +586,6 @@ ParameterLogger::ParameterLogger (std::ostream &os)
     m_os (os)
 {
 }
-
-
 #endif
 
 
