@@ -12,6 +12,9 @@ unix-system-wall-clock-ms.cc
 wall-clock-synchronizer.cc
 system-path.cc
 real-time-simulator.cc
+cairo-wideint.cc
+int64x64-cairo.cc
+int64x64-128.cc
 
 #Add
 

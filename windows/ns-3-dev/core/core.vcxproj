@@ -150,7 +150,6 @@
     <ClCompile Include="..\..\..\src\core\model\attribute.cc" />
     <ClCompile Include="..\..\..\src\core\model\boolean.cc" />
     <ClCompile Include="..\..\..\src\core\model\breakpoint.cc" />
-    <ClCompile Include="..\..\..\src\core\model\cairo-wideint.c" />
     <ClCompile Include="..\..\..\src\core\model\calendar-scheduler.cc" />
     <ClCompile Include="..\..\..\src\core\model\callback.cc" />
     <ClCompile Include="..\..\..\src\core\model\command-line.cc" />
@@ -163,8 +162,6 @@
     <ClCompile Include="..\..\..\src\core\model\fatal-impl.cc" />
     <ClCompile Include="..\..\..\src\core\model\global-value.cc" />
     <ClCompile Include="..\..\..\src\core\model\heap-scheduler.cc" />
-    <ClCompile Include="..\..\..\src\core\model\int64x64-128.cc" />
-    <ClCompile Include="..\..\..\src\core\model\int64x64-cairo.cc" />
     <ClCompile Include="..\..\..\src\core\model\int64x64.cc" />
     <ClCompile Include="..\..\..\src\core\model\integer.cc" />
     <ClCompile Include="..\..\..\src\core\model\list-scheduler.cc" />
@@ -188,7 +185,6 @@
     <ClCompile Include="..\..\..\src\core\model\simulator.cc" />
     <ClCompile Include="..\..\..\src\core\model\string.cc" />
     <ClCompile Include="..\..\..\src\core\model\synchronizer.cc" />
-    <ClCompile Include="..\..\..\src\core\model\system-thread.cc" />
     <ClCompile Include="..\..\..\src\core\model\test.cc" />
     <ClCompile Include="..\..\..\src\core\model\time.cc" />
     <ClCompile Include="..\..\..\src\core\model\timer.cc" />
