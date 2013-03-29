@@ -296,9 +296,6 @@
     <ClCompile Include="..\..\..\src\core\model\heap-scheduler.cc">
       <Filter>model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\core\model\int64x64.cc">
-      <Filter>model</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\core\model\integer.cc">
       <Filter>model</Filter>
     </ClCompile>

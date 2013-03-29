@@ -15,6 +15,7 @@ real-time-simulator.cc
 cairo-wideint.cc
 int64x64-cairo.cc
 int64x64-128.cc
+int64x64.cc
 
 #Add
 
