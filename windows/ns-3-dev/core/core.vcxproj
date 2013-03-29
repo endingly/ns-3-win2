@@ -43,8 +43,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);WIN32</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\ws\ns-3-win2\windows\ns-3-dev\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);WIN32;NS3_LOG_ENABLE;NS3_ASSERT_ENABLE</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -162,6 +162,7 @@
     <ClCompile Include="..\..\..\src\core\model\fatal-impl.cc" />
     <ClCompile Include="..\..\..\src\core\model\global-value.cc" />
     <ClCompile Include="..\..\..\src\core\model\heap-scheduler.cc" />
+    <ClCompile Include="..\..\..\src\core\model\int64x64.cc" />
     <ClCompile Include="..\..\..\src\core\model\integer.cc" />
     <ClCompile Include="..\..\..\src\core\model\list-scheduler.cc" />
     <ClCompile Include="..\..\..\src\core\model\log.cc" />
@@ -184,7 +185,6 @@
     <ClCompile Include="..\..\..\src\core\model\simulator.cc" />
     <ClCompile Include="..\..\..\src\core\model\string.cc" />
     <ClCompile Include="..\..\..\src\core\model\synchronizer.cc" />
-    <ClCompile Include="..\..\..\src\core\model\test.cc" />
     <ClCompile Include="..\..\..\src\core\model\time.cc" />
     <ClCompile Include="..\..\..\src\core\model\timer.cc" />
     <ClCompile Include="..\..\..\src\core\model\trace-source-accessor.cc" />
@@ -192,7 +192,6 @@
     <ClCompile Include="..\..\..\src\core\model\type-name.cc" />
     <ClCompile Include="..\..\..\src\core\model\uinteger.cc" />
     <ClCompile Include="..\..\..\src\core\model\vector.cc" />
-    <ClCompile Include="..\..\..\src\core\model\win32-system-wall-clock-ms.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
