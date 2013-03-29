@@ -22,8 +22,12 @@
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
+#ifndef WIN32
 #include <sys/time.h>                   // for gettimeofday
 #include <unistd.h>
+#else
+#include "winport.h"
+#endif
 #include <iostream>
 #include <sys/types.h>
 #include <sys/stat.h>

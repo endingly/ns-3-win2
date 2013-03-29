@@ -260,9 +260,6 @@
     <ClCompile Include="..\..\..\src\core\model\breakpoint.cc">
       <Filter>model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\core\model\cairo-wideint.c">
-      <Filter>model</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\core\model\calendar-scheduler.cc">
       <Filter>model</Filter>
     </ClCompile>
@@ -300,12 +297,6 @@
       <Filter>model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\core\model\int64x64.cc">
-      <Filter>model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\core\model\int64x64-128.cc">
-      <Filter>model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\core\model\int64x64-cairo.cc">
       <Filter>model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\core\model\integer.cc">
@@ -372,9 +363,6 @@
       <Filter>model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\core\model\synchronizer.cc">
-      <Filter>model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\core\model\system-thread.cc">
       <Filter>model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\core\model\test.cc">
