@@ -162,7 +162,6 @@
     <ClCompile Include="..\..\..\src\core\model\fatal-impl.cc" />
     <ClCompile Include="..\..\..\src\core\model\global-value.cc" />
     <ClCompile Include="..\..\..\src\core\model\heap-scheduler.cc" />
-    <ClCompile Include="..\..\..\src\core\model\int64x64.cc" />
     <ClCompile Include="..\..\..\src\core\model\integer.cc" />
     <ClCompile Include="..\..\..\src\core\model\list-scheduler.cc" />
     <ClCompile Include="..\..\..\src\core\model\log.cc" />
