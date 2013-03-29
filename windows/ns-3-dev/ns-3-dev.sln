@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "core", "core\core.vcxproj", "{B7820E24-D8E4-463F-BF3E-204B9D8114B4}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "main", "main\main.vcxproj", "{E295EBA9-1ACD-4583-B9C8-16C7FDD1E35A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B7820E24-D8E4-463F-BF3E-204B9D8114B4} = {B7820E24-D8E4-463F-BF3E-204B9D8114B4}
+		{FCAE684C-D6B0-4D31-8836-1D0875A98D65} = {FCAE684C-D6B0-4D31-8836-1D0875A98D65}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InstallHeaders", "InstallHeaders\InstallHeaders.vcxproj", "{FCAE684C-D6B0-4D31-8836-1D0875A98D65}"
 EndProject
