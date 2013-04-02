@@ -18,9 +18,11 @@
  * Author: Sebastien Vincent <vincent@clarinet.u-strasbg.fr>
  */
 
+#ifndef WIN32
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#endif
 #include "ns3/inet6-socket-address.h"
 #include "ns3/node.h"
 #include "ns3/packet.h"
