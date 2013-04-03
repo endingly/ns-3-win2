@@ -347,7 +347,11 @@ uint8_t Ipv6ExtensionFragment::Process (Ptr<Packet>& packet, uint8_t offset, Ipv
   uint32_t identification = fragmentHeader.GetIdentification ();
   Ipv6Address src = ipv6Header.GetSourceAddress ();
 
+#ifndef WIN32
   std::pair<Ipv6Address, uint32_t> fragmentsId = std::make_pair<Ipv6Address, uint32_t> (src, identification);
+#else
+  std::pair<Ipv6Address, uint32_t> fragmentsId = std::make_pair(src, identification);
+#endif
   Ptr<Fragments> fragments;
 
   Ipv6Header ipHeader = ipv6Header;
@@ -440,8 +444,11 @@ void Ipv6ExtensionFragment::GetFragments (Ptr<Packet> packet, uint32_t maxFragme
               moreHeader = false;
               hopbyhopHeader->SetNextHeader (Ipv6Header::IPV6_EXT_FRAGMENTATION);
             }
-
+#ifndef WIN32
           unfragmentablePart.push_back (std::make_pair<Ipv6ExtensionHeader *, uint8_t> (hopbyhopHeader, Ipv6Header::IPV6_EXT_HOP_BY_HOP));
+#else
+          unfragmentablePart.push_back (std::make_pair (hopbyhopHeader, Ipv6Header::IPV6_EXT_HOP_BY_HOP));
+#endif
           unfragmentablePartSize += extensionHeaderLength;
         }
       else if (nextHeader == Ipv6Header::IPV6_EXT_ROUTING)
@@ -464,8 +471,11 @@ void Ipv6ExtensionFragment::GetFragments (Ptr<Packet> packet, uint32_t maxFragme
               moreHeader = false;
               routingHeader->SetNextHeader (Ipv6Header::IPV6_EXT_FRAGMENTATION);
             }
-
+#ifndef WIN32
           unfragmentablePart.push_back (std::make_pair<Ipv6ExtensionHeader *, uint8_t> (routingHeader, Ipv6Header::IPV6_EXT_ROUTING));
+#else
+          unfragmentablePart.push_back (std::make_pair (routingHeader, Ipv6Header::IPV6_EXT_ROUTING));
+#endif
           unfragmentablePartSize += extensionHeaderLength;
         }
       else if (nextHeader == Ipv6Header::IPV6_EXT_DESTINATION)
@@ -484,8 +494,11 @@ void Ipv6ExtensionFragment::GetFragments (Ptr<Packet> packet, uint32_t maxFragme
               moreHeader = false;
               destinationHeader->SetNextHeader (Ipv6Header::IPV6_EXT_FRAGMENTATION);
             }
-
+#ifndef WIN32
           unfragmentablePart.push_back (std::make_pair<Ipv6ExtensionHeader *, uint8_t> (destinationHeader, Ipv6Header::IPV6_EXT_DESTINATION));
+#else
+          unfragmentablePart.push_back (std::make_pair (destinationHeader, Ipv6Header::IPV6_EXT_DESTINATION));
+#endif
           unfragmentablePartSize += extensionHeaderLength;
         }
     }
@@ -610,8 +623,11 @@ void Ipv6ExtensionFragment::Fragments::AddFragment (Ptr<Packet> fragment, uint16
     {
       m_moreFragment = moreFragment;
     }
-
+#ifndef WIN32
   m_packetFragments.insert (it, std::make_pair<Ptr<Packet>, uint16_t> (fragment, fragmentOffset));
+#else
+  m_packetFragments.insert (it, std::make_pair (fragment, fragmentOffset));
+#endif
 }
 
 void Ipv6ExtensionFragment::Fragments::SetUnfragmentablePart (Ptr<Packet> unfragmentablePart)

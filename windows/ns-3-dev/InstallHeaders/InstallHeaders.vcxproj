@@ -55,7 +55,10 @@ copy "$(SolutionDir)\..\..\src\internet\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\internet\helper\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\network\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\network\helper\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\network\utils\*.h"  "$(SolutionDir)\headers\ns3"</Command>
+copy "$(SolutionDir)\..\..\src\network\utils\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\mpi\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\bridge\model\*.h"  "$(SolutionDir)\headers\ns3"
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
