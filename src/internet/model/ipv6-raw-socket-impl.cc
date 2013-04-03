@@ -22,6 +22,8 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#else
+#include <WinSock2.h>
 #endif
 #include "ns3/inet6-socket-address.h"
 #include "ns3/node.h"
