@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "antenna", "antenna\antenna.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aodv", "aodv\aodv.vcxproj", "{2257CCC8-E4A0-4464-A84C-D989328DC869}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "buildings", "buildings\buildings.vcxproj", "{CC81AF8F-057F-4E7A-9640-F7CEEDD1B273}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -65,6 +67,10 @@ Global
 		{2257CCC8-E4A0-4464-A84C-D989328DC869}.Debug|Win32.Build.0 = Debug|Win32
 		{2257CCC8-E4A0-4464-A84C-D989328DC869}.Release|Win32.ActiveCfg = Release|Win32
 		{2257CCC8-E4A0-4464-A84C-D989328DC869}.Release|Win32.Build.0 = Release|Win32
+		{CC81AF8F-057F-4E7A-9640-F7CEEDD1B273}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CC81AF8F-057F-4E7A-9640-F7CEEDD1B273}.Debug|Win32.Build.0 = Debug|Win32
+		{CC81AF8F-057F-4E7A-9640-F7CEEDD1B273}.Release|Win32.ActiveCfg = Release|Win32
+		{CC81AF8F-057F-4E7A-9640-F7CEEDD1B273}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
