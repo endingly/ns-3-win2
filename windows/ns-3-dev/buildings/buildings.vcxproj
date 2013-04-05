@@ -11,12 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FCAE684C-D6B0-4D31-8836-1D0875A98D65}</ProjectGuid>
-    <RootNamespace>InstallHeaders</RootNamespace>
+    <ProjectGuid>{CC81AF8F-057F-4E7A-9640-F7CEEDD1B273}</ProjectGuid>
+    <RootNamespace>buildings</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -43,32 +43,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)\headers;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);WIN32;_USE_MATH_DEFINES</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent>
-      <Command>
-copy "$(SolutionDir)\..\..\src\core\model\*.h"  "$(SolutionDir)\headers\ns3"
-
-copy "$(SolutionDir)\..\..\src\internet\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\internet\helper\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\network\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\network\helper\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\network\utils\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\mpi\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\bridge\model\*.h"  "$(SolutionDir)\headers\ns3"
-
-copy "$(SolutionDir)\..\..\src\mobility\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\mobility\helper\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\propagation\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\antenna\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\aodv\model\*.h"  "$(SolutionDir)\headers\ns3"
-
-copy "$(SolutionDir)\..\..\src\wifi\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\buildings\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\buildings\helper\*.h"  "$(SolutionDir)\headers\ns3"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -84,6 +64,30 @@ copy "$(SolutionDir)\..\..\src\buildings\helper\*.h"  "$(SolutionDir)\headers\ns
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\buildings\helper\building-allocator.cc" />
+    <ClCompile Include="..\..\..\src\buildings\helper\building-container.cc" />
+    <ClCompile Include="..\..\..\src\buildings\helper\building-position-allocator.cc" />
+    <ClCompile Include="..\..\..\src\buildings\helper\buildings-helper.cc" />
+    <ClCompile Include="..\..\..\src\buildings\model\building-list.cc" />
+    <ClCompile Include="..\..\..\src\buildings\model\building.cc" />
+    <ClCompile Include="..\..\..\src\buildings\model\buildings-mobility-model.cc" />
+    <ClCompile Include="..\..\..\src\buildings\model\buildings-propagation-loss-model.cc" />
+    <ClCompile Include="..\..\..\src\buildings\model\hybrid-buildings-propagation-loss-model.cc" />
+    <ClCompile Include="..\..\..\src\buildings\model\itu-r-1238-propagation-loss-model.cc" />
+    <ClCompile Include="..\..\..\src\buildings\model\oh-buildings-propagation-loss-model.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\buildings\helper\building-allocator.h" />
+    <ClInclude Include="..\..\..\src\buildings\helper\building-container.h" />
+    <ClInclude Include="..\..\..\src\buildings\helper\building-position-allocator.h" />
+    <ClInclude Include="..\..\..\src\buildings\helper\buildings-helper.h" />
+    <ClInclude Include="..\..\..\src\buildings\model\building-list.h" />
+    <ClInclude Include="..\..\..\src\buildings\model\building.h" />
+    <ClInclude Include="..\..\..\src\buildings\model\buildings-mobility-model.h" />
+    <ClInclude Include="..\..\..\src\buildings\model\buildings-propagation-loss-model.h" />
+    <ClInclude Include="..\..\..\src\buildings\model\hybrid-buildings-propagation-loss-model.h" />
+    <ClInclude Include="..\..\..\src\buildings\model\itu-r-1238-propagation-loss-model.h" />
+    <ClInclude Include="..\..\..\src\buildings\model\oh-buildings-propagation-loss-model.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
