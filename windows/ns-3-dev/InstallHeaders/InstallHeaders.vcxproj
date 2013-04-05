@@ -67,7 +67,11 @@ copy "$(SolutionDir)\..\..\src\aodv\model\*.h"  "$(SolutionDir)\headers\ns3"
 
 copy "$(SolutionDir)\..\..\src\wifi\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\buildings\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\buildings\helper\*.h"  "$(SolutionDir)\headers\ns3"</Command>
+copy "$(SolutionDir)\..\..\src\buildings\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
+
+copy "$(SolutionDir)\..\..\src\csma\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\csma\helper\*.h"  "$(SolutionDir)\headers\ns3"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
