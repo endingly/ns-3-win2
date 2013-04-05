@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aodv", "aodv\aodv.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "buildings", "buildings\buildings.vcxproj", "{CC81AF8F-057F-4E7A-9640-F7CEEDD1B273}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "csma", "csma\csma.vcxproj", "{3F443112-28F5-4454-830C-55D8A49CDCB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -71,6 +73,10 @@ Global
 		{CC81AF8F-057F-4E7A-9640-F7CEEDD1B273}.Debug|Win32.Build.0 = Debug|Win32
 		{CC81AF8F-057F-4E7A-9640-F7CEEDD1B273}.Release|Win32.ActiveCfg = Release|Win32
 		{CC81AF8F-057F-4E7A-9640-F7CEEDD1B273}.Release|Win32.Build.0 = Release|Win32
+		{3F443112-28F5-4454-830C-55D8A49CDCB9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3F443112-28F5-4454-830C-55D8A49CDCB9}.Debug|Win32.Build.0 = Debug|Win32
+		{3F443112-28F5-4454-830C-55D8A49CDCB9}.Release|Win32.ActiveCfg = Release|Win32
+		{3F443112-28F5-4454-830C-55D8A49CDCB9}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
