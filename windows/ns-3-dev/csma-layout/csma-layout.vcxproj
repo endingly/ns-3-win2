@@ -11,12 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FCAE684C-D6B0-4D31-8836-1D0875A98D65}</ProjectGuid>
-    <RootNamespace>InstallHeaders</RootNamespace>
+    <ProjectGuid>{E7ED077F-3D0F-4AAD-8599-9DC3AADAE69C}</ProjectGuid>
+    <RootNamespace>csmalayout</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -43,42 +43,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(SolutionDir)\headers;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);WIN32</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <PostBuildEvent>
-      <Command>
-copy "$(SolutionDir)\..\..\src\core\model\*.h"  "$(SolutionDir)\headers\ns3"
-
-copy "$(SolutionDir)\..\..\src\internet\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\internet\helper\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\network\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\network\helper\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\network\utils\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\mpi\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\bridge\model\*.h"  "$(SolutionDir)\headers\ns3"
-
-copy "$(SolutionDir)\..\..\src\mobility\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\mobility\helper\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\propagation\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\antenna\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\aodv\model\*.h"  "$(SolutionDir)\headers\ns3"
-
-copy "$(SolutionDir)\..\..\src\wifi\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\buildings\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\buildings\helper\*.h"  "$(SolutionDir)\headers\ns3"
-
-
-copy "$(SolutionDir)\..\..\src\csma\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\csma\helper\*.h"  "$(SolutionDir)\headers\ns3"
-
-copy "$(SolutionDir)\..\..\src\point-to-point\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\point-to-point\helper\*.h"  "$(SolutionDir)\headers\ns3"
-
-copy "$(SolutionDir)\..\..\src\csma-layout\model\*.h"  "$(SolutionDir)\headers\ns3"
-</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -94,6 +64,10 @@ copy "$(SolutionDir)\..\..\src\csma-layout\model\*.h"  "$(SolutionDir)\headers\n
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\csma-layout\model\csma-star-helper.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\csma-layout\model\csma-star-helper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

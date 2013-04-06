@@ -27,6 +27,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "buildings", "buildings\buil
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "csma", "csma\csma.vcxproj", "{3F443112-28F5-4454-830C-55D8A49CDCB9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "csma-layout", "csma-layout\csma-layout.vcxproj", "{E7ED077F-3D0F-4AAD-8599-9DC3AADAE69C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "point-to-point", "point-to-point\point-to-point.vcxproj", "{9D9615EC-115E-4F9E-8F8A-E2EF65437C79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -77,6 +81,14 @@ Global
 		{3F443112-28F5-4454-830C-55D8A49CDCB9}.Debug|Win32.Build.0 = Debug|Win32
 		{3F443112-28F5-4454-830C-55D8A49CDCB9}.Release|Win32.ActiveCfg = Release|Win32
 		{3F443112-28F5-4454-830C-55D8A49CDCB9}.Release|Win32.Build.0 = Release|Win32
+		{E7ED077F-3D0F-4AAD-8599-9DC3AADAE69C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E7ED077F-3D0F-4AAD-8599-9DC3AADAE69C}.Debug|Win32.Build.0 = Debug|Win32
+		{E7ED077F-3D0F-4AAD-8599-9DC3AADAE69C}.Release|Win32.ActiveCfg = Release|Win32
+		{E7ED077F-3D0F-4AAD-8599-9DC3AADAE69C}.Release|Win32.Build.0 = Release|Win32
+		{9D9615EC-115E-4F9E-8F8A-E2EF65437C79}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9D9615EC-115E-4F9E-8F8A-E2EF65437C79}.Debug|Win32.Build.0 = Debug|Win32
+		{9D9615EC-115E-4F9E-8F8A-E2EF65437C79}.Release|Win32.ActiveCfg = Release|Win32
+		{9D9615EC-115E-4F9E-8F8A-E2EF65437C79}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
