@@ -510,7 +510,11 @@ SimpleOfdmWimaxPhy::ConvertBurstToBits (Ptr<const PacketBurst> burst)
 Ptr<PacketBurst>
 SimpleOfdmWimaxPhy::ConvertBitsToBurst (bvec buffer)
 {
+#ifndef WIN32
   uint8_t init[buffer.size () / 8];
+#else
+  uint8_t * init = new uint8_t[buffer.size () / 8];
+#endif
   uint8_t *pstart = init;
   uint8_t temp;
   int32_t j = 0;
@@ -556,6 +560,9 @@ SimpleOfdmWimaxPhy::ConvertBitsToBurst (bvec buffer)
       RecvBurst->AddPacket (p);
       pos += packetSize;
     }
+#ifdef WIN32
+  delete [] init;
+#endif
   return RecvBurst;
 }
 
