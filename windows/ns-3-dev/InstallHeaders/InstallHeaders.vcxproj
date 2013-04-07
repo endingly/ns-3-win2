@@ -106,6 +106,19 @@ copy "$(SolutionDir)\..\..\src\virtual-net-device\model\*.h"  "$(SolutionDir)\he
 copy "$(SolutionDir)\..\..\src\stats\model\*.h"  "$(SolutionDir)\headers\ns3"
 
 copy "$(SolutionDir)\..\winport\*.h"  "$(SolutionDir)\headers"
+
+
+copy "$(SolutionDir)\..\..\src\mesh\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\mesh\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\..\src\mesh\model\flame\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\mesh\helper\flame\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\..\src\mesh\model\dot11s\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\mesh\helper\dot11s\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\..\src\wifi\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\wifi\helper\*.h"  "$(SolutionDir)\headers\ns3"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

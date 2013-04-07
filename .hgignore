@@ -10,6 +10,9 @@
 \.idb$
 \.pdb$
 \.lib$
+\.exe$
+\.ilk$
+\.opensdf$
 ^windows/ns-3-dev/headers/
 ~$
 ^build-dir
