@@ -61,6 +61,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nix-vector-routing", "nix-v
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "olsr", "olsr\olsr.vcxproj", "{83DAD76D-3B1C-484E-BF47-548C523A0409}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "uan", "uan\uan.vcxproj", "{F2573FC7-1CCD-4341-A75E-88A4A07765BE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wifi", "wifi\wifi.vcxproj", "{38C26040-424B-4526-B0C6-4089A04EABE2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wimax", "wimax\wimax.vcxproj", "{823C041E-23A4-4820-9C81-EF13E438F962}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -179,6 +185,18 @@ Global
 		{83DAD76D-3B1C-484E-BF47-548C523A0409}.Debug|Win32.Build.0 = Debug|Win32
 		{83DAD76D-3B1C-484E-BF47-548C523A0409}.Release|Win32.ActiveCfg = Release|Win32
 		{83DAD76D-3B1C-484E-BF47-548C523A0409}.Release|Win32.Build.0 = Release|Win32
+		{F2573FC7-1CCD-4341-A75E-88A4A07765BE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F2573FC7-1CCD-4341-A75E-88A4A07765BE}.Debug|Win32.Build.0 = Debug|Win32
+		{F2573FC7-1CCD-4341-A75E-88A4A07765BE}.Release|Win32.ActiveCfg = Release|Win32
+		{F2573FC7-1CCD-4341-A75E-88A4A07765BE}.Release|Win32.Build.0 = Release|Win32
+		{38C26040-424B-4526-B0C6-4089A04EABE2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{38C26040-424B-4526-B0C6-4089A04EABE2}.Debug|Win32.Build.0 = Debug|Win32
+		{38C26040-424B-4526-B0C6-4089A04EABE2}.Release|Win32.ActiveCfg = Release|Win32
+		{38C26040-424B-4526-B0C6-4089A04EABE2}.Release|Win32.Build.0 = Release|Win32
+		{823C041E-23A4-4820-9C81-EF13E438F962}.Debug|Win32.ActiveCfg = Debug|Win32
+		{823C041E-23A4-4820-9C81-EF13E438F962}.Debug|Win32.Build.0 = Debug|Win32
+		{823C041E-23A4-4820-9C81-EF13E438F962}.Release|Win32.ActiveCfg = Release|Win32
+		{823C041E-23A4-4820-9C81-EF13E438F962}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
