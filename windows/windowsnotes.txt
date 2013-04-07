@@ -18,6 +18,7 @@ int64x64-128.cc
 win32-wallclock
 test.cc
 config-store (due to libxml dependency)
+sqlite-data-output.cc
 
 #Add
 
