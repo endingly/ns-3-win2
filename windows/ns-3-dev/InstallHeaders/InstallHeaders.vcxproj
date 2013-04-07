@@ -77,6 +77,35 @@ copy "$(SolutionDir)\..\..\src\point-to-point\model\*.h"  "$(SolutionDir)\header
 copy "$(SolutionDir)\..\..\src\point-to-point\helper\*.h"  "$(SolutionDir)\headers\ns3"
 
 copy "$(SolutionDir)\..\..\src\csma-layout\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\point-to-point-layout\model\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\..\src\dsdv\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\dsdv\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\..\src\dsr\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\dsr\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\..\src\tools\model\*.h"  "$(SolutionDir)\headers\ns3"
+
+
+copy "$(SolutionDir)\..\..\src\energy\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\energy\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\..\src\flow-monitor\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\flow-monitor\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\..\src\lte\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\lte\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
+
+copy "$(SolutionDir)\..\..\src\spectrum\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\spectrum\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\..\src\virtual-net-device\model\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\..\src\stats\model\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\winport\*.h"  "$(SolutionDir)\headers"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>

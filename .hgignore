@@ -9,6 +9,8 @@
 \.unsuccessfulbuild$
 \.idb$
 \.pdb$
+\.lib$
+^windows/ns-3-dev/headers/
 ~$
 ^build-dir
 ^build
