@@ -57,6 +57,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mesh", "mesh\mesh.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "netanim", "netanim\netanim.vcxproj", "{CB1BA1D7-4286-483F-AF16-A252B3FA07BF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nix-vector-routing", "nix-vector-routing\nix-vector-routing.vcxproj", "{62D77ADF-2806-4DAC-BF9B-A2629C8931D7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "olsr", "olsr\olsr.vcxproj", "{83DAD76D-3B1C-484E-BF47-548C523A0409}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -167,6 +171,14 @@ Global
 		{CB1BA1D7-4286-483F-AF16-A252B3FA07BF}.Debug|Win32.Build.0 = Debug|Win32
 		{CB1BA1D7-4286-483F-AF16-A252B3FA07BF}.Release|Win32.ActiveCfg = Release|Win32
 		{CB1BA1D7-4286-483F-AF16-A252B3FA07BF}.Release|Win32.Build.0 = Release|Win32
+		{62D77ADF-2806-4DAC-BF9B-A2629C8931D7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{62D77ADF-2806-4DAC-BF9B-A2629C8931D7}.Debug|Win32.Build.0 = Debug|Win32
+		{62D77ADF-2806-4DAC-BF9B-A2629C8931D7}.Release|Win32.ActiveCfg = Release|Win32
+		{62D77ADF-2806-4DAC-BF9B-A2629C8931D7}.Release|Win32.Build.0 = Release|Win32
+		{83DAD76D-3B1C-484E-BF47-548C523A0409}.Debug|Win32.ActiveCfg = Debug|Win32
+		{83DAD76D-3B1C-484E-BF47-548C523A0409}.Debug|Win32.Build.0 = Debug|Win32
+		{83DAD76D-3B1C-484E-BF47-548C523A0409}.Release|Win32.ActiveCfg = Release|Win32
+		{83DAD76D-3B1C-484E-BF47-548C523A0409}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
