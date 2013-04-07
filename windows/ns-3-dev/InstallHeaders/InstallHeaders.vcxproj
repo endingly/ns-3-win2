@@ -62,10 +62,17 @@ copy "$(SolutionDir)\..\..\src\bridge\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\mobility\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\mobility\helper\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\propagation\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\antenna\model\*.h"  "$(SolutionDir)\headers\ns3"
-copy "$(SolutionDir)\..\..\src\aodv\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\propagation\helper\*.h"  "$(SolutionDir)\headers\ns3"
 
-copy "$(SolutionDir)\..\..\src\wifi\model\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\..\src\antenna\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\antenna\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
+
+copy "$(SolutionDir)\..\..\src\aodv\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\aodv\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
+
 copy "$(SolutionDir)\..\..\src\buildings\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\buildings\helper\*.h"  "$(SolutionDir)\headers\ns3"
 
@@ -77,7 +84,11 @@ copy "$(SolutionDir)\..\..\src\point-to-point\model\*.h"  "$(SolutionDir)\header
 copy "$(SolutionDir)\..\..\src\point-to-point\helper\*.h"  "$(SolutionDir)\headers\ns3"
 
 copy "$(SolutionDir)\..\..\src\csma-layout\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\csma-layout\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
 copy "$(SolutionDir)\..\..\src\point-to-point-layout\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\point-to-point-layout\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
 
 copy "$(SolutionDir)\..\..\src\dsdv\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\dsdv\helper\*.h"  "$(SolutionDir)\headers\ns3"
@@ -119,7 +130,15 @@ copy "$(SolutionDir)\..\..\src\mesh\helper\dot11s\*.h"  "$(SolutionDir)\headers\
 
 copy "$(SolutionDir)\..\..\src\wifi\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\wifi\helper\*.h"  "$(SolutionDir)\headers\ns3"
-</Command>
+
+copy "$(SolutionDir)\..\..\src\netanim\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\netanim\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\..\src\uan\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\uan\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
+copy "$(SolutionDir)\..\..\src\wimax\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\wimax\helper\*.h"  "$(SolutionDir)\headers\ns3"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
