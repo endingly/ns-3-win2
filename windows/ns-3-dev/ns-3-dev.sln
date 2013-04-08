@@ -182,6 +182,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wimax", "wimax\wimax.vcxpro
 		{FCAE684C-D6B0-4D31-8836-1D0875A98D65} = {FCAE684C-D6B0-4D31-8836-1D0875A98D65}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "applications", "applications\applications.vcxproj", "{0595E80B-3D2F-4737-AF51-8B912670B7CD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bridge", "bridge\bridge.vcxproj", "{633F111F-FFD3-40D5-A463-9E713235CF4B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpi", "mpi\mpi.vcxproj", "{FE1A1789-88A3-4177-A3B5-C574DFAFE215}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -312,6 +318,18 @@ Global
 		{823C041E-23A4-4820-9C81-EF13E438F962}.Debug|Win32.Build.0 = Debug|Win32
 		{823C041E-23A4-4820-9C81-EF13E438F962}.Release|Win32.ActiveCfg = Release|Win32
 		{823C041E-23A4-4820-9C81-EF13E438F962}.Release|Win32.Build.0 = Release|Win32
+		{0595E80B-3D2F-4737-AF51-8B912670B7CD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0595E80B-3D2F-4737-AF51-8B912670B7CD}.Debug|Win32.Build.0 = Debug|Win32
+		{0595E80B-3D2F-4737-AF51-8B912670B7CD}.Release|Win32.ActiveCfg = Release|Win32
+		{0595E80B-3D2F-4737-AF51-8B912670B7CD}.Release|Win32.Build.0 = Release|Win32
+		{633F111F-FFD3-40D5-A463-9E713235CF4B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{633F111F-FFD3-40D5-A463-9E713235CF4B}.Debug|Win32.Build.0 = Debug|Win32
+		{633F111F-FFD3-40D5-A463-9E713235CF4B}.Release|Win32.ActiveCfg = Release|Win32
+		{633F111F-FFD3-40D5-A463-9E713235CF4B}.Release|Win32.Build.0 = Release|Win32
+		{FE1A1789-88A3-4177-A3B5-C574DFAFE215}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FE1A1789-88A3-4177-A3B5-C574DFAFE215}.Debug|Win32.Build.0 = Debug|Win32
+		{FE1A1789-88A3-4177-A3B5-C574DFAFE215}.Release|Win32.ActiveCfg = Release|Win32
+		{FE1A1789-88A3-4177-A3B5-C574DFAFE215}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
