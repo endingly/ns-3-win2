@@ -10,16 +10,13 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E295EBA9-1ACD-4583-B9C8-16C7FDD1E35A}</ProjectGuid>
-    <RootNamespace>main</RootNamespace>
+    <ProjectGuid>{633F111F-FFD3-40D5-A463-9E713235CF4B}</ProjectGuid>
+    <RootNamespace>bridge</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -46,12 +43,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);WIN32;NS3_LOG_ENABLE</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\headers</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);WIN32</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)\core\Debug\*.obj;$(SolutionDir)\applications\Debug\*.obj;$(SolutionDir)\aodv\Debug\*.obj;$(SolutionDir)\antenna\Debug\*.obj;$(SolutionDir)\bridge\Debug\*.obj;$(SolutionDir)\buildings\Debug\*.obj;$(SolutionDir)\csma\Debug\*.obj;$(SolutionDir)\csma-layout\Debug\*.obj;$(SolutionDir)\dsdn\Debug\*.obj;$(SolutionDir)\dsr\Debug\*.obj;$(SolutionDir)\energy\Debug\*.obj;$(SolutionDir)\flow-monitor\Debug\*.obj;$(SolutionDir)\internet\Debug\*.obj;$(SolutionDir)\lte\Debug\*.obj;$(SolutionDir)\mesh\Debug\*.obj;$(SolutionDir)\mobility\Debug\*.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -67,6 +63,16 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\bridge\helper\bridge-helper.cc" />
+    <ClCompile Include="..\..\..\src\bridge\model\bridge-channel.cc" />
+    <ClCompile Include="..\..\..\src\bridge\model\bridge-net-device.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\bridge\helper\bridge-helper.h" />
+    <ClInclude Include="..\..\..\src\bridge\model\bridge-channel.h" />
+    <ClInclude Include="..\..\..\src\bridge\model\bridge-net-device.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

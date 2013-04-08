@@ -51,6 +51,10 @@
       <Command>
 copy "$(SolutionDir)\..\..\src\core\model\*.h"  "$(SolutionDir)\headers\ns3"
 
+copy "$(SolutionDir)\..\..\src\applications\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\applications\helper\*.h"  "$(SolutionDir)\headers\ns3"
+
+
 copy "$(SolutionDir)\..\..\src\internet\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\internet\helper\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\network\model\*.h"  "$(SolutionDir)\headers\ns3"
