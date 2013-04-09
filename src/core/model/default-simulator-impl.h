@@ -24,8 +24,10 @@
 #include "simulator-impl.h"
 #include "scheduler.h"
 #include "event-impl.h"
+#ifndef WIN32
 #include "system-thread.h"
 #include "ns3/system-mutex.h"
+#endif
 
 #include "ptr.h"
 
@@ -73,7 +75,9 @@ private:
   typedef std::list<struct EventWithContext> EventsWithContext;
   EventsWithContext m_eventsWithContext;
   bool m_eventsWithContextEmpty;
+#ifndef WIN32
   SystemMutex m_eventsWithContextMutex;
+#endif
 
   typedef std::list<EventId> DestroyEvents;
   DestroyEvents m_destroyEvents;
@@ -87,8 +91,9 @@ private:
   // number of events that have been inserted but not yet scheduled,
   // not counting the "destroy" events; this is used for validation
   int m_unscheduledEvents;
-
+#ifndef WIN32
   SystemThread::ThreadId m_main;
+#endif
 };
 
 } // namespace ns3
