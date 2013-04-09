@@ -49,6 +49,10 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)\..\..\src\lte\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\lte\helper\*.h"  "$(SolutionDir)\headers\ns3"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
