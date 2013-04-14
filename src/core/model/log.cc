@@ -576,11 +576,19 @@ LogNodePrinter LogGetNodePrinter (void)
   return g_logNodePrinter;
 }
 
-
+#ifndef WIN32
 ParameterLogger::ParameterLogger (std::ostream &os)
   : m_itemNumber (0),
     m_os (os)
 {
 }
+#else
+ParameterLogger::ParameterLogger (std::ostream &os)
+  : basic_ostream<char>(os.rdbuf()), m_itemNumber (0),
+    m_os (os)
+{
+}
+#endif
+
 
 } // namespace ns3

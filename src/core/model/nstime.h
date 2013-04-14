@@ -28,6 +28,10 @@
 #include <cmath>
 #include <ostream>
 
+#ifdef WIN32
+#include "winport.h"
+#endif
+
 namespace ns3 {
 
 /**
