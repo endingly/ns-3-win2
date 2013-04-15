@@ -48,6 +48,9 @@
     <ClCompile Include="..\..\..\src\dsr\helper\dsr-main-helper.cc">
       <Filter>helper</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\dsr\model\dsr-passive-buff.cc">
+      <Filter>model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\dsr\model\dsr-errorbuff.h">
@@ -88,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\dsr\helper\dsr-main-helper.h">
       <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\dsr\model\dsr-passive-buff.h">
+      <Filter>model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

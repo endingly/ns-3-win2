@@ -77,6 +77,7 @@ copy "$(SolutionDir)\..\..\src\dsr\helper\*.h"  "$(SolutionDir)\headers\ns3"</Co
     <ClCompile Include="..\..\..\src\dsr\model\dsr-network-queue.cc" />
     <ClCompile Include="..\..\..\src\dsr\model\dsr-option-header.cc" />
     <ClCompile Include="..\..\..\src\dsr\model\dsr-options.cc" />
+    <ClCompile Include="..\..\..\src\dsr\model\dsr-passive-buff.cc" />
     <ClCompile Include="..\..\..\src\dsr\model\dsr-rcache.cc" />
     <ClCompile Include="..\..\..\src\dsr\model\dsr-routing.cc" />
     <ClCompile Include="..\..\..\src\dsr\model\dsr-rreq-table.cc" />
@@ -92,6 +93,7 @@ copy "$(SolutionDir)\..\..\src\dsr\helper\*.h"  "$(SolutionDir)\headers\ns3"</Co
     <ClInclude Include="..\..\..\src\dsr\model\dsr-network-queue.h" />
     <ClInclude Include="..\..\..\src\dsr\model\dsr-option-header.h" />
     <ClInclude Include="..\..\..\src\dsr\model\dsr-options.h" />
+    <ClInclude Include="..\..\..\src\dsr\model\dsr-passive-buff.h" />
     <ClInclude Include="..\..\..\src\dsr\model\dsr-rcache.h" />
     <ClInclude Include="..\..\..\src\dsr\model\dsr-routing.h" />
     <ClInclude Include="..\..\..\src\dsr\model\dsr-rreq-table.h" />
