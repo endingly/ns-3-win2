@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\..\..\examples\tutorial\third.cc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E295EBA9-1ACD-4583-B9C8-16C7FDD1E35A}</ProjectGuid>
