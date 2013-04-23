@@ -108,7 +108,12 @@ Time::SetResolution (enum Unit unit, struct Resolution *resolution)
   for (int i = 0; i < Time::LAST; i++)
     {
       int shift = power[i] - power[(int)unit];
+#ifndef WIN32
       uint64_t factor = (uint64_t) std::pow (10, std::fabs (shift));
+#else
+      uint64_t factor = (uint64_t) std::pow (10, std::fabs ((double)shift));
+
+#endif
       struct Information *info = &resolution->info[i];
       info->factor = factor;
       if (shift == 0)

@@ -1328,8 +1328,11 @@ Ipv4L3Protocol::Fragments::AddFragment (Ptr<Packet> fragment, uint16_t fragmentO
     {
       m_moreFragment = moreFragment;
     }
-
+#ifndef WIN32
   m_fragments.insert (it, std::make_pair<Ptr<Packet>, uint16_t> (fragment, fragmentOffset));
+#else
+  m_fragments.insert (it, std::make_pair (fragment, fragmentOffset));
+#endif
 }
 
 bool

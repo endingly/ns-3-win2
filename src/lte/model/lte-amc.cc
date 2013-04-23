@@ -31,6 +31,10 @@
 #include "ns3/enum.h"
 #include <ns3/lte-mi-error-model.h>
 
+#ifdef WIN32
+#include "winport.h"
+#endif
+
 
 NS_LOG_COMPONENT_DEFINE ("LteAmc");
 
