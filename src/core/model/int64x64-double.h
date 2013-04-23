@@ -5,6 +5,10 @@
 #include <iostream>
 #include <cmath>
 
+#ifdef WIN32
+#include <stdint.h>
+#endif
+
 namespace ns3 {
 
 class int64x64_t

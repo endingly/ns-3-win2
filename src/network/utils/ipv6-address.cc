@@ -47,6 +47,7 @@ extern "C"
 static uint32_t lookuphash (unsigned char* k, uint32_t length, uint32_t level)
 {
   NS_LOG_FUNCTION (k << length << level);
+#ifndef WIN32
 #define mix(a, b, c) \
   ({ \
      (a) -= (b); (a) -= (c); (a) ^= ((c) >> 13); \
@@ -59,6 +60,21 @@ static uint32_t lookuphash (unsigned char* k, uint32_t length, uint32_t level)
      (b) -= (c); (b) -= (a); (b) ^= ((a) << 10); \
      (c) -= (a); (c) -= (b); (c) ^= ((b) >> 15); \
    })
+#else
+#define mix(a, b, c) \
+  { \
+   (a) -= (b); (a) -= (c); (a) ^= ((c) >> 13); \
+   (b) -= (c); (b) -= (a); (b) ^= ((a) << 8);  \
+   (c) -= (a); (c) -= (b); (c) ^= ((b) >> 13); \
+   (a) -= (b); (a) -= (c); (a) ^= ((c) >> 12); \
+   (b) -= (c); (b) -= (a); (b) ^= ((a) << 16); \
+   (c) -= (a); (c) -= (b); (c) ^= ((b) >> 5);  \
+   (a) -= (b); (a) -= (c); (a) ^= ((c) >> 3);  \
+   (b) -= (c); (b) -= (a); (b) ^= ((a) << 10); \
+   (c) -= (a); (c) -= (b); (c) ^= ((b) >> 15); \
+   }
+
+#endif
 
   typedef uint32_t  ub4;   /* unsigned 4-byte quantities */
   typedef unsigned  char ub1;   /* unsigned 1-byte quantities */
