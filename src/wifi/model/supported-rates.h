@@ -118,6 +118,9 @@ public:
    */
   friend class ExtendedSupportedRatesIE;
   ExtendedSupportedRatesIE extended;
+#ifdef WIN32
+  SupportedRates& operator= (const SupportedRates& sr);
+#endif
 private:
   uint8_t m_nRates;
   uint8_t m_rates[MAX_SUPPORTED_RATES];
