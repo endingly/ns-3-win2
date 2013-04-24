@@ -65,7 +65,7 @@ DefaultSimulatorImpl::DefaultSimulatorImpl ()
   m_currentContext = 0xffffffff;
   m_unscheduledEvents = 0;
   m_eventsWithContextEmpty = true;
-#ifndef WIN32
+#if HAVE_PTHREAD_H
   m_main = SystemThread::Self();
 #endif
 }
@@ -162,7 +162,7 @@ DefaultSimulatorImpl::ProcessEventsWithContext (void)
   // swap queues
   EventsWithContext eventsWithContext;
   {
-#ifndef WIN32
+#ifndef HAVE_PTHREAD_H 
     CriticalSection cs (m_eventsWithContextMutex);
 #endif
     m_eventsWithContext.swap(eventsWithContext);
@@ -188,7 +188,7 @@ DefaultSimulatorImpl::Run (void)
 {
   NS_LOG_FUNCTION (this);
   // Set the current threadId as the main threadId
-#ifndef WIN32
+#ifndef HAVE_PTHREAD_H 
   m_main = SystemThread::Self();
 #endif
   ProcessEventsWithContext ();
@@ -225,7 +225,7 @@ EventId
 DefaultSimulatorImpl::Schedule (Time const &time, EventImpl *event)
 {
   NS_LOG_FUNCTION (this << time.GetTimeStep () << event);
-#ifndef WIN32
+#ifndef HAVE_PTHREAD_H 
   NS_ASSERT_MSG (SystemThread::Equals (m_main), "Simulator::Schedule Thread-unsafe invocation!");
 #endif
   Time tAbsolute = time + TimeStep (m_currentTs);
@@ -243,7 +243,7 @@ DefaultSimulatorImpl::Schedule (Time const &time, EventImpl *event)
   return EventId (event, ev.key.m_ts, ev.key.m_context, ev.key.m_uid);
 }
 
-#ifndef WIN32
+#ifndef HAVE_PTHREAD_H 
 void
 DefaultSimulatorImpl::ScheduleWithContext (uint32_t context, Time const &time, EventImpl *event)
 {
@@ -294,7 +294,7 @@ DefaultSimulatorImpl::ScheduleWithContext (uint32_t context, Time const &time, E
 EventId
 DefaultSimulatorImpl::ScheduleNow (EventImpl *event)
 {
-#ifndef WIN32
+#ifndef HAVE_PTHREAD_H 
   NS_ASSERT_MSG (SystemThread::Equals (m_main), "Simulator::ScheduleNow Thread-unsafe invocation!");
 #endif
 
@@ -312,7 +312,7 @@ DefaultSimulatorImpl::ScheduleNow (EventImpl *event)
 EventId
 DefaultSimulatorImpl::ScheduleDestroy (EventImpl *event)
 {
-#ifndef WIN32
+#ifndef HAVE_PTHREAD_H 
   NS_ASSERT_MSG (SystemThread::Equals (m_main), "Simulator::ScheduleDestroy Thread-unsafe invocation!");
 #endif
   EventId id (Ptr<EventImpl> (event, false), m_currentTs, 0xffffffff, 2);
