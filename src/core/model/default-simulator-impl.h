@@ -24,7 +24,7 @@
 #include "simulator-impl.h"
 #include "scheduler.h"
 #include "event-impl.h"
-#ifndef WIN32
+#if HAVE_PTHREAD_H
 #include "system-thread.h"
 #include "ns3/system-mutex.h"
 #endif
@@ -75,7 +75,7 @@ private:
   typedef std::list<struct EventWithContext> EventsWithContext;
   EventsWithContext m_eventsWithContext;
   bool m_eventsWithContextEmpty;
-#ifndef WIN32
+#ifndef HAVE_PTHREAD_H 
   SystemMutex m_eventsWithContextMutex;
 #endif
 
@@ -91,7 +91,7 @@ private:
   // number of events that have been inserted but not yet scheduled,
   // not counting the "destroy" events; this is used for validation
   int m_unscheduledEvents;
-#ifndef WIN32
+#if HAVE_PTHREAD_H
   SystemThread::ThreadId m_main;
 #endif
 };
