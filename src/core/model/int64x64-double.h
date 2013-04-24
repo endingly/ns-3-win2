@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cmath>
 
-#ifdef WIN32
+#if HAVE_STDINT_H
 #include <stdint.h>
 #endif
 
