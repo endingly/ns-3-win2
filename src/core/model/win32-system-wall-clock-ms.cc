@@ -22,6 +22,10 @@
 
 #include <ctime>
 
+#ifdef WIN32
+#include "log.h"
+#endif
+
 namespace ns3 {
 
 class SystemWallClockMsPrivate {
