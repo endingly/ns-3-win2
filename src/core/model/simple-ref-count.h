@@ -29,8 +29,7 @@
 #include <limits>
 
 #ifdef WIN32
-#undef max
-#undef min
+#include "winport.h"
 #endif
 
 namespace ns3 {

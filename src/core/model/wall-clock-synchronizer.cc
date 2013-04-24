@@ -18,11 +18,7 @@
 
 #include <ctime> // for clock_getres
 
-#ifndef WIN32
 #include <sys/time.h>
-#else
-#include "winport.h"
-#endif
 
 #include "log.h"
 #include "system-condition.h"
