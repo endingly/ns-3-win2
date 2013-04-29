@@ -29,6 +29,12 @@
 #include "ipv4-route.h"
 #include "ipv4-interface-address.h"
 
+#ifdef WIN32
+#ifdef interface
+#undef interface
+#endif
+#endif
+
 namespace ns3 {
 
 class Node;

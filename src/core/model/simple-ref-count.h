@@ -28,6 +28,10 @@
 #include <stdint.h>
 #include <limits>
 
+#ifdef WIN32
+#include "winport.h"
+#endif
+
 namespace ns3 {
 
 /**

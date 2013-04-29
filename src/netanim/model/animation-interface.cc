@@ -42,7 +42,9 @@
 #include "ns3/ipv4-routing-protocol.h" 
 
 #include <cstdio>
+#ifndef WIN32
 #include <unistd.h>
+#endif
 #include <sstream>
 #include <fstream>
 #include <string>
