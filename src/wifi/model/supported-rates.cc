@@ -133,6 +133,19 @@ SupportedRates::DeserializeInformationField (Buffer::Iterator start,
   return m_nRates;
 }
 
+#ifdef WIN32
+SupportedRates & SupportedRates::operator= (const SupportedRates & sr)
+{
+  this->m_nRates = sr.m_nRates ;
+  for (int i = 0 ; i < MAX_SUPPORTED_RATES ; i++) 
+  {
+	  this->m_rates[i] = sr.m_rates[i];
+  }
+  this->extended = ExtendedSupportedRatesIE (this);
+  return *this;
+}
+#endif
+
 ExtendedSupportedRatesIE::ExtendedSupportedRatesIE ()
 {
 }

@@ -40,6 +40,8 @@ def configure(conf):
     conf.check_nonfatal(header_name='sys/types.h', define_name='HAVE_SYS_TYPES_H')
     conf.check_nonfatal(header_name='sys/stat.h', define_name='HAVE_SYS_STAT_H')
     conf.check_nonfatal(header_name='dirent.h', define_name='HAVE_DIRENT_H')
+    conf.check_nonfatal(header_name='sys/time.h', define_name='HAVE_SYS_TIME_H')
+    conf.check_nonfatal(header_name='unistd.h', define_name='HAVE_UNISTD_H')
 
     if conf.check_nonfatal(header_name='stdlib.h'):
         conf.define('HAVE_STDLIB_H', 1)
