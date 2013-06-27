@@ -75,7 +75,7 @@ private:
   typedef std::list<struct EventWithContext> EventsWithContext;
   EventsWithContext m_eventsWithContext;
   bool m_eventsWithContextEmpty;
-#ifndef HAVE_PTHREAD_H 
+#ifdef HAVE_PTHREAD_H 
   SystemMutex m_eventsWithContextMutex;
 #endif
 

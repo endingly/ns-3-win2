@@ -19,7 +19,8 @@
 #ifndef _WINPORT_H_
 #define _WINPORT_H_
 #include <stdint.h>
-
+#undef max
+#undef min
 int64_t lround (double v);
 long double fabs (int v);
 long double sqrt (uint64_t v);
