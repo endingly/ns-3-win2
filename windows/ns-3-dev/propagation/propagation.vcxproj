@@ -45,6 +45,7 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir)\headers;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);WIN32;_USE_MATH_DEFINES</PreprocessorDefinitions>
+      <AdditionalOptions>/D "NS3_LOG_ENABLE" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
