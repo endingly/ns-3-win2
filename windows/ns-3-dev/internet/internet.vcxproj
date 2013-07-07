@@ -152,6 +152,7 @@ copy "$(SolutionDir)\..\..\src\internet\helper\*.h"  "$(SolutionDir)\headers\ns3
     <ClCompile Include="..\..\..\src\internet\model\tcp-socket.cc" />
     <ClCompile Include="..\..\..\src\internet\model\tcp-tahoe.cc" />
     <ClCompile Include="..\..\..\src\internet\model\tcp-tx-buffer.cc" />
+    <ClCompile Include="..\..\..\src\internet\model\tcp-westwood.cc" />
     <ClCompile Include="..\..\..\src\internet\model\udp-header.cc" />
     <ClCompile Include="..\..\..\src\internet\model\udp-l4-protocol.cc" />
     <ClCompile Include="..\..\..\src\internet\model\udp-socket-factory-impl.cc" />
@@ -246,6 +247,7 @@ copy "$(SolutionDir)\..\..\src\internet\helper\*.h"  "$(SolutionDir)\headers\ns3
     <ClInclude Include="..\..\..\src\internet\model\tcp-socket.h" />
     <ClInclude Include="..\..\..\src\internet\model\tcp-tahoe.h" />
     <ClInclude Include="..\..\..\src\internet\model\tcp-tx-buffer.h" />
+    <ClInclude Include="..\..\..\src\internet\model\tcp-westwood.h" />
     <ClInclude Include="..\..\..\src\internet\model\udp-header.h" />
     <ClInclude Include="..\..\..\src\internet\model\udp-l4-protocol.h" />
     <ClInclude Include="..\..\..\src\internet\model\udp-socket-factory-impl.h" />
