@@ -49,6 +49,10 @@
     </Link>
     <PostBuildEvent>
       <Command>
+      </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
 copy "$(SolutionDir)\..\..\src\core\model\*.h"  "$(SolutionDir)\headers\ns3"
 
 copy "$(SolutionDir)\..\..\src\applications\model\*.h"  "$(SolutionDir)\headers\ns3"
@@ -149,7 +153,7 @@ copy "$(SolutionDir)\..\..\src\nix-vector-routing\helper\*.h"  "$(SolutionDir)\h
 
 copy "$(SolutionDir)\..\..\src\olsr\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\olsr\helper\*.h"  "$(SolutionDir)\headers\ns3"</Command>
-    </PostBuildEvent>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

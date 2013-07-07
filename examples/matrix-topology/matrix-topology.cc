@@ -89,7 +89,7 @@ int main (int argc, char *argv[])
   //  DropTailQueue::MaxPackets affects the # of dropped packets, default value:100
   //  Config::SetDefault ("ns3::DropTailQueue::MaxPackets", UintegerValue (1000));
 
-  srand ( (unsigned)time ( NULL ) );   // generate different seed each time
+  //srand ( (unsigned)time ( NULL ) );   // generate different seed each time
 
   std::string tr_name ("n-node-ppp.tr");
   std::string pcap_name ("n-node-ppp");
