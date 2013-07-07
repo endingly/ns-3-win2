@@ -386,8 +386,5 @@
     <ClCompile Include="..\..\..\src\core\model\int64x64.cc">
       <Filter>model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\core\model\system-thread.cc">
-      <Filter>model</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

@@ -45,6 +45,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);WIN32;NS3_LOG_ENABLE;NS3_ASSERT_ENABLE</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/D "NS3_LOG_ENABLE" %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
