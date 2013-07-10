@@ -150,6 +150,9 @@
     <ClCompile Include="..\..\..\src\wimax\model\wimax-tlv.cc">
       <Filter>model</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\wimax\helper\wimax-helper.cc">
+      <Filter>helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\wimax\model\bandwidth-manager.h">
@@ -298,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\wimax\model\wimax-tlv.h">
       <Filter>model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\wimax\helper\wimax-helper.h">
+      <Filter>helper</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
