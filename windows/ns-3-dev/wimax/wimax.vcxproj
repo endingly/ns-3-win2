@@ -70,6 +70,7 @@ copy "$(SolutionDir)\..\..\src\wimax\helper\*.h"  "$(SolutionDir)\headers\ns3"
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\wimax\helper\wimax-helper.cc" />
     <ClCompile Include="..\..\..\src\wimax\model\bandwidth-manager.cc" />
     <ClCompile Include="..\..\..\src\wimax\model\bs-link-manager.cc" />
     <ClCompile Include="..\..\..\src\wimax\model\bs-net-device.cc" />
@@ -119,6 +120,7 @@ copy "$(SolutionDir)\..\..\src\wimax\helper\*.h"  "$(SolutionDir)\headers\ns3"
     <ClCompile Include="..\..\..\src\wimax\model\wimax-tlv.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\wimax\helper\wimax-helper.h" />
     <ClInclude Include="..\..\..\src\wimax\model\bandwidth-manager.h" />
     <ClInclude Include="..\..\..\src\wimax\model\bs-link-manager.h" />
     <ClInclude Include="..\..\..\src\wimax\model\bs-net-device.h" />
