@@ -14,7 +14,9 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#ifndef WIN32
 #include <unistd.h>
+#endif
 #include <cstdlib>
 
 

@@ -2,8 +2,10 @@
 #define XML_CONFIG_STORE_H
 
 #include <string>
+#ifdef HAVE_LIBXML2
 #include <libxml/xmlwriter.h>
 #include <libxml/xmlreader.h>
+#endif
 #include "file-config.h"
 
 namespace ns3 {
@@ -23,7 +25,9 @@ public:
   virtual void Global (void);
   virtual void Attributes (void);
 private:
+#ifdef HAVE_LIBXML2
   xmlTextWriterPtr m_writer;
+#endif
 };
 
 /**
