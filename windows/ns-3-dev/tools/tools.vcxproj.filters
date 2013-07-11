@@ -15,18 +15,12 @@
     <ClInclude Include="..\..\..\src\tools\model\event-garbage-collector.h">
       <Filter>model</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\tools\model\gnuplot.h">
-      <Filter>model</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\tools\model\delay-jitter-estimation.cc">
       <Filter>model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\tools\model\event-garbage-collector.cc">
-      <Filter>model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\tools\model\gnuplot.cc">
       <Filter>model</Filter>
     </ClCompile>
   </ItemGroup>

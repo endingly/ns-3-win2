@@ -51,7 +51,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)\..\..\src\core\model\*.h"  "$(SolutionDir)\headers\ns3"</Command>
+      <Command>copy "$(SolutionDir)\..\..\src\core\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\core\helper\*.h"  "$(SolutionDir)\headers\ns3"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,6 +69,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\core\helper\event-garbage-collector.h" />
+    <ClInclude Include="..\..\..\src\core\helper\random-variable-stream-helper.h" />
     <ClInclude Include="..\..\..\src\core\model\abort.h" />
     <ClInclude Include="..\..\..\src\core\model\assert.h" />
     <ClInclude Include="..\..\..\src\core\model\attribute-accessor-helper.h" />
@@ -114,7 +117,6 @@
     <ClInclude Include="..\..\..\src\core\model\object.h" />
     <ClInclude Include="..\..\..\src\core\model\pointer.h" />
     <ClInclude Include="..\..\..\src\core\model\ptr.h" />
-    <ClInclude Include="..\..\..\src\core\model\random-variable-stream-helper.h" />
     <ClInclude Include="..\..\..\src\core\model\random-variable-stream.h" />
     <ClInclude Include="..\..\..\src\core\model\random-variable.h" />
     <ClInclude Include="..\..\..\src\core\model\realtime-simulator-impl.h" />
@@ -150,6 +152,8 @@
     <ClInclude Include="..\..\..\src\core\model\watchdog.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\core\helper\event-garbage-collector.cc" />
+    <ClCompile Include="..\..\..\src\core\helper\random-variable-stream-helper.cc" />
     <ClCompile Include="..\..\..\src\core\model\attribute-construction-list.cc" />
     <ClCompile Include="..\..\..\src\core\model\attribute.cc" />
     <ClCompile Include="..\..\..\src\core\model\boolean.cc" />
@@ -178,7 +182,6 @@
     <ClCompile Include="..\..\..\src\core\model\object-ptr-container.cc" />
     <ClCompile Include="..\..\..\src\core\model\object.cc" />
     <ClCompile Include="..\..\..\src\core\model\pointer.cc" />
-    <ClCompile Include="..\..\..\src\core\model\random-variable-stream-helper.cc" />
     <ClCompile Include="..\..\..\src\core\model\random-variable-stream.cc" />
     <ClCompile Include="..\..\..\src\core\model\random-variable.cc" />
     <ClCompile Include="..\..\..\src\core\model\ref-count-base.cc" />

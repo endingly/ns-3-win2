@@ -73,6 +73,7 @@
     <ClInclude Include="..\..\..\src\stats\model\data-calculator.h" />
     <ClInclude Include="..\..\..\src\stats\model\data-collector.h" />
     <ClInclude Include="..\..\..\src\stats\model\data-output-interface.h" />
+    <ClInclude Include="..\..\..\src\stats\model\gnuplot.h" />
     <ClInclude Include="..\..\..\src\stats\model\omnet-data-output.h" />
     <ClInclude Include="..\..\..\src\stats\model\packet-data-calculators.h" />
     <ClInclude Include="..\..\..\src\stats\model\sqlite-data-output.h" />
@@ -82,6 +83,7 @@
     <ClCompile Include="..\..\..\src\stats\model\data-calculator.cc" />
     <ClCompile Include="..\..\..\src\stats\model\data-collector.cc" />
     <ClCompile Include="..\..\..\src\stats\model\data-output-interface.cc" />
+    <ClCompile Include="..\..\..\src\stats\model\gnuplot.cc" />
     <ClCompile Include="..\..\..\src\stats\model\omnet-data-output.cc" />
     <ClCompile Include="..\..\..\src\stats\model\packet-data-calculators.cc" />
     <ClCompile Include="..\..\..\src\stats\model\time-data-calculators.cc" />

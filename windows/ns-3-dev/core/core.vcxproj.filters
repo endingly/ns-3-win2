@@ -4,6 +4,9 @@
     <Filter Include="model">
       <UniqueIdentifier>{c94b4f7a-35e6-431b-951c-93c935ad7e3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="helper">
+      <UniqueIdentifier>{fa87b254-b67e-4458-9c66-c39050b1dd48}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\core\model\abort.h">
@@ -150,9 +153,6 @@
     <ClInclude Include="..\..\..\src\core\model\random-variable-stream.h">
       <Filter>model</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\core\model\random-variable-stream-helper.h">
-      <Filter>model</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\core\model\realtime-simulator-impl.h">
       <Filter>model</Filter>
     </ClInclude>
@@ -246,6 +246,12 @@
     <ClInclude Include="..\..\..\src\core\model\watchdog.h">
       <Filter>model</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\core\helper\event-garbage-collector.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\core\helper\random-variable-stream-helper.h">
+      <Filter>helper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\core\model\attribute.cc">
@@ -335,9 +341,6 @@
     <ClCompile Include="..\..\..\src\core\model\random-variable-stream.cc">
       <Filter>model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\core\model\random-variable-stream-helper.cc">
-      <Filter>model</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\core\model\ref-count-base.cc">
       <Filter>model</Filter>
     </ClCompile>
@@ -385,6 +388,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\src\core\model\int64x64.cc">
       <Filter>model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\helper\event-garbage-collector.cc">
+      <Filter>helper</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\helper\random-variable-stream-helper.cc">
+      <Filter>helper</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

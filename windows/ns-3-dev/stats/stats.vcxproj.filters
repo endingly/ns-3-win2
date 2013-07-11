@@ -33,6 +33,9 @@
     <ClInclude Include="..\..\..\src\stats\model\time-data-calculators.h">
       <Filter>model</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\src\stats\model\gnuplot.h">
+      <Filter>model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\stats\model\data-calculator.cc">
@@ -51,6 +54,9 @@
       <Filter>model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\stats\model\time-data-calculators.cc">
+      <Filter>model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\stats\model\gnuplot.cc">
       <Filter>model</Filter>
     </ClCompile>
   </ItemGroup>
