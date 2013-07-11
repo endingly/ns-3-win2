@@ -51,8 +51,8 @@ public:
     * \brief Constructs an Ipv4Address by parsing a the input C-string
     *
     * Input address is in format:
-    * hhh.xxx.xxx.lll
-    * where h is the high byte and l the
+    * \c hhh.xxx.xxx.lll
+    * where \c h is the high byte and \c l the
     * low byte
     * \param address C-string containing the address as described above
     */
@@ -71,8 +71,8 @@ public:
     * \brief Sets an Ipv4Address by parsing a the input C-string
     *
     * Input address is in format:
-    * hhh.xxx.xxx.lll
-    * where h is the high byte and l the
+    * \c hhh.xxx.xxx.lll
+    * where \c h is the high byte and \c l the
     * low byte
     * \param address C-string containing the address as described above
     */

@@ -35,6 +35,9 @@
 
 namespace ns3 {
 
+/**
+ * \ingroup simulator
+ */
 class DefaultSimulatorImpl : public SimulatorImpl
 {
 public:

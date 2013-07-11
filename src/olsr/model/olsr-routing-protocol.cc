@@ -2043,7 +2043,9 @@ RoutingProtocol::LinkSensing (const olsr::MessageHeader &msg,
         case OLSR_ASYM_LINK: linkTypeName = "ASYM_LINK"; break;
         case OLSR_SYM_LINK: linkTypeName = "SYM_LINK"; break;
         case OLSR_LOST_LINK: linkTypeName = "LOST_LINK"; break;
+          /*  no default, since lt must be in 0..3, covered above
         default: linkTypeName = "(invalid value!)";
+          */
         }
 
       const char *neighborTypeName;
@@ -2114,7 +2116,7 @@ RoutingProtocol::LinkSensing (const olsr::MessageHeader &msg,
     }
 
   // Schedules link tuple deletion
-  if (created && link_tuple != NULL)
+  if (created)
     {
       LinkTupleAdded (*link_tuple, hello.willingness);
       m_events.Track (Simulator::Schedule (DELAY (std::min (link_tuple->time, link_tuple->symTime)),
@@ -3093,6 +3095,7 @@ RoutingProtocol::RouteOutput (Ptr<Packet> p, const Ipv4Header &header, Ptr<NetDe
       if (numOifAddresses == 1) {
           ifAddr = m_ipv4->GetAddress (interfaceIdx, 0);
         } else {
+          /// \todo Implment IP aliasing and OLSR
           NS_FATAL_ERROR ("XXX Not implemented yet:  IP aliasing and OLSR");
         }
       rtentry->SetSource (ifAddr.GetLocal ());
@@ -3186,6 +3189,7 @@ bool RoutingProtocol::RouteInput  (Ptr<const Packet> p,
       if (numOifAddresses == 1) {
           ifAddr = m_ipv4->GetAddress (interfaceIdx, 0);
         } else {
+          /// \todo Implment IP aliasing and OLSR
           NS_FATAL_ERROR ("XXX Not implemented yet:  IP aliasing and OLSR");
         }
       rtentry->SetSource (ifAddr.GetLocal ());

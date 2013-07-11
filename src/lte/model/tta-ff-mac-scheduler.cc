@@ -29,6 +29,7 @@
 #include <ns3/lte-vendor-specific-parameters.h>
 #include <ns3/boolean.h>
 #include <set>
+#include <cfloat>
 
 NS_LOG_COMPONENT_DEFINE ("TtaFfMacScheduler");
 
@@ -1091,6 +1092,11 @@ TtaFfMacScheduler::DoSchedDlTriggerReq (const struct FfMacSchedSapProvider::Sche
 
       uint16_t lcActives = LcActivePerFlow ((*itMap).first);
       NS_LOG_INFO (this << "Allocate user " << newEl.m_rnti << " rbg " << lcActives);
+      if (lcActives == 0)
+        {
+          // Set to max value, to avoid divide by 0 below
+          lcActives = (uint16_t)65535; // UINT16_MAX;
+        }
       uint16_t RgbPerRnti = (*itMap).second.size ();
       std::map <uint16_t,SbMeasResult_s>::iterator itCqi;
       itCqi = m_a30CqiRxed.find ((*itMap).first);
@@ -1234,7 +1240,7 @@ TtaFfMacScheduler::DoSchedDlTriggerReq (const struct FfMacSchedSapProvider::Sche
 
       itMap++;
     } // end while allocation
-  ret.m_nrOfPdcchOfdmSymbols = 1;   // TODO: check correct value according the DCIs txed
+  ret.m_nrOfPdcchOfdmSymbols = 1;   /// \todo check correct value according the DCIs txed
 
   m_schedSapUser->SchedDlConfigInd (ret);
 
@@ -1337,7 +1343,7 @@ TtaFfMacScheduler::EstimateUlSinr (uint16_t rnti, uint16_t rb)
               sinrNum++;
             }
         }
-      double estimatedSinr = sinrSum / (double)sinrNum;
+      double estimatedSinr = (sinrNum > 0) ? (sinrSum / sinrNum) : DBL_MAX;
       // store the value
       (*itCqi).second.at (rb) = estimatedSinr;
       return (estimatedSinr);
