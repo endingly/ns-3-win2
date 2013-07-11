@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\examples\tutorial\third.cc">
+    <ClCompile Include="..\..\..\src\lte\examples\lena-cqi-threshold.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

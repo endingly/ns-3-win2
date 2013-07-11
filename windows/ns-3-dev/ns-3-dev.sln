@@ -41,6 +41,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "main", "main\main.vcxproj",
 		{62D77ADF-2806-4DAC-BF9B-A2629C8931D7} = {62D77ADF-2806-4DAC-BF9B-A2629C8931D7}
 		{8B381BEA-93FD-4076-ACF9-D1B18C6A2F7F} = {8B381BEA-93FD-4076-ACF9-D1B18C6A2F7F}
 		{9D9615EC-115E-4F9E-8F8A-E2EF65437C79} = {9D9615EC-115E-4F9E-8F8A-E2EF65437C79}
+		{553B0CFA-776A-4007-B398-2C0165C98AE9} = {553B0CFA-776A-4007-B398-2C0165C98AE9}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InstallHeaders", "InstallHeaders\InstallHeaders.vcxproj", "{FCAE684C-D6B0-4D31-8836-1D0875A98D65}"
@@ -200,6 +201,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mpi", "mpi\mpi.vcxproj", "{
 		{FCAE684C-D6B0-4D31-8836-1D0875A98D65} = {FCAE684C-D6B0-4D31-8836-1D0875A98D65}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "config-store", "config-store\config-store.vcxproj", "{553B0CFA-776A-4007-B398-2C0165C98AE9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FCAE684C-D6B0-4D31-8836-1D0875A98D65} = {FCAE684C-D6B0-4D31-8836-1D0875A98D65}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -342,6 +348,10 @@ Global
 		{FE1A1789-88A3-4177-A3B5-C574DFAFE215}.Debug|Win32.Build.0 = Debug|Win32
 		{FE1A1789-88A3-4177-A3B5-C574DFAFE215}.Release|Win32.ActiveCfg = Release|Win32
 		{FE1A1789-88A3-4177-A3B5-C574DFAFE215}.Release|Win32.Build.0 = Release|Win32
+		{553B0CFA-776A-4007-B398-2C0165C98AE9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{553B0CFA-776A-4007-B398-2C0165C98AE9}.Debug|Win32.Build.0 = Debug|Win32
+		{553B0CFA-776A-4007-B398-2C0165C98AE9}.Release|Win32.ActiveCfg = Release|Win32
+		{553B0CFA-776A-4007-B398-2C0165C98AE9}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

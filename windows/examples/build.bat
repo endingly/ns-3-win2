@@ -10,6 +10,7 @@ for /r %%i in (*.cc) do (
          "..\ns-3-dev\bridge\Debug\*.obj" ^
          "..\ns-3-dev\network\Debug\*.obj" ^
          "..\ns-3-dev\applications\Debug\*.obj" ^
+         "..\ns-3-dev\config-store\Debug\*.obj" ^
          "..\ns-3-dev\stats\Debug\*.obj" ^
          "..\ns-3-dev\point-to-point\Debug\*.obj" ^
          "..\ns-3-dev\point-to-point-layout\Debug\*.obj" ^
