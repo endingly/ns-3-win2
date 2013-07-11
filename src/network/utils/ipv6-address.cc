@@ -77,7 +77,6 @@ static uint32_t lookuphash (unsigned char* k, uint32_t length, uint32_t level)
 #endif
 
   typedef uint32_t  ub4;   /* unsigned 4-byte quantities */
-  typedef unsigned  char ub1;   /* unsigned 1-byte quantities */
   uint32_t a = 0;
   uint32_t b = 0;
   uint32_t c = 0;
@@ -211,7 +210,7 @@ static bool AsciiToIpv6Host (const char *address, uint8_t addr[16])
           continue;
         }
 
-      /* TODO Handle IPv4 mapped address (2001::192.168.0.1) */
+      /* \todo Handle IPv4 mapped address (2001::192.168.0.1) */
 #if 0
       if (ch == '.' && ((tp + 4 /*NS_INADDRSZ*/) <= endp) &&
           inet_pton4 (curtok, tp) > 0)
@@ -538,6 +537,19 @@ bool Ipv6Address::IsAny () const
   static Ipv6Address any ("::");
   return (*this == any);
 }
+
+
+bool Ipv6Address::IsDocumentation () const
+{
+  NS_LOG_FUNCTION (this);
+  Ipv6Address documentation ("2001:db8::0");
+  if (((Ipv6Address*)this)->CombinePrefix (Ipv6Prefix (32)) == documentation)
+    {
+      return true;
+    }
+  return false;
+}
+
 
 bool Ipv6Address::IsMatchingType (const Address& address)
 {

@@ -327,6 +327,7 @@ TypeId Ipv6OptionRouterAlertHeader::GetInstanceTypeId () const
 Ipv6OptionRouterAlertHeader::Ipv6OptionRouterAlertHeader ()
   : m_value (0)
 {
+  SetType (5);
   SetLength (2);
 }
 
