@@ -54,7 +54,7 @@
     <PreBuildEvent>
       <Command>
 copy "$(SolutionDir)\..\..\src\core\model\*.h"  "$(SolutionDir)\headers\ns3"
-
+copy "$(SolutionDir)\..\..\src\core\helper\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\applications\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\applications\helper\*.h"  "$(SolutionDir)\headers\ns3"
 
@@ -66,6 +66,7 @@ copy "$(SolutionDir)\..\..\src\network\helper\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\network\utils\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\mpi\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\bridge\model\*.h"  "$(SolutionDir)\headers\ns3"
+copy "$(SolutionDir)\..\..\src\config-store\model\*.h"  "$(SolutionDir)\headers\ns3"
 
 copy "$(SolutionDir)\..\..\src\mobility\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\mobility\helper\*.h"  "$(SolutionDir)\headers\ns3"
@@ -103,9 +104,6 @@ copy "$(SolutionDir)\..\..\src\dsdv\helper\*.h"  "$(SolutionDir)\headers\ns3"
 
 copy "$(SolutionDir)\..\..\src\dsr\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\dsr\helper\*.h"  "$(SolutionDir)\headers\ns3"
-
-copy "$(SolutionDir)\..\..\src\tools\model\*.h"  "$(SolutionDir)\headers\ns3"
-
 
 copy "$(SolutionDir)\..\..\src\energy\model\*.h"  "$(SolutionDir)\headers\ns3"
 copy "$(SolutionDir)\..\..\src\energy\helper\*.h"  "$(SolutionDir)\headers\ns3"

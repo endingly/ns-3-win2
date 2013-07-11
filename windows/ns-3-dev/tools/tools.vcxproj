@@ -72,12 +72,10 @@
     <ClInclude Include="..\..\..\src\tools\model\average.h" />
     <ClInclude Include="..\..\..\src\tools\model\delay-jitter-estimation.h" />
     <ClInclude Include="..\..\..\src\tools\model\event-garbage-collector.h" />
-    <ClInclude Include="..\..\..\src\tools\model\gnuplot.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\tools\model\delay-jitter-estimation.cc" />
     <ClCompile Include="..\..\..\src\tools\model\event-garbage-collector.cc" />
-    <ClCompile Include="..\..\..\src\tools\model\gnuplot.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
