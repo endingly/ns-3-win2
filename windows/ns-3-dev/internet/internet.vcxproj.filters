@@ -276,7 +276,9 @@
     <ClCompile Include="..\..\..\src\internet\helper\ipv6-static-routing-helper.cc">
       <Filter>helper</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\internet\model\tcp-westwood.cc" />
+    <ClCompile Include="..\..\..\src\internet\model\tcp-westwood.cc">
+      <Filter>model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\internet\model\arp-cache.h">
@@ -555,6 +557,8 @@
     <ClInclude Include="..\..\..\src\internet\helper\ipv6-static-routing-helper.h">
       <Filter>helper</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\internet\model\tcp-westwood.h" />
+    <ClInclude Include="..\..\..\src\internet\model\tcp-westwood.h">
+      <Filter>model</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

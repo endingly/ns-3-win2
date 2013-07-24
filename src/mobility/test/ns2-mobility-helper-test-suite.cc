@@ -265,7 +265,11 @@ class Ns2MobilityHelperTestSuite : public TestSuite
 public:
   Ns2MobilityHelperTestSuite () : TestSuite ("mobility-ns2-trace-helper", UNIT)
   {
-    SetDataDir (NS_TEST_SOURCEDIR);
+#ifndef WIN32    
+	  SetDataDir (NS_TEST_SOURCEDIR);
+#else
+	  SetDataDir ("src\\mobility\\test\\");
+#endif
 
     // to be used as temporary variable for test cases.
     // Note that test suite takes care of deleting all test cases.
