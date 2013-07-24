@@ -395,5 +395,11 @@
     <ClCompile Include="..\..\..\src\core\helper\random-variable-stream-helper.cc">
       <Filter>helper</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\core\model\test.cc">
+      <Filter>model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\core\model\system-path.cc">
+      <Filter>model</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

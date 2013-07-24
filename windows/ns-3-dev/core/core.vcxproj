@@ -192,6 +192,8 @@ copy "$(SolutionDir)\..\..\src\core\helper\*.h"  "$(SolutionDir)\headers\ns3"</C
     <ClCompile Include="..\..\..\src\core\model\simulator.cc" />
     <ClCompile Include="..\..\..\src\core\model\string.cc" />
     <ClCompile Include="..\..\..\src\core\model\synchronizer.cc" />
+    <ClCompile Include="..\..\..\src\core\model\system-path.cc" />
+    <ClCompile Include="..\..\..\src\core\model\test.cc" />
     <ClCompile Include="..\..\..\src\core\model\time.cc" />
     <ClCompile Include="..\..\..\src\core\model\timer.cc" />
     <ClCompile Include="..\..\..\src\core\model\trace-source-accessor.cc" />
