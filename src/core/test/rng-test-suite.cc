@@ -16,10 +16,16 @@
 
 
 #include <cmath>
-#include <gsl/gsl_cdf.h>
-#include <gsl/gsl_histogram.h>
+
 #include <ctime>
 #include <fstream>
+
+#ifdef WIN32
+#include "winport.h"
+#else
+#include <gsl/gsl_cdf.h>
+#include <gsl/gsl_histogram.h>
+#endif
 
 #include "ns3/test.h"
 #include "ns3/random-variable.h"

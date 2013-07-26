@@ -57,7 +57,9 @@
 
 #include <string>
 #include <limits>
+#ifndef WIN32
 #include <netinet/in.h>
+#endif
 
 using namespace ns3;
 
