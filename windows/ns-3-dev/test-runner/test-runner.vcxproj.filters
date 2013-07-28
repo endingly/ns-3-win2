@@ -13,5 +13,8 @@
     <ClCompile Include="..\..\..\utils\test-runner.cc">
       <Filter>model</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\core\test\command-line-test-suite.cc">
+      <Filter>tests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
