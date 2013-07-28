@@ -13,7 +13,7 @@
     <ClCompile Include="..\..\..\utils\test-runner.cc">
       <Filter>model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\core\test\command-line-test-suite.cc">
+    <ClCompile Include="..\..\..\src\lte\test\lte-test-link-adaptation.cc">
       <Filter>tests</Filter>
     </ClCompile>
   </ItemGroup>

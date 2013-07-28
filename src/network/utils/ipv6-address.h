@@ -461,7 +461,7 @@ inline bool operator == (const Ipv6Address& a, const Ipv6Address& b)
 
 inline bool operator != (const Ipv6Address& a, const Ipv6Address& b)
 {
-  return std::memcmp (a.m_address, b.m_address, 16);
+  return (std::memcmp (a.m_address, b.m_address, 16) != 0);
 }
 
 inline bool operator < (const Ipv6Address& a, const Ipv6Address& b)
