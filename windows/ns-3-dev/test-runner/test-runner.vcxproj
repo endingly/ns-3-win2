@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\core\test\command-line-test-suite.cc" />
     <ClCompile Include="..\..\..\utils\test-runner.cc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
