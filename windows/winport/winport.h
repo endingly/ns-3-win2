@@ -22,6 +22,7 @@
 #undef max
 #undef min
 int64_t lround (double v);
+uint32_t round (double v);
 long double fabs (int v);
 long double sqrt (uint64_t v);
 long double sqrt (uint16_t v);

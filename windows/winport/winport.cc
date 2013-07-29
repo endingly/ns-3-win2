@@ -39,6 +39,21 @@ log2 (uint32_t v)
   return log (static_cast<double> (v)/log (2.0));
 }
 
+
+uint32_t 
+round (double v)
+{
+  if(v>=0)
+    {
+	  return uint32_t (((v-floor(v) >= 0.5) ? ceil(v):floor(v))) ;
+    }
+  else
+    {
+	  NS_ASSERT ("Not yet implemented");
+	  return -1;
+    }
+}
+
 int64_t 
 lround (double v)
 {
