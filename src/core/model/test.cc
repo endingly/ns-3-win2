@@ -764,7 +764,7 @@ TestRunnerImpl::Run (int argc, char *argv[])
   bool printTestNameList = false;
   bool printTestTypeAndName = false;
 #ifdef WIN32
-  enum TestCase::TestDuration maximumTestDuration = TestCase::TAKES_FOREVER;
+  enum TestCase::TestDuration maximumTestDuration = TestCase::QUICK;// TestCase::TAKES_FOREVER;
 
 #else
   enum TestCase::TestDuration maximumTestDuration = TestCase::QUICK;
