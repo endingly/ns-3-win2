@@ -12,7 +12,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\lte\test\lte-test-link-adaptation.cc" />
+    <ClCompile Include="..\..\..\src\lte\test\lte-test-sinr-chunk-processor.cc" />
+    <ClCompile Include="..\..\..\src\lte\test\test-lte-antenna.cc" />
+    <ClCompile Include="..\..\..\src\lte\test\test-lte-x2-handover.cc" />
     <ClCompile Include="..\..\..\utils\test-runner.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\lte\test\lte-test-sinr-chunk-processor.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0716C5EF-C020-4A50-8A16-67C43024869E}</ProjectGuid>

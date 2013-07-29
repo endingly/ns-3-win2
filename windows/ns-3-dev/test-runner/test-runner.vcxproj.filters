@@ -16,5 +16,19 @@
     <ClCompile Include="..\..\..\src\lte\test\lte-test-link-adaptation.cc">
       <Filter>tests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\lte\test\lte-test-sinr-chunk-processor.cc">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lte\test\test-lte-antenna.cc">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lte\test\test-lte-x2-handover.cc">
+      <Filter>tests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\lte\test\lte-test-sinr-chunk-processor.h">
+      <Filter>tests</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
