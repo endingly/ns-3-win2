@@ -30,7 +30,12 @@ class RegressionTestSuite : public TestSuite
 public:
   RegressionTestSuite () : TestSuite ("routing-olsr-regression", SYSTEM) 
   {
+//Not ideal
+#ifndef WIN32
     SetDataDir (NS_TEST_SOURCEDIR);
+#else
+	SetDataDir ("src\\olsr\\test\\");
+#endif
     AddTestCase (new HelloRegressionTest, TestCase::QUICK);
     AddTestCase (new TcRegressionTest, TestCase::QUICK);
     AddTestCase (new Bug780Test, TestCase::QUICK);

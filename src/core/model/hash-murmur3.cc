@@ -76,7 +76,7 @@ inline uint64_t rotl64 ( uint64_t x, int8_t r )
   return (x << r) | (x >> (64 - r));
 }
 
-#define BIG_CONSTANT(x) (x##LLU)
+#define BIG_CONSTANT(x) (x##ULL)
 
 //-----------------------------------------------------------------------------
 // Block read - if your platform needs to do endian-swapping or can only

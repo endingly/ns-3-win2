@@ -35,6 +35,10 @@
 #include "icmpv6-l4-protocol.h"
 #include "ndisc-cache.h"
 
+#ifdef WIN32
+#include "ipv4-interface.h"
+#endif
+
 namespace ns3 {
 
 NS_OBJECT_ENSURE_REGISTERED (Icmpv6L4Protocol);

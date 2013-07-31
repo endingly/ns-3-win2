@@ -75,7 +75,9 @@ struct TestCaseFailure
 struct TestCase::Result
 {
   Result ();
+#ifndef WIN32
   SystemWallClockMs clock;
+#endif
   std::vector<TestCaseFailure> failure;
   bool childrenFailed;
 };
@@ -221,10 +223,13 @@ TestCase::Run (TestRunnerImpl *runner)
   m_result = new Result ();
   m_runner = runner;
   DoSetup ();
+#ifndef WIN32
   m_result->clock.Start ();
+#endif
   for (std::vector<TestCase *>::const_iterator i = m_children.begin (); i != m_children.end (); ++i)
     {
       TestCase *test = *i;
+	  //std::cout << "Running: " << test->GetName() << std::endl;
       test->Run (runner);
       if (IsFailed ())
         {
@@ -232,8 +237,10 @@ TestCase::Run (TestRunnerImpl *runner)
         }
     }
   DoRun ();
- out:
+out:
+#ifndef WIN32
   m_result->clock.End ();
+#endif
   DoTeardown ();
   m_runner = 0;
 }
@@ -543,10 +550,11 @@ TestRunnerImpl::PrintReport (TestCase *test, std::ostream *os, bool xml, int lev
     }
   // Report times in seconds, from ms timer
   const double MS_PER_SEC = 1000.;
+#ifndef WIN32
   double real = test->m_result->clock.GetElapsedReal () / MS_PER_SEC;
   double user = test->m_result->clock.GetElapsedUser () / MS_PER_SEC;
   double system = test->m_result->clock.GetElapsedSystem () / MS_PER_SEC;
-
+#endif
   std::streamsize oldPrecision = (*os).precision (3);
   *os << std::fixed;
 
@@ -557,8 +565,10 @@ TestRunnerImpl::PrintReport (TestCase *test, std::ostream *os, bool xml, int lev
       *os << Indent (level+1) << "<Name>" << ReplaceXmlSpecialCharacters (test->m_name)
           << "</Name>" << std::endl;
       *os << Indent (level+1) << "<Result>" << statusString << "</Result>" << std::endl;
-      *os << Indent (level+1) << "<Time real=\"" << real << "\" user=\"" << user 
+#ifndef WIN32
+	  *os << Indent (level+1) << "<Time real=\"" << real << "\" user=\"" << user 
           << "\" system=\"" << system << "\"/>" << std::endl;
+#endif
       for (uint32_t i = 0; i < test->m_result->failure.size (); i++)
         {
           TestCaseFailure failure = test->m_result->failure[i];
@@ -585,8 +595,10 @@ TestRunnerImpl::PrintReport (TestCase *test, std::ostream *os, bool xml, int lev
     }
   else
     {
+#ifndef WIN32
       *os << Indent (level) << statusString << " " << test->GetName () 
           << " " << real << " s" << std::endl;
+#endif
       if (m_verbose)
         {
           for (uint32_t i = 0; i < test->m_result->failure.size (); i++)
@@ -751,7 +763,12 @@ TestRunnerImpl::Run (int argc, char *argv[])
   bool printTestTypeList = false;
   bool printTestNameList = false;
   bool printTestTypeAndName = false;
+#ifdef WIN32
+  enum TestCase::TestDuration maximumTestDuration = TestCase::QUICK;// TestCase::TAKES_FOREVER;
+
+#else
   enum TestCase::TestDuration maximumTestDuration = TestCase::QUICK;
+#endif
   char *progname = argv[0];
 
   argv++;
@@ -942,13 +959,22 @@ TestRunnerImpl::Run (int argc, char *argv[])
       PrintReport (test, os, xml, 0);
       if (test->IsFailed ())
         {
+#ifdef WIN32
+			std::cout << "Test: " << test->GetName() << " FAILED!" << std::endl;
+#endif
           failed = true;
           if (!m_continueOnFailure)
             {
               return 1;
             }
         }
-    }
+#ifdef WIN32
+	  else
+	  {
+		  std::cout << "Test: " << test->GetName() << " PASSED!" << std::endl;
+	  }
+	}
+#endif
 
   if (out != "")
     {

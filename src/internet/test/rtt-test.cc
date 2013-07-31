@@ -87,10 +87,13 @@ RttTestCase::DoRun (void)
   int expectedTimeout = (int)a + 4 * (int)v;
 
   NS_TEST_EXPECT_MSG_EQ (rtt->RetransmitTimeout ().GetMilliSeconds (), expectedTimeout, "Timeout values do not match");
+
+  
 }
 void
 RttTestCase::DoTeardown (void)
 {
+	Simulator::Destroy ();
 }
 
 
