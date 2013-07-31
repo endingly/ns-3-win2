@@ -38,10 +38,10 @@ namespace ns3 {
 
 NS_OBJECT_ENSURE_REGISTERED (Node);
 
-GlobalValue g_checksumEnabled  = GlobalValue ("ChecksumEnabled",
-                                              "A global switch to enable all checksums for all protocols",
-                                              BooleanValue (false),
-                                              MakeBooleanChecker ());
+GlobalValue g_checksumEnabled ("ChecksumEnabled",
+                               "A global switch to enable all checksums for all protocols",
+                               BooleanValue (false),
+                               MakeBooleanChecker ());
 
 TypeId 
 Node::GetTypeId (void)

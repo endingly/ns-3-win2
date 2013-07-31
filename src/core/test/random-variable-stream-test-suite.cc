@@ -21,10 +21,14 @@
  *
  */
 
-
+#ifdef WIN32
+#include "winport.h"
+#else
 #include <gsl/gsl_cdf.h>
 #include <gsl/gsl_histogram.h>
 #include <gsl/gsl_sf_zeta.h>
+#endif
+
 #include <ctime>
 #include <fstream>
 #include <cmath>

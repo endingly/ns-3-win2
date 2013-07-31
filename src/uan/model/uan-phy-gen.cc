@@ -285,8 +285,8 @@ UanPhyPerUmodem::CalcPer (Ptr<Packet> pkt, double sinr, UanTxMode mode)
   { 12, 14, 16, 18, 20, 22, 24, 26, 28 };
   double Bd[] =
   {
-    33, 281, 2179, 15035LLU, 105166LLU, 692330LLU, 4580007LLU, 29692894LLU,
-    190453145LLU
+    33, 281, 2179, 15035ULL, 105166ULL, 692330ULL, 4580007ULL, 29692894ULL,
+    190453145ULL
   };
 
   // double Rc = 1.0 / 2.0;

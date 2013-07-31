@@ -43,9 +43,16 @@
 
 #include <string>
 #include <limits>
+#ifndef WIN32
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#else
+#include "winport.h"
+#include <winsock.h>
+#undef max
+#undef GetObject
+#endif
 
 using namespace ns3;
 
@@ -107,7 +114,7 @@ void Ipv6RawSocketImplTest::ReceivePkt (Ptr<Socket> socket)
   availableData = socket->GetRxAvailable ();
   m_receivedPacket = socket->Recv (2, MSG_PEEK);
   NS_ASSERT (m_receivedPacket->GetSize () == 2);
-  m_receivedPacket = socket->Recv (std::numeric_limits<uint32_t>::max (), 0);
+  m_receivedPacket = socket->Recv (std::numeric_limits<uint32_t>::max(), 0);
   NS_ASSERT (availableData == m_receivedPacket->GetSize ());
 }
 

@@ -30,6 +30,10 @@
 #include "ns3/address.h"
 #include "ns3/ipv4-address.h"
 
+#ifdef WIN32
+#include <hash_map>
+#endif
+
 namespace ns3 { 
 
 class Ipv6Prefix;
@@ -489,7 +493,7 @@ inline bool operator == (const Ipv6Address& a, const Ipv6Address& b)
 
 inline bool operator != (const Ipv6Address& a, const Ipv6Address& b)
 {
-  return std::memcmp (a.m_address, b.m_address, 16);
+  return (std::memcmp (a.m_address, b.m_address, 16) != 0);
 }
 
 inline bool operator < (const Ipv6Address& a, const Ipv6Address& b)
@@ -501,6 +505,7 @@ inline bool operator < (const Ipv6Address& a, const Ipv6Address& b)
  * \class Ipv6AddressHash
  * \brief Hash function class for IPv6 addresses.
  */
+#ifndef WIN32
 class Ipv6AddressHash : public std::unary_function<Ipv6Address, size_t>
 {
 public:
@@ -510,6 +515,18 @@ public:
    */
   size_t operator () (Ipv6Address const &x) const;
 };
+
+#else
+class Ipv6AddressHash : public stdext::hash_compare<ns3::Ipv6Address> {
+public:
+  size_t operator()(Ipv6Address const &x) const;
+    bool operator() (const Ipv6Address& s1, const Ipv6Address& s2) const
+  {
+    return s1 < s2;
+  }
+
+};
+#endif
 
 bool operator == (Ipv6Prefix const &a, Ipv6Prefix const &b);
 bool operator != (Ipv6Prefix const &a, Ipv6Prefix const &b);

@@ -576,9 +576,8 @@ LogNodePrinter LogGetNodePrinter (void)
   return g_logNodePrinter;
 }
 
-
 ParameterLogger::ParameterLogger (std::ostream &os)
-  : m_itemNumber (0),
+  : std::basic_ostream<char> (os.rdbuf ()), m_itemNumber (0),
     m_os (os)
 {
 }

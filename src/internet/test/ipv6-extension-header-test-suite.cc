@@ -136,7 +136,8 @@ public:
 
   virtual Alignment GetAlignment () const
   {
-    return (Alignment){ 4,0};
+	  Ipv6OptionHeader::Alignment ret = { 4, 0};
+	  return ret;
   }
 };
 
