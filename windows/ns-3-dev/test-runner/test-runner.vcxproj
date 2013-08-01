@@ -11,13 +11,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\lte\test\lte-test-link-adaptation.cc" />
+    <ClCompile Include="..\..\..\src\lte\test\lte-simple-net-device.cc" />
     <ClCompile Include="..\..\..\src\lte\test\lte-test-pss-ff-mac-scheduler.cc" />
     <ClCompile Include="..\..\..\src\lte\test\lte-test-sinr-chunk-processor.cc" />
+    <ClCompile Include="..\..\..\src\lte\test\test-lte-rrc.cc" />
     <ClCompile Include="..\..\..\utils\test-runner.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\lte\test\lte-simple-helper.h" />
+    <ClInclude Include="..\..\..\src\lte\test\lte-simple-net-device.h" />
     <ClInclude Include="..\..\..\src\lte\test\lte-test-pss-ff-mac-scheduler.h" />
+    <ClInclude Include="..\..\..\src\lte\test\lte-test-rlc-am-e2e.h" />
+    <ClInclude Include="..\..\..\src\lte\test\lte-test-rlc-am-transmitter.h" />
+    <ClInclude Include="..\..\..\src\lte\test\lte-test-rlc-um-e2e.h" />
+    <ClInclude Include="..\..\..\src\lte\test\lte-test-rlc-um-transmitter.h" />
     <ClInclude Include="..\..\..\src\lte\test\lte-test-sinr-chunk-processor.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
