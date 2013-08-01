@@ -15,8 +15,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\lte\examples\lena-cqi-threshold.cc">
+    <ClCompile Include="X:\itstest\its-rsu-application.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="X:\itstest\itstest.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="X:\itstest\its-vehicle-application.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="X:\itstest\mobile-node.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="X:\itstest\Road.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="X:\itstest\its-rsu-application.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="X:\itstest\its-vehicle-application.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="X:\itstest\mobile-node.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="X:\itstest\Road.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

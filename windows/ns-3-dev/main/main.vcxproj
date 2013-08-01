@@ -11,7 +11,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\lte\examples\lena-cqi-threshold.cc" />
+    <ClCompile Include="X:\itstest\its-rsu-application.cc" />
+    <ClCompile Include="X:\itstest\its-vehicle-application.cc" />
+    <ClCompile Include="X:\itstest\itstest.cc" />
+    <ClCompile Include="X:\itstest\mobile-node.cc" />
+    <ClCompile Include="X:\itstest\Road.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="X:\itstest\its-rsu-application.h" />
+    <ClInclude Include="X:\itstest\its-vehicle-application.h" />
+    <ClInclude Include="X:\itstest\mobile-node.h" />
+    <ClInclude Include="X:\itstest\Road.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E295EBA9-1ACD-4583-B9C8-16C7FDD1E35A}</ProjectGuid>

@@ -13,13 +13,16 @@
     <ClCompile Include="..\..\..\utils\test-runner.cc">
       <Filter>model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\lte\test\lte-test-link-adaptation.cc">
-      <Filter>tests</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\lte\test\lte-test-sinr-chunk-processor.cc">
       <Filter>tests</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\lte\test\lte-test-pss-ff-mac-scheduler.cc">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lte\test\lte-simple-net-device.cc">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\lte\test\test-lte-rrc.cc">
       <Filter>tests</Filter>
     </ClCompile>
   </ItemGroup>
@@ -28,6 +31,24 @@
       <Filter>tests</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\lte\test\lte-test-pss-ff-mac-scheduler.h">
+      <Filter>tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lte\test\lte-test-rlc-am-e2e.h">
+      <Filter>tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lte\test\lte-test-rlc-am-transmitter.h">
+      <Filter>tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lte\test\lte-test-rlc-um-e2e.h">
+      <Filter>tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lte\test\lte-test-rlc-um-transmitter.h">
+      <Filter>tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lte\test\lte-simple-helper.h">
+      <Filter>tests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\lte\test\lte-simple-net-device.h">
       <Filter>tests</Filter>
     </ClInclude>
   </ItemGroup>
