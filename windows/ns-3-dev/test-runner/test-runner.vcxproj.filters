@@ -13,42 +13,18 @@
     <ClCompile Include="..\..\..\utils\test-runner.cc">
       <Filter>model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\lte\test\lte-test-sinr-chunk-processor.cc">
+    <ClCompile Include="..\..\..\src\mesh\test\flame\flame-regression.cc">
       <Filter>tests</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\lte\test\lte-test-pss-ff-mac-scheduler.cc">
+    <ClCompile Include="..\..\..\src\mesh\test\flame\flame-test-suite.cc">
       <Filter>tests</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\lte\test\lte-simple-net-device.cc">
-      <Filter>tests</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\lte\test\test-lte-rrc.cc">
+    <ClCompile Include="..\..\..\src\mesh\test\flame\regression.cc">
       <Filter>tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\lte\test\lte-test-sinr-chunk-processor.h">
-      <Filter>tests</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\lte\test\lte-test-pss-ff-mac-scheduler.h">
-      <Filter>tests</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\lte\test\lte-test-rlc-am-e2e.h">
-      <Filter>tests</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\lte\test\lte-test-rlc-am-transmitter.h">
-      <Filter>tests</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\lte\test\lte-test-rlc-um-e2e.h">
-      <Filter>tests</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\lte\test\lte-test-rlc-um-transmitter.h">
-      <Filter>tests</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\lte\test\lte-simple-helper.h">
-      <Filter>tests</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\lte\test\lte-simple-net-device.h">
+    <ClInclude Include="..\..\..\src\mesh\test\flame\flame-regression.h">
       <Filter>tests</Filter>
     </ClInclude>
   </ItemGroup>
