@@ -21,6 +21,7 @@
 #include "abort.h"
 #include "system-path.h"
 #include "log.h"
+#include "config.h"
 #include <cmath>
 #include <cstring>
 #include <vector>
@@ -954,13 +955,19 @@ TestRunnerImpl::Run (int argc, char *argv[])
   for (std::list<TestCase *>::const_iterator i = tests.begin (); i != tests.end (); ++i)
     {
       TestCase *test = *i;
-
+#ifdef WIN32
+	  Config::Reset();
+#endif
       test->Run (this);
       PrintReport (test, os, xml, 0);
       if (test->IsFailed ())
         {
 #ifdef WIN32
+			std::ofstream output;
+			output.open("testresults.txt", std::ios::out | std::ios::app);
+			output << "Test: " << test->GetName() << " FAILED!" << std::endl;
 			std::cout << "Test: " << test->GetName() << " FAILED!" << std::endl;
+			output.close();
 #endif
           failed = true;
           if (!m_continueOnFailure)
@@ -971,7 +978,11 @@ TestRunnerImpl::Run (int argc, char *argv[])
 #ifdef WIN32
 	  else
 	  {
+		  std::ofstream output;
+		  output.open("testresults.txt", std::ios::out | std::ios::app);
+		  output << "Test: " << test->GetName() << " PASSED!" << std::endl;
 		  std::cout << "Test: " << test->GetName() << " PASSED!" << std::endl;
+		  output.close();
 	  }
 	}
 #endif
