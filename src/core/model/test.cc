@@ -316,6 +316,9 @@ TestCase::CreateTempDirFilename (std::string filename)
           names.push_front (current->m_name);
           current = current->m_parent;
         }
+#ifdef WIN32
+	  names.pop_back();
+#endif
       std::string tempDir = SystemPath::Append (m_runner->GetTempDir (), SystemPath::Join (names.begin (), names.end ()));
       SystemPath::MakeDirectories (tempDir);
       return SystemPath::Append (tempDir, filename);
