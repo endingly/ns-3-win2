@@ -35,8 +35,10 @@ long double pow (int u, uint32_t v);
 long double pow (int u, int v);
 long double log10 (int v);
 long double log2 (uint32_t v);
+long double log2 (double v);
+long double log2 (long double v);
 bool isblank (char v);
-uint32_t lrint (double v);
+uint64_t lrint (double v);
 long double ceil (uint32_t v);
 long double abs (uint32_t v);
 #define erfc gsl_sf_erfc
