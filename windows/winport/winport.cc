@@ -36,7 +36,7 @@ long double abs (uint32_t v);
 long double 
 log2 (uint32_t v)
 {
-	std::cout << "log2" << std::endl;
+	//std::cout << "log2" << std::endl;
 	return log (static_cast<double> (v)/log (2.0));
 }
 
@@ -44,21 +44,21 @@ log2 (uint32_t v)
 long double 
 log2 (double v)
 {
-	std::cout << "log2" << std::endl;
+	//std::cout << "log2" << std::endl;
 	return log(v)/log(2.0);
 }
 
 long double 
 log2 (long double v)
 {
-	std::cout << "log2" << std::endl;
+	//std::cout << "log2" << std::endl;
 	return log(v)/log(2.0);
 }
 
 uint32_t 
 round (double v)
 {
-	std::cout << "round" << std::endl;
+	//std::cout << "round" << std::endl;
   if(v>=0)
     {
 	  return uint32_t (((v-floor(v) >= 0.5) ? ceil(v):floor(v))) ;
@@ -73,7 +73,7 @@ round (double v)
 int64_t 
 lround (double v)
 {
-	std::cout << "lround" << std::endl;
+	//std::cout << "lround" << std::endl;
   if(v>=0)
     {
 	  return ((v-floor(v) >= 0.5) ? ceil(v):floor(v)) ;
@@ -87,7 +87,6 @@ lround (double v)
 uint64_t 
 lrint (double v)
 {
-	std::cout << "lrint" << std::endl;
   if(v>=0)
     {
 	  return ((v-floor(v) >= 0.5) ? ceil(v):floor(v)) ;
@@ -102,97 +101,97 @@ lrint (double v)
 long double 
 pow (uint32_t u,uint32_t v)
 {
-	std::cout << "pow" << std::endl;
+	//std::cout << "pow" << std::endl;
   return pow (static_cast<double> (u), static_cast<int> (v));
 }
 
 long double 
 pow (double u,uint32_t v)
 {
-	std::cout << "pow" << std::endl;
+	//std::cout << "pow" << std::endl;
   return pow (u, static_cast<int> (v));
 }
 
 long double 
 pow (int u, double v)
 {
-	std::cout << "pow" << std::endl;
+	//std::cout << "pow" << std::endl;
   return pow (static_cast<double> (u), v);
 }
 
 long double 
 pow (int u, uint32_t v)
 {  
-	std::cout << "pow" << std::endl;
+	//std::cout << "pow" << std::endl;
   return pow (static_cast<double> (u), static_cast<int> (v));
 }
 
 long double 
 pow (int u, int v)
 {  
-	std::cout << "pow" << std::endl;
+	//std::cout << "pow" << std::endl;
   return pow (static_cast<double> (u), v);
 }
 
 long double 
 pow (int u, long double v)
 {
-	std::cout << "pow" << std::endl;
+	//std::cout << "pow" << std::endl;
   return pow (static_cast<long double> (u),v);
 }
 
 long double 
 fabs (int v)
 {
-	std::cout << "fabs" << std::endl;
+	//std::cout << "fabs" << std::endl;
   return fabs (static_cast<double> (v));
 }
 
 long double 
 sqrt (uint64_t v)
 {
-	std::cout << "sqrt" << std::endl;
+	//std::cout << "sqrt" << std::endl;
   return sqrt (static_cast<double> (v));
 }
 
 long double 
 sqrt (uint16_t v)
 {
-	std::cout << "sqrt" << std::endl;
+	//std::cout << "sqrt" << std::endl;
   return sqrt (static_cast<double> (v));
 }
 
 long double 
 sqrt (unsigned int v)
 {
-	std::cout << "sqrt" << std::endl;
+	//std::cout << "sqrt" << std::endl;
   return sqrt (static_cast<double> (v));
 }
 
 long double 
 log10 (int v)
 {
-	std::cout << "log10" << std::endl;
+	//std::cout << "log10" << std::endl;
 	return log10 (static_cast<double> (v));
 }
 
 long double 
 ceil (uint32_t v)
 {
-	std::cout << "ceil" << std::endl;
+	//std::cout << "ceil" << std::endl;
   return ceil (static_cast<double> (v));  
 }
 
 long double 
 abs (uint32_t v)
 {
-	std::cout << "abs" << std::endl;
+	//std::cout << "abs" << std::endl;
   return abs (static_cast<double> (v));  
 }
 //double erfc (double v);
 bool 
 isblank (char v)
 {
-	std::cout << "isblank" << std::endl;
+	//std::cout << "isblank" << std::endl;
   return isspace (v);
 }
