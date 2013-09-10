@@ -36,7 +36,7 @@ long double abs (uint32_t v);
 long double 
 log2 (uint32_t v)
 {
-	std::cout << "log2" << std::endl;
+	//std::cout << "log2" << std::endl;
 	return log (static_cast<double> (v)/log (2.0));
 }
 
@@ -87,7 +87,6 @@ lround (double v)
 uint64_t 
 lrint (double v)
 {
-	std::cout << "lrint" << std::endl;
   if(v>=0)
     {
 	  return ((v-floor(v) >= 0.5) ? ceil(v):floor(v)) ;
