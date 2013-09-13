@@ -268,11 +268,13 @@ OlsrHnaTestCase::DoRun (void)
   Packet packet;
   olsr::MessageHeader msgIn;
   olsr::MessageHeader::Hna &hnaIn = msgIn.GetHna ();
-
-  hnaIn.associations.push_back ((olsr::MessageHeader::Hna::Association)
-                                { Ipv4Address ("1.2.3.4"), Ipv4Mask ("255.255.255.0")});
-  hnaIn.associations.push_back ((olsr::MessageHeader::Hna::Association)
-                                { Ipv4Address ("1.2.3.5"), Ipv4Mask ("255.255.0.0")});
+  olsr::MessageHeader::Hna::Association assoc;
+  assoc.address = Ipv4Address("1.2.3.4");
+  assoc.mask = Ipv4Mask("255.255.255.0");
+  hnaIn.associations.push_back (assoc);
+  assoc.address = Ipv4Address("1.2.3.5");
+  assoc.mask = Ipv4Mask("255.255.0.0");
+  hnaIn.associations.push_back (assoc);
   packet.AddHeader (msgIn);
 
   olsr::MessageHeader msgOut;

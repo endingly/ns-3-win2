@@ -260,6 +260,7 @@ Ipv4HeaderTest::DoRun (void)
 
  
   Simulator::Destroy ();
+  
 }
 //-----------------------------------------------------------------------------
 class Ipv4HeaderTestSuite : public TestSuite
