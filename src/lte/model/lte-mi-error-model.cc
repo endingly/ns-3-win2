@@ -31,7 +31,11 @@
 
 
 #include <list>
+#ifndef WIN32
 #include <tr1/functional>
+#else
+#include "winport.h"
+#endif
 #include <vector>
 #include <ns3/log.h>
 #include <ns3/pointer.h>

@@ -179,7 +179,7 @@ LteEnbAntennaTestCase::DoRun (void)
   double expectedSinrDl = enbTxPowerDbm + m_antennaGainDb - noisePowerDbm + ueNoiseFigureDb;
   if (expectedSinrDl > 0)
     {
-      double calculatedSinrDbDl = -INFINITY;
+      double calculatedSinrDbDl = -std::numeric_limits<double>::infinity ();
       if (testDlSinr->GetSinr () != 0)
         {
           calculatedSinrDbDl = 10.0 * std::log10 (testDlSinr->GetSinr ()->operator[] (0));
@@ -191,7 +191,7 @@ LteEnbAntennaTestCase::DoRun (void)
   double expectedSinrUl = ueTxPowerDbm + m_antennaGainDb - noisePowerDbm + enbNoiseFigureDb;
   if (expectedSinrUl > 0)
     {      
-      double calculatedSinrDbUl = -INFINITY;
+      double calculatedSinrDbUl = -std::numeric_limits<double>::infinity ();
       if (testUlSinr->GetSinr () != 0)
         {
           calculatedSinrDbUl = 10.0 * std::log10 (testUlSinr->GetSinr ()->operator[] (0));

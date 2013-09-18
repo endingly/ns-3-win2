@@ -50,7 +50,7 @@ IpAddressHelperTestCasev6::~IpAddressHelperTestCasev6 ()
 
 void
 IpAddressHelperTestCasev6::DoRun (void)
-{
+{ 
   Ipv6AddressHelper ip1;
   Ipv6Address ipAddr1;
   ipAddr1 = ip1.NewAddress ();

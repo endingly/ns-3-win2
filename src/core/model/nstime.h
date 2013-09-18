@@ -31,6 +31,10 @@
 #include <ostream>
 #include <set>
 
+#ifdef WIN32
+#include "winport.h"
+#endif
+
 namespace ns3 {
 
 /**
@@ -339,7 +343,7 @@ public:
   }
   inline double GetDouble (void) const
   {
-    return m_data;
+    return double (m_data);
   }
   inline int64_t GetInteger (void) const
   {

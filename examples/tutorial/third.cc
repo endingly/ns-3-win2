@@ -52,13 +52,6 @@ main (int argc, char *argv[])
 
   cmd.Parse (argc,argv);
 
-  if (nWifi > 18)
-    {
-      std::cout << "Number of wifi nodes " << nWifi << 
-                   " specified exceeds the mobility bounding box" << std::endl;
-      exit (1);
-    }
-
   if (verbose)
     {
       LogComponentEnable ("UdpEchoClientApplication", LOG_LEVEL_INFO);
@@ -157,7 +150,7 @@ main (int argc, char *argv[])
 
   UdpEchoClientHelper echoClient (csmaInterfaces.GetAddress (nCsma), 9);
   echoClient.SetAttribute ("MaxPackets", UintegerValue (1));
-  echoClient.SetAttribute ("Interval", TimeValue (Seconds (1.0)));
+  echoClient.SetAttribute ("Interval", TimeValue (Seconds (1.)));
   echoClient.SetAttribute ("PacketSize", UintegerValue (1024));
 
   ApplicationContainer clientApps = 

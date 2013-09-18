@@ -23,6 +23,10 @@
 #include <ns3/math.h>
 #include <ns3/log.h>
 
+#ifdef WIN32
+#include "winport.h"
+#endif
+
 NS_LOG_COMPONENT_DEFINE ("SpectrumValue");
 
 
