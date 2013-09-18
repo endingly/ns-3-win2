@@ -28,6 +28,10 @@
 #include <stdint.h>
 #include <limits>
 
+#ifdef WIN32
+#include "winport.h"
+#endif
+
 namespace ns3 {
 
 /**
@@ -60,6 +64,11 @@ namespace ns3 {
  *
  * Interesting users of this class include ns3::Object as well as ns3::Packet.
  */
+
+#ifdef WIN32
+#undef max
+#undef min
+#endif
 template <typename T, typename PARENT = empty, typename DELETER = DefaultDeleter<T> >
 class SimpleRefCount : public PARENT
 {

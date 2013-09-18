@@ -362,8 +362,9 @@ LteUplinkSrsSinrTestCase::DoRun (void)
   int numOfIntfSignals = 4;
   int numOfSignals = numOfDataSignals + numOfIntfSignals;
 
-  uint16_t pbCellId[numOfSignals];
+  //uint16_t pbCellId[numOfSignals];
   
+  uint16_t *pbCellId = new uint16_t[numOfSignals];
   
   
   /**
@@ -471,6 +472,8 @@ LteUplinkSrsSinrTestCase::DoRun (void)
   */
   Ptr<SpectrumValue> calculatedSinr = chunkProcessor->GetSinr ();
   
+  delete pbCellId;
+
   NS_LOG_INFO ("SRS Frame - Theoretical SINR: " << *m_sinr);
   NS_LOG_INFO ("SRS Frame - Calculated SINR: " << *calculatedSinr);
   

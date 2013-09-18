@@ -54,7 +54,12 @@ class AodvRegressionTestSuite : public TestSuite
 public:
   AodvRegressionTestSuite () : TestSuite ("routing-aodv-regression", SYSTEM) 
   {
+	  //Not ideal
+#ifndef WIN32
     SetDataDir (NS_TEST_SOURCEDIR);
+#else
+	SetDataDir ("src\\aodv\\test\\");
+#endif
     // General RREQ-RREP-RRER test case
     AddTestCase (new ChainRegressionTest ("aodv-chain-regression-test"), TestCase::QUICK);
     /// \internal
@@ -192,6 +197,5 @@ ChainRegressionTest::CheckResults ()
       NS_PCAP_TEST_EXPECT_EQ (m_prefix << "-" << i << "-0.pcap");
     }
 }
-
 }
 }

@@ -33,7 +33,6 @@
 #include <ns3/string.h>
 #include <algorithm>
 
-
 NS_LOG_COMPONENT_DEFINE ("PssFfMacScheduler");
 
 namespace ns3 {
@@ -1275,7 +1274,7 @@ PssFfMacScheduler::DoSchedDlTriggerReq (const struct FfMacSchedSapProvider::Sche
                   if (rbgMap.at (i) == true)
                     continue;
         
-                  std::map <uint16_t, pssFlowPerf_t>::iterator itMax = tdUeSet.end ();
+                  std::map <uint16_t, pssFlowPerf_t>::const_iterator itMax = tdUeSet.end ();
                   double metricMax = 0.0;
                   for (it = tdUeSet.begin (); it != tdUeSet.end (); it++)
                     {
@@ -1343,8 +1342,11 @@ PssFfMacScheduler::DoSchedDlTriggerReq (const struct FfMacSchedSapProvider::Sche
                           itMax = it;
                         }
                     } // end of tdUeSet
-         
+#ifndef WIN32
                   if (itMax == m_flowStatsDl.end ())
+#else
+				  if (itMax == tdUeSet.end ())
+#endif
                     {
                       // no UE available for downlink 
                       return;

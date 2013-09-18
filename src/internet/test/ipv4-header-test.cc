@@ -42,10 +42,16 @@
 #include <string>
 #include <sstream>
 #include <limits>
+#ifndef WIN32
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <sys/types.h>
-
+#else
+#include <winport.h>
+#include <winsock.h>
+#undef max
+#undef GetObject
+#endif
 using namespace ns3;
 
 static void
@@ -254,6 +260,7 @@ Ipv4HeaderTest::DoRun (void)
 
  
   Simulator::Destroy ();
+  
 }
 //-----------------------------------------------------------------------------
 class Ipv4HeaderTestSuite : public TestSuite

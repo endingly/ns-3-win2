@@ -32,6 +32,11 @@
 #include "ns3/ipv6-address.h"
 #include "ipv6-interface-address.h"
 
+#ifdef WIN32
+#ifdef interface
+#undef interface
+#endif
+#endif
 namespace ns3 {
 
 class Node;

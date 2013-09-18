@@ -500,7 +500,12 @@ MessageHeader::Hna::Deserialize (Buffer::Iterator start, uint32_t messageSize)
     {
       Ipv4Address address (i.ReadNtohU32 ());
       Ipv4Mask mask (i.ReadNtohU32 ());
+#ifndef WIN32
       this->associations.push_back ((Association) { address, mask});
+#else
+	  Association association = { address, mask};
+	  this->associations.push_back (association);
+#endif
     }
   return messageSize;
 }
