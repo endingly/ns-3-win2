@@ -208,6 +208,7 @@ copy "$(SolutionDir)\..\..\src\core\helper\*.h"  "$(SolutionDir)\headers\ns3"</C
     <ClCompile Include="..\..\..\src\core\model\type-id.cc" />
     <ClCompile Include="..\..\..\src\core\model\type-name.cc" />
     <ClCompile Include="..\..\..\src\core\model\uinteger.cc" />
+    <ClCompile Include="..\..\..\src\core\model\unix-system-mutex.cc" />
     <ClCompile Include="..\..\..\src\core\model\vector.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
