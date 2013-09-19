@@ -425,5 +425,8 @@
     <ClCompile Include="..\..\..\src\core\model\hash-function.cc">
       <Filter>model</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\core\model\unix-system-mutex.cc">
+      <Filter>model</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
