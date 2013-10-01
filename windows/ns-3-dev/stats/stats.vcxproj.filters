@@ -24,9 +24,6 @@
     <ClInclude Include="..\..\..\src\stats\model\omnet-data-output.h">
       <Filter>model</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\stats\model\packet-data-calculators.h">
-      <Filter>model</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\stats\model\sqlite-data-output.h">
       <Filter>model</Filter>
     </ClInclude>
@@ -48,9 +45,6 @@
       <Filter>model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\stats\model\omnet-data-output.cc">
-      <Filter>model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\stats\model\packet-data-calculators.cc">
       <Filter>model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\stats\model\time-data-calculators.cc">

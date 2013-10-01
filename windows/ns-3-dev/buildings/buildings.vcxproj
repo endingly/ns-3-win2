@@ -75,10 +75,10 @@ copy "$(SolutionDir)\..\..\src\buildings\helper\*.h"  "$(SolutionDir)\headers\ns
     <ClCompile Include="..\..\..\src\buildings\helper\buildings-helper.cc" />
     <ClCompile Include="..\..\..\src\buildings\model\building-list.cc" />
     <ClCompile Include="..\..\..\src\buildings\model\building.cc" />
-    <ClCompile Include="..\..\..\src\buildings\model\buildings-mobility-model.cc" />
     <ClCompile Include="..\..\..\src\buildings\model\buildings-propagation-loss-model.cc" />
     <ClCompile Include="..\..\..\src\buildings\model\hybrid-buildings-propagation-loss-model.cc" />
     <ClCompile Include="..\..\..\src\buildings\model\itu-r-1238-propagation-loss-model.cc" />
+    <ClCompile Include="..\..\..\src\buildings\model\mobility-building-info.cc" />
     <ClCompile Include="..\..\..\src\buildings\model\oh-buildings-propagation-loss-model.cc" />
   </ItemGroup>
   <ItemGroup>
@@ -88,10 +88,10 @@ copy "$(SolutionDir)\..\..\src\buildings\helper\*.h"  "$(SolutionDir)\headers\ns
     <ClInclude Include="..\..\..\src\buildings\helper\buildings-helper.h" />
     <ClInclude Include="..\..\..\src\buildings\model\building-list.h" />
     <ClInclude Include="..\..\..\src\buildings\model\building.h" />
-    <ClInclude Include="..\..\..\src\buildings\model\buildings-mobility-model.h" />
     <ClInclude Include="..\..\..\src\buildings\model\buildings-propagation-loss-model.h" />
     <ClInclude Include="..\..\..\src\buildings\model\hybrid-buildings-propagation-loss-model.h" />
     <ClInclude Include="..\..\..\src\buildings\model\itu-r-1238-propagation-loss-model.h" />
+    <ClInclude Include="..\..\..\src\buildings\model\mobility-building-info.h" />
     <ClInclude Include="..\..\..\src\buildings\model\oh-buildings-propagation-loss-model.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
