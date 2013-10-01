@@ -890,12 +890,7 @@ TestRunnerImpl::Run (int argc, char *argv[])
   bool printTestTypeList = false;
   bool printTestNameList = false;
   bool printTestTypeAndName = false;
-#ifdef WIN32
-  enum TestCase::TestDuration maximumTestDuration = TestCase::QUICK;// TestCase::TAKES_FOREVER;
-
-#else
   enum TestCase::TestDuration maximumTestDuration = TestCase::QUICK;
-#endif
   char *progname = argv[0];
 
   argv++;
@@ -1097,6 +1092,7 @@ TestRunnerImpl::Run (int argc, char *argv[])
       delete os;
     }
 
+    }
   return failed?1:0;
 }
 
@@ -1108,5 +1104,6 @@ TestRunner::Run (int argc, char *argv[])
   NS_LOG_FUNCTION (argc << argv);
   return TestRunnerImpl::Instance ()->Run (argc, argv);
 }
+
 
 } // namespace ns3
