@@ -771,8 +771,8 @@ TestRunnerImpl::Run (int argc, char *argv[])
 	std::stringstream arguments;
 
 	char *progname = argv[0];
-
-	argv++;
+	if (strncmp(progname, "--suite=", strlen("--suite=")) != 0)
+      argv++;
 
 	while (*argv != 0)
 	{

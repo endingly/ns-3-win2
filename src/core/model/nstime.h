@@ -551,12 +551,6 @@ public:
    *  Function to force static initialization of Time
    */
   static bool StaticInit ();
-private:
-
-  /* Friend the Simulator class so it can call the private function
-     ClearMarkedTimes ()
-  */
-  friend class Simulator;
   /**
    *  Remove all MarkedTimes.
    *
@@ -564,6 +558,13 @@ private:
    *  Has to be visible to the Simulator class, hence the friending.
    */
   static void ClearMarkedTimes ();
+
+private:
+
+  /* Friend the Simulator class so it can call the private function
+     ClearMarkedTimes ()
+  */
+  friend class Simulator;
   /**
    *  Record a Time instance with the MarkedTimes
    */
