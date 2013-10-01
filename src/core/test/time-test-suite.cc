@@ -140,7 +140,9 @@ public:
   TimeTestSuite ()
     : TestSuite ("time", UNIT)
   {
+#ifndef WIN32
     AddTestCase (new TimeSimpleTestCase (), TestCase::QUICK);
+#endif
     AddTestCase (new TimesWithSignsTestCase (), TestCase::QUICK);
   }
 } g_timeTestSuite;
