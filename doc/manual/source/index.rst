@@ -26,8 +26,6 @@ This document is written in `reStructuredText <http://docutils.sourceforge.net/r
    object-names
    logging
    tracing
-   data-collection
-   statistics
    realtime
    helpers
    gnuplot

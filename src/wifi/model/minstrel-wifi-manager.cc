@@ -38,8 +38,6 @@
 #include "ns3/assert.h"
 #include <vector>
 
-#define Min(a,b) ((a < b) ? a : b)
-
 NS_LOG_COMPONENT_DEFINE ("MinstrelWifiManager");
 
 
@@ -138,9 +136,7 @@ MinstrelWifiManager::SetupPhy (Ptr<WifiPhy> phy)
   for (uint32_t i = 0; i < nModes; i++)
     {
       WifiMode mode = phy->GetMode (i);
-      WifiTxVector txVector;
-      txVector.SetMode(mode);
-      AddCalcTxTime (mode, phy->CalculateTxDuration (m_pktLen, txVector, WIFI_PREAMBLE_LONG));
+      AddCalcTxTime (mode, phy->CalculateTxDuration (m_pktLen, mode, WIFI_PREAMBLE_LONG));
     }
   WifiRemoteStationManager::SetupPhy (phy);
 }
@@ -439,8 +435,8 @@ MinstrelWifiManager::UpdateRetry (MinstrelWifiRemoteStation *station)
   station->m_longRetry = 0;
 }
 
-WifiTxVector
-MinstrelWifiManager::DoGetDataTxVector (WifiRemoteStation *st,
+WifiMode
+MinstrelWifiManager::DoGetDataMode (WifiRemoteStation *st,
                                     uint32_t size)
 {
   MinstrelWifiRemoteStation *station = (MinstrelWifiRemoteStation *) st;
@@ -452,16 +448,16 @@ MinstrelWifiManager::DoGetDataTxVector (WifiRemoteStation *st,
       station->m_txrate = m_nsupported / 2;
     }
   UpdateStats (station);
-  return WifiTxVector (GetSupported (station, station->m_txrate), GetDefaultTxPowerLevel (), GetLongRetryCount (station), GetShortGuardInterval (station), Min (GetNumberOfReceiveAntennas (station),GetNumberOfTransmitAntennas()), GetNumberOfTransmitAntennas (station), GetStbc (station));
+  return GetSupported (station, station->m_txrate);
 }
 
-WifiTxVector
-MinstrelWifiManager::DoGetRtsTxVector (WifiRemoteStation *st)
+WifiMode
+MinstrelWifiManager::DoGetRtsMode (WifiRemoteStation *st)
 {
   MinstrelWifiRemoteStation *station = (MinstrelWifiRemoteStation *) st;
   NS_LOG_DEBUG ("DoGetRtsMode m_txrate=" << station->m_txrate);
 
-  return WifiTxVector (GetSupported (station, 0), GetDefaultTxPowerLevel (), GetShortRetryCount (station), GetShortGuardInterval (station), Min (GetNumberOfReceiveAntennas (station),GetNumberOfTransmitAntennas()), GetNumberOfTransmitAntennas (station), GetStbc (station));
+  return GetSupported (station, 0);
 }
 
 bool

@@ -15,6 +15,9 @@
     <ClCompile Include="..\..\..\src\buildings\model\building-list.cc">
       <Filter>model</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\buildings\model\buildings-mobility-model.cc">
+      <Filter>model</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\src\buildings\model\buildings-propagation-loss-model.cc">
       <Filter>model</Filter>
     </ClCompile>
@@ -39,15 +42,15 @@
     <ClCompile Include="..\..\..\src\buildings\helper\buildings-helper.cc">
       <Filter>helper</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\buildings\model\mobility-building-info.cc">
-      <Filter>model</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\buildings\model\building.h">
       <Filter>model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\buildings\model\building-list.h">
+      <Filter>model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\buildings\model\buildings-mobility-model.h">
       <Filter>model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\buildings\model\buildings-propagation-loss-model.h">
@@ -73,9 +76,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\buildings\helper\buildings-helper.h">
       <Filter>helper</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\buildings\model\mobility-building-info.h">
-      <Filter>model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

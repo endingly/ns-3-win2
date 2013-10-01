@@ -58,10 +58,7 @@ enum TypeOfStation
   STA,
   AP,
   ADHOC_STA,
-  MESH,
-  HT_STA,
-  HT_AP,
-  HT_ADHOC_STA
+  MESH
 };
 
 

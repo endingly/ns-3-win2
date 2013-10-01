@@ -36,10 +36,6 @@ namespace ns3
 class RadvdInterface : public SimpleRefCount<RadvdInterface>
 {
 public:
-  typedef std::list<Ptr<RadvdPrefix> > RadvdPrefixList;
-  typedef std::list<Ptr<RadvdPrefix> >::iterator RadvdPrefixListI;
-  typedef std::list<Ptr<RadvdPrefix> >::const_iterator RadvdPrefixListCI;
-
   /**
    * \brief Constructor.
    * \param interface interface index
@@ -69,7 +65,7 @@ public:
    * \brief Get list of prefixes advertised for this interface.
    * \return list of IPv6 prefixes
    */
-  RadvdPrefixList GetPrefixes () const;
+  std::list <Ptr<RadvdPrefix> > GetPrefixes () const;
 
   /**
    * \brief Add a prefix to advertise on interface.
@@ -306,6 +302,8 @@ public:
   void SetIntervalOpt (bool intervalOpt);
 
 private:
+  typedef std::list<Ptr<RadvdPrefix> > RadvdPrefixList;
+  typedef std::list<Ptr<RadvdPrefix> >::iterator RadvdPrefixListI;
 
   /**
    * \brief Interface to advertise RA.

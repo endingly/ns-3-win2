@@ -108,9 +108,6 @@ private:
   SupportedRates GetSupportedRates (void) const;
   void SetState (enum MacState value);
 
-  HtCapabilities GetHtCapabilities (void) const;
-
-
   enum MacState m_state;
   Time m_probeRequestTimeout;
   Time m_assocRequestTimeout;

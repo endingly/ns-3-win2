@@ -65,11 +65,6 @@ public:
    * \param pifs the pifs duration.
    */
   virtual void SetPifs (Time pifs) = 0;
-/**
-   * \param rifs the rifs duration.
-   */
-
-  virtual void SetRifs (Time rifs) = 0;
   /**
    * \param ctsTimeout the duration of a CTS timeout.
    */
@@ -84,11 +79,6 @@ public:
    * Unused for now.
    */
   void SetMaxPropagationDelay (Time delay);
-/**
-   * \returns the current RIFS duration.
-   */
-
-  virtual Time GetRifs (void) const = 0;
 
   /**
    * \returns the current PIFS duration.
@@ -243,7 +233,6 @@ private:
   static Time GetDefaultMaxPropagationDelay (void);
   static Time GetDefaultSlot (void);
   static Time GetDefaultSifs (void);
-  static Time GetDefaultRifs (void);
   static Time GetDefaultEifsNoDifs (void);
   static Time GetDefaultCtsAckDelay (void);
   static Time GetDefaultCtsAckTimeout (void);
@@ -270,8 +259,6 @@ private:
   void Configure80211_5Mhz ();
   void Configure80211p_CCH (void);
   void Configure80211p_SCH (void);
-  void Configure80211n_2_4Ghz (void);
-  void Configure80211n_5Ghz (void);
 
   /**
    * The trace source fired when packets come into the "top" of the device

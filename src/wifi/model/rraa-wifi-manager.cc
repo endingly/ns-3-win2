@@ -26,8 +26,6 @@
 #include "ns3/uinteger.h"
 #include "ns3/simulator.h"
 
-#define Min(a,b) ((a < b) ? a : b)
-
 NS_LOG_COMPONENT_DEFINE ("RraaWifiManager");
 
 namespace ns3 {
@@ -269,8 +267,8 @@ RraaWifiManager::DoReportFinalDataFailed (WifiRemoteStation *st)
 {
 }
 
-WifiTxVector
-RraaWifiManager::DoGetDataTxVector (WifiRemoteStation *st,
+WifiMode
+RraaWifiManager::DoGetDataMode (WifiRemoteStation *st,
                                 uint32_t size)
 {
   RraaWifiRemoteStation *station = (RraaWifiRemoteStation *) st;
@@ -278,12 +276,12 @@ RraaWifiManager::DoGetDataTxVector (WifiRemoteStation *st,
     {
       ResetCountersBasic (station);
     }
-  return WifiTxVector (GetSupported (station, station->m_rate), GetDefaultTxPowerLevel (), GetLongRetryCount (station), GetShortGuardInterval (station), Min (GetNumberOfReceiveAntennas (station),GetNumberOfTransmitAntennas()), GetNumberOfTransmitAntennas (station), GetStbc (station));
+  return GetSupported (station, station->m_rate);
 }
-WifiTxVector
-RraaWifiManager::DoGetRtsTxVector (WifiRemoteStation *st)
+WifiMode
+RraaWifiManager::DoGetRtsMode (WifiRemoteStation *st)
 {
-  return WifiTxVector (GetSupported (st, 0), GetDefaultTxPowerLevel (), GetShortRetryCount (st), GetShortGuardInterval (st), Min (GetNumberOfReceiveAntennas (st),GetNumberOfTransmitAntennas()), GetNumberOfTransmitAntennas (st), GetStbc (st));
+  return GetSupported (st, 0);
 }
 
 bool

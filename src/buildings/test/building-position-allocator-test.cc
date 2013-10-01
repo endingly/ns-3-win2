@@ -23,9 +23,7 @@
 #include "ns3/log.h"
 #include "ns3/test.h"
 #include <ns3/building-position-allocator.h>
-#include <ns3/mobility-building-info.h>
-#include <ns3/constant-position-mobility-model.h>
-#include <ns3/mobility-model.h>
+#include <ns3/buildings-mobility-model.h>
 #include <ns3/building.h>
 #include <ns3/buildings-helper.h>
 #include <ns3/mobility-helper.h>
@@ -97,11 +95,10 @@ RandomRoomPositionAllocatorTestCase::DoRun ()
   nodes.Create (24);
 
   MobilityHelper mobility;
-  mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+  mobility.SetMobilityModel ("ns3::BuildingsMobilityModel");
   Ptr<PositionAllocator> positionAlloc = CreateObject<RandomRoomPositionAllocator> ();
   mobility.SetPositionAllocator (positionAlloc);
   mobility.Install (nodes);
-  BuildingsHelper::Install (nodes);
 
   BuildingsHelper::MakeMobilityModelConsistent ();
 
@@ -111,14 +108,14 @@ RandomRoomPositionAllocatorTestCase::DoRun ()
     {
       Ptr<MobilityModel> mm = (*it)->GetObject<MobilityModel> ();
       NS_ASSERT_MSG (mm, "no mobility model aggregated to this node");
-      Ptr<MobilityBuildingInfo> bmm = mm->GetObject<MobilityBuildingInfo> ();
-      NS_ASSERT_MSG (bmm, "MobilityBuildingInfo has not been aggregated to this node mobility model");
+      Ptr<BuildingsMobilityModel> bmm = DynamicCast<BuildingsMobilityModel> (mm);
+      NS_ASSERT_MSG (bmm, "mobility model aggregated to this node is not a BuildingsMobilityModel");
 
       NS_TEST_ASSERT_MSG_EQ (bmm->IsIndoor (), true, "node should be indoor");
       Room r (bmm->GetRoomNumberX (), bmm->GetRoomNumberY (), bmm->GetFloorNumber ());
       ++(roomCounter[r]);
 
-      Vector p = mm->GetPosition ();
+      Vector p = bmm->GetPosition ();
       NS_TEST_ASSERT_MSG_GT (p.x, bmm->GetRoomNumberX (), "wrong x value");
       NS_TEST_ASSERT_MSG_LT (p.x, bmm->GetRoomNumberX () + 1, "wrong x value");
       NS_TEST_ASSERT_MSG_GT (p.y, bmm->GetRoomNumberY (), "wrong y value");
@@ -179,18 +176,16 @@ SameRoomPositionAllocatorTestCase::DoRun ()
   nodes.Create (24);
 
   MobilityHelper mobility;
-  mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+  mobility.SetMobilityModel ("ns3::BuildingsMobilityModel");
   Ptr<PositionAllocator> positionAlloc = CreateObject<RandomRoomPositionAllocator> ();
   mobility.SetPositionAllocator (positionAlloc);
   mobility.Install (nodes);
-  BuildingsHelper::Install (nodes);
 
   NodeContainer copyNodes;
   copyNodes.Create (48);
   positionAlloc = CreateObject<SameRoomPositionAllocator> (nodes);
   mobility.SetPositionAllocator (positionAlloc);
   mobility.Install (copyNodes);
-  BuildingsHelper::Install (copyNodes);
 
   BuildingsHelper::MakeMobilityModelConsistent ();
 
@@ -200,8 +195,8 @@ SameRoomPositionAllocatorTestCase::DoRun ()
     {
       Ptr<MobilityModel> mm = (*it)->GetObject<MobilityModel> ();
       NS_ASSERT_MSG (mm, "no mobility model aggregated to this node");
-      Ptr<MobilityBuildingInfo> bmm = mm->GetObject<MobilityBuildingInfo> ();
-      NS_ASSERT_MSG (bmm, "MobilityBuildingInfo has not been aggregated to this node mobility model");
+      Ptr<BuildingsMobilityModel> bmm = DynamicCast<BuildingsMobilityModel> (mm);
+      NS_ASSERT_MSG (bmm, "mobility model aggregated to this node is not a BuildingsMobilityModel");
 
       NS_TEST_ASSERT_MSG_EQ (bmm->IsIndoor (), true, "node should be indoor");
       Room r (bmm->GetRoomNumberX (), bmm->GetRoomNumberY (), bmm->GetFloorNumber ());

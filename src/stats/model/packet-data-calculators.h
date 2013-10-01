@@ -23,8 +23,8 @@
 
 #include "ns3/packet.h"
 #include "ns3/mac48-address.h"
-#include "ns3/data-calculator.h"
-#include "ns3/basic-data-calculators.h"
+
+#include "data-calculator.h"
 
 namespace ns3 {
 

@@ -24,7 +24,6 @@
 #include "ns3/mobility-module.h"
 #include "ns3/lte-module.h"
 #include "ns3/config-store.h"
-#include <ns3/buildings-helper.h>
 //#include "ns3/gtk-config-store.h"
 
 using namespace ns3;
@@ -59,12 +58,10 @@ int main (int argc, char *argv[])
 
   // Install Mobility Model
   MobilityHelper mobility;
-  mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+  mobility.SetMobilityModel ("ns3::BuildingsMobilityModel");
   mobility.Install (enbNodes);
-  BuildingsHelper::Install (enbNodes);
-  mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+  mobility.SetMobilityModel ("ns3::BuildingsMobilityModel");
   mobility.Install (ueNodes);
-  BuildingsHelper::Install (ueNodes);
 
   // Create Devices and install them in the Nodes (eNB and UE)
   NetDeviceContainer enbDevs;

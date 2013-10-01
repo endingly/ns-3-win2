@@ -18,8 +18,7 @@
  * Author: Peter D. Barnes, Jr. <pdbarnes@llnl.gov>
  */
 
-#include <iostream>
-#include <iomanip>
+#include <iostream>  // boolalpha
 #include <string>
 
 #include "ns3/core-module.h"
@@ -28,11 +27,11 @@
 using namespace ns3;
 
 
-std::string g_cbArg="cbArg default";
+std::string g_val4="val4 default";
 
-bool SetCbArg (std::string val)
+bool SetVal4 (std::string val)
 {
-  g_cbArg = val;
+  g_val4 = val;
   return true;
 }
 
@@ -40,28 +39,25 @@ bool SetCbArg (std::string val)
 int main (int argc, char *argv[])
 {
 
-  int         intArg  = 1;
-  bool        boolArg = false;
-  std::string strArg  = "strArg default";
+  int         val1 = 1;
+  bool        val2 = false;
+  std::string val3 = "val3 default";
   
   CommandLine cmd;
   cmd.Usage ("CommandLine example program.\n"
              "\n"
              "This little program demonstrates how to use CommandLine.");
-  cmd.AddValue ("intArg",  "an int argument",       intArg);
-  cmd.AddValue ("boolArg", "a bool argument",       boolArg);
-  cmd.AddValue ("strArg",  "a string argument",     strArg);
-  cmd.AddValue ("cbArg",   "a string via callback", MakeCallback (SetCbArg));
+  cmd.AddValue ("val1", "an int argument",          val1);
+  cmd.AddValue ("val2", "a bool argument",          val2);
+  cmd.AddValue ("val3", "a string argument",        val3);
+  cmd.AddValue ("val4", "a string via callback", MakeCallback (SetVal4));
   cmd.Parse (argc, argv);
 
-  std::cout << std::left
-            << std::setw (10) << "intArg:"         << intArg           << std::endl;
-  std::cout << std::setw (10) << "boolArg:"
-            << std::boolalpha                      << boolArg
-            << std::noboolalpha                                        << std::endl;
-  
-  std::cout << std::setw (10) << "strArg:" << "\"" << strArg  << "\""  << std::endl;
-  std::cout << std::setw (10) << "cbArg:"  << "\"" << g_cbArg << "\""  << std::endl;
+  std::cout << "val1:\t" << val1 << std::endl;
+  std::cout << "val2:\t"   << std::boolalpha << val2
+            << std::noboolalpha << std::endl;
+  std::cout << "val3:\t\"" << val3 << "\"" << std::endl;
+  std::cout << "val4:\t\"" << g_val4 << "\"" << std::endl;
 
   return 0;
 }

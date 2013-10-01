@@ -32,8 +32,6 @@
 \.pcap$
 \.mob$
 \.routes$
-^seventh-packet-byte-count.png
-\.cwnd
 ^doc/doxygen.log$
 ^doc/doxygen.warnings.log$
 ^doc/(manual|models|tutorial|tutorial-pt-br)/build
@@ -50,10 +48,6 @@ massif.*
 \.patch$
 \.diff$
 \.tr$
-\.txt$
-\.sh$
-\.dat$
-\.plt$
 \#[^\#/]+\#$
 ^coverity
 syntax: glob

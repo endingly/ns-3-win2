@@ -26,8 +26,6 @@
 
 NS_LOG_COMPONENT_DEFINE ("ConstantRateWifiManager");
 
-#define Min(a,b) ((a < b) ? a : b)
-
 namespace ns3 {
 
 NS_OBJECT_ENSURE_REGISTERED (ConstantRateWifiManager);
@@ -108,17 +106,17 @@ ConstantRateWifiManager::DoReportFinalDataFailed (WifiRemoteStation *station)
   NS_LOG_FUNCTION (this << station);
 }
 
-WifiTxVector
-ConstantRateWifiManager::DoGetDataTxVector (WifiRemoteStation *st, uint32_t size)
+WifiMode
+ConstantRateWifiManager::DoGetDataMode (WifiRemoteStation *st, uint32_t size)
 {
   NS_LOG_FUNCTION (this << st << size);
-  return WifiTxVector (m_dataMode, GetDefaultTxPowerLevel (), GetLongRetryCount (st), GetShortGuardInterval (st), Min (GetNumberOfReceiveAntennas (st),GetNumberOfTransmitAntennas()), GetNumberOfTransmitAntennas (st), GetStbc (st));
+  return m_dataMode;
 }
-WifiTxVector
-ConstantRateWifiManager::DoGetRtsTxVector (WifiRemoteStation *st)
+WifiMode
+ConstantRateWifiManager::DoGetRtsMode (WifiRemoteStation *st)
 {
   NS_LOG_FUNCTION (this << st);
-  return WifiTxVector (m_ctlMode, GetDefaultTxPowerLevel (), GetShortRetryCount (st), GetShortGuardInterval (st), Min (GetNumberOfReceiveAntennas (st),GetNumberOfTransmitAntennas()), GetNumberOfTransmitAntennas (st), GetStbc (st));
+  return m_ctlMode;
 }
 
 bool

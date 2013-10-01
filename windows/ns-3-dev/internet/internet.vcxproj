@@ -129,7 +129,6 @@ copy "$(SolutionDir)\..\..\src\internet\helper\*.h"  "$(SolutionDir)\headers\ns3
     <ClCompile Include="..\..\..\src\internet\model\ipv6-option-header.cc" />
     <ClCompile Include="..\..\..\src\internet\model\ipv6-option.cc" />
     <ClCompile Include="..\..\..\src\internet\model\ipv6-packet-info-tag.cc" />
-    <ClCompile Include="..\..\..\src\internet\model\ipv6-pmtu-cache.cc" />
     <ClCompile Include="..\..\..\src\internet\model\ipv6-raw-socket-factory-impl.cc" />
     <ClCompile Include="..\..\..\src\internet\model\ipv6-raw-socket-factory.cc" />
     <ClCompile Include="..\..\..\src\internet\model\ipv6-raw-socket-impl.cc" />
@@ -223,7 +222,6 @@ copy "$(SolutionDir)\..\..\src\internet\helper\*.h"  "$(SolutionDir)\headers\ns3
     <ClInclude Include="..\..\..\src\internet\model\ipv6-option-header.h" />
     <ClInclude Include="..\..\..\src\internet\model\ipv6-option.h" />
     <ClInclude Include="..\..\..\src\internet\model\ipv6-packet-info-tag.h" />
-    <ClInclude Include="..\..\..\src\internet\model\ipv6-pmtu-cache.h" />
     <ClInclude Include="..\..\..\src\internet\model\ipv6-raw-socket-factory-impl.h" />
     <ClInclude Include="..\..\..\src\internet\model\ipv6-raw-socket-factory.h" />
     <ClInclude Include="..\..\..\src\internet\model\ipv6-raw-socket-impl.h" />

@@ -21,30 +21,30 @@
 
 #include <ns3/simulator.h>
 #include <ns3/position-allocator.h>
-#include <ns3/mobility-building-info.h>
+#include <ns3/buildings-mobility-model.h>
 #include <ns3/pointer.h>
 #include <ns3/log.h>
 #include <ns3/assert.h>
 
-NS_LOG_COMPONENT_DEFINE ("MobilityBuildingInfo");
+NS_LOG_COMPONENT_DEFINE ("BuildingsMobilityModel");
 
 namespace ns3 {
 
-NS_OBJECT_ENSURE_REGISTERED (MobilityBuildingInfo);
+NS_OBJECT_ENSURE_REGISTERED (BuildingsMobilityModel);
 
 TypeId
-MobilityBuildingInfo::GetTypeId (void)
+BuildingsMobilityModel::GetTypeId (void)
 {
-  static TypeId tid = TypeId ("ns3::MobilityBuildingInfo")
-    .SetParent<Object> ()
-    .SetGroupName ("Building")
-    .AddConstructor<MobilityBuildingInfo> ();
+  static TypeId tid = TypeId ("ns3::BuildingsMobilityModel")
+    .SetParent<MobilityModel> ()
+    .SetGroupName ("Mobility")
+    .AddConstructor<BuildingsMobilityModel> ();
 
   return tid;
 }
 
 
-MobilityBuildingInfo::MobilityBuildingInfo ()
+BuildingsMobilityModel::BuildingsMobilityModel ()
 {
   NS_LOG_FUNCTION (this);
   m_indoor = false;
@@ -53,33 +53,49 @@ MobilityBuildingInfo::MobilityBuildingInfo ()
   m_roomY = 1;
 }
 
-
-MobilityBuildingInfo::MobilityBuildingInfo (Ptr<Building> building)
-  : m_myBuilding (building)
+void
+BuildingsMobilityModel::DoDispose (void)
 {
   NS_LOG_FUNCTION (this);
-  m_indoor = false;
-  m_nFloor = 1;
-  m_roomX = 1;
-  m_roomY = 1;
+  MobilityModel::DoDispose ();
+}
+
+Vector
+BuildingsMobilityModel::DoGetPosition (void) const
+{
+  NS_LOG_FUNCTION (this);
+  m_helper.Update ();
+  return m_helper.GetCurrentPosition ();
+}
+void 
+BuildingsMobilityModel::DoSetPosition (const Vector &position)
+{
+  NS_LOG_FUNCTION (this);
+  m_helper.SetPosition (position);
+}
+Vector
+BuildingsMobilityModel::DoGetVelocity (void) const
+{
+  NS_LOG_FUNCTION (this);
+  return m_helper.GetVelocity ();
 }
 
 bool
-MobilityBuildingInfo::IsIndoor (void)
+BuildingsMobilityModel::IsIndoor (void)
 {
   NS_LOG_FUNCTION (this);
   return (m_indoor);
 }
 
 bool
-MobilityBuildingInfo::IsOutdoor (void)
+BuildingsMobilityModel::IsOutdoor (void)
 {
   NS_LOG_FUNCTION (this);
   return (!m_indoor);
 }
 
 void
-MobilityBuildingInfo::SetIndoor (Ptr<Building> building, uint8_t nfloor, uint8_t nroomx, uint8_t nroomy)
+BuildingsMobilityModel::SetIndoor (Ptr<Building> building, uint8_t nfloor, uint8_t nroomx, uint8_t nroomy)
 {
   NS_LOG_FUNCTION (this);
   m_indoor = true;
@@ -88,7 +104,7 @@ MobilityBuildingInfo::SetIndoor (Ptr<Building> building, uint8_t nfloor, uint8_t
   m_roomX = nroomx;
   m_roomY = nroomy;
   
-
+  NS_ASSERT_MSG (building->IsInside (m_helper.GetCurrentPosition ()), "Position of the node is outside of building bounds");
   NS_ASSERT (m_roomX > 0);
   NS_ASSERT (m_roomX <= building->GetNRoomsX ());
   NS_ASSERT (m_roomY > 0);
@@ -100,48 +116,28 @@ MobilityBuildingInfo::SetIndoor (Ptr<Building> building, uint8_t nfloor, uint8_t
 
 
 void
-MobilityBuildingInfo::SetIndoor (uint8_t nfloor, uint8_t nroomx, uint8_t nroomy)
-{
-  NS_LOG_FUNCTION (this);
-  m_indoor = true;
-  m_nFloor = nfloor;
-  m_roomX = nroomx;
-  m_roomY = nroomy;
-
-  NS_ASSERT_MSG (m_myBuilding, "Node does not have any building defined");
-  NS_ASSERT (m_roomX > 0);
-  NS_ASSERT (m_roomX <= m_myBuilding->GetNRoomsX ());
-  NS_ASSERT (m_roomY > 0);
-  NS_ASSERT (m_roomY <= m_myBuilding->GetNRoomsY ());
-  NS_ASSERT (m_nFloor > 0);
-  NS_ASSERT (m_nFloor <= m_myBuilding->GetNFloors ());
-
-}
-
-
-void
-MobilityBuildingInfo::SetOutdoor (void)
+BuildingsMobilityModel::SetOutdoor (void)
 {
   NS_LOG_FUNCTION (this);
   m_indoor = false;
 }
 
 uint8_t
-MobilityBuildingInfo::GetFloorNumber (void)
+BuildingsMobilityModel::GetFloorNumber (void)
 {
   NS_LOG_FUNCTION (this);
   return (m_nFloor);
 }
 
 uint8_t
-MobilityBuildingInfo::GetRoomNumberX (void)
+BuildingsMobilityModel::GetRoomNumberX (void)
 {
   NS_LOG_FUNCTION (this);
   return (m_roomX);
 }
 
 uint8_t
-MobilityBuildingInfo::GetRoomNumberY (void)
+BuildingsMobilityModel::GetRoomNumberY (void)
 {
   NS_LOG_FUNCTION (this);
   return (m_roomY);
@@ -149,7 +145,7 @@ MobilityBuildingInfo::GetRoomNumberY (void)
 
 
 Ptr<Building>
-MobilityBuildingInfo::GetBuilding ()
+BuildingsMobilityModel::GetBuilding ()
 {
   NS_LOG_FUNCTION (this);
   return (m_myBuilding);

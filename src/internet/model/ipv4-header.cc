@@ -117,45 +117,45 @@ Ipv4Header::DscpTypeToString (DscpType dscp) const
     {
       case DscpDefault:
         return "Default";
-      case DSCP_CS1:
+      case CS1:
         return "CS1";
-      case DSCP_AF11:
+      case AF11:
         return "AF11";
-      case DSCP_AF12:
+      case AF12:
         return "AF12";
-      case DSCP_AF13:
+      case AF13:
         return "AF13";
-      case DSCP_CS2:
+      case CS2:
         return "CS2";
-      case DSCP_AF21:
+      case AF21:
         return "AF21";
-      case DSCP_AF22:
+      case AF22:
         return "AF22";
-      case DSCP_AF23:
+      case AF23:
         return "AF23";
-      case DSCP_CS3:
+      case CS3:
         return "CS3";
-      case DSCP_AF31:
+      case AF31:
         return "AF31";
-      case DSCP_AF32:
+      case AF32:
         return "AF32";
-      case DSCP_AF33:
+      case AF33:
         return "AF33";
-      case DSCP_CS4:
+      case CS4:
         return "CS4";
-      case DSCP_AF41:
+      case AF41:
         return "AF41";
-      case DSCP_AF42:
+      case AF42:
         return "AF42";
-      case DSCP_AF43:
+      case AF43:
         return "AF43";
-      case DSCP_CS5:
+      case CS5:
         return "CS5";
-      case DSCP_EF:
+      case EF:
         return "EF";
-      case DSCP_CS6:
+      case CS6:
         return "CS6";
-      case DSCP_CS7:
+      case CS7:
         return "CS7";
       default:
         return "Unrecognized DSCP";
@@ -177,13 +177,13 @@ Ipv4Header::EcnTypeToString (EcnType ecn) const
   NS_LOG_FUNCTION (this << ecn);
   switch (ecn)
     {
-      case ECN_NotECT:
+      case NotECT:
         return "Not-ECT";
-      case ECN_ECT1:
+      case ECT1:
         return "ECT (1)";
-      case ECN_ECT0:
+      case ECT0:
         return "ECT (0)";
-      case ECN_CE:
+      case CE:
         return "CE";      
       default:
         return "Unknown ECN";

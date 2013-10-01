@@ -36,7 +36,6 @@ enum WifiMacType
   WIFI_MAC_CTL_ACK,
   WIFI_MAC_CTL_BACKREQ,
   WIFI_MAC_CTL_BACKRESP,
-  WIFI_MAC_CTL_CTLWRAPPER,
 
   WIFI_MAC_MGT_BEACON,
   WIFI_MAC_MGT_ASSOCIATION_REQUEST,
@@ -142,8 +141,7 @@ public:
   void SetQosAmsdu (void);
   void SetQosNoAmsdu (void);
   void SetQosTxopLimit (uint8_t txop);
-  void SetOrder (void);
-  void SetNoOrder (void);
+
 
   Mac48Address GetAddr1 (void) const;
   Mac48Address GetAddr2 (void) const;

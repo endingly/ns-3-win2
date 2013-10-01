@@ -32,7 +32,7 @@
 #include <ns3/ptr.h>
 #include <iostream>
 #include "ns3/radio-bearer-stats-calculator.h"
-#include <ns3/mobility-building-info.h>
+#include <ns3/buildings-mobility-model.h>
 #include <ns3/buildings-propagation-loss-model.h>
 #include <ns3/eps-bearer.h>
 #include <ns3/node-container.h>
@@ -51,7 +51,6 @@
 #include <ns3/pf-ff-mac-scheduler.h>
 #include <ns3/pointer.h>
 #include <ns3/enum.h>
-#include <ns3/buildings-helper.h>
 
 #include "lte-test-mimo.h"
 
@@ -148,12 +147,10 @@ LenaMimoTestCase::DoRun (void)
 
   // Install Mobility Model
   MobilityHelper mobility;
-  mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+  mobility.SetMobilityModel ("ns3::BuildingsMobilityModel");
   mobility.Install (enbNodes);
-  BuildingsHelper::Install (enbNodes);
-  mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+  mobility.SetMobilityModel ("ns3::BuildingsMobilityModel");
   mobility.Install (ueNodes);
-  BuildingsHelper::Install (ueNodes);
 
   // Create Devices and install them in the Nodes (eNB and UE)
   NetDeviceContainer enbDevs;
@@ -175,11 +172,11 @@ LenaMimoTestCase::DoRun (void)
   Ptr<LteEnbPhy> enbPhy = lteEnbDev->GetPhy ();
   enbPhy->SetAttribute ("TxPower", DoubleValue (46.0));
   enbPhy->SetAttribute ("NoiseFigure", DoubleValue (5.0));
-  Ptr<MobilityModel> mmenb = enbNodes.Get (0)->GetObject<MobilityModel> ();
+  Ptr<BuildingsMobilityModel> mmenb = enbNodes.Get (0)->GetObject<BuildingsMobilityModel> ();
   mmenb->SetPosition (Vector (0.0, 0.0, 30.0));
 
   // Set UE's position and power
-  Ptr<MobilityModel> mmue = ueNodes.Get (0)->GetObject<MobilityModel> ();
+  Ptr<BuildingsMobilityModel> mmue = ueNodes.Get (0)->GetObject<BuildingsMobilityModel> ();
   mmue->SetPosition (Vector (m_dist, 0.0, 1.0));
   Ptr<LteUeNetDevice> lteUeDev = ueDevs.Get (0)->GetObject<LteUeNetDevice> ();
   Ptr<LteUePhy> uePhy = lteUeDev->GetPhy ();

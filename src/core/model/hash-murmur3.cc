@@ -34,33 +34,6 @@
 
 #include <iomanip>
 
-/*
- * \brief Silence erroneous strict alias warning from a gcc 4.4 bug
- *
- * Casting \c (void*) triggers a strict alias warning bug
- * in gcc 4.4 (see http://gcc.gnu.org/bugzilla/show_bug.cgi?id=39390).
- *
- * In the murmur3 code, data is returned by
- * \code
- *   void Function (... , void * out)
- *   {
- *     ...
- *     *(uint32_t *)out = ...
- *   }
- * \endcode
- *
- * which triggers the erroneous warning.
- *
- * We suppress strict-alias warnings in this compilation unit.
- * (gcc 4.4 doesn't support the <tt>diagnostic push/pop</tt> pragmas,
- * so we can't narrow down the suppression any further.)
- */
-// Test for gcc 4.4.x
-#define GCC_VERSION (__GNUC__ * 100 + __GNUC_MINOR__)
-#if (GCC_VERSION == 404)
-#  pragma GCC diagnostic ignored "-Wstrict-aliasing"
-#endif
- 
 namespace ns3 {
 
 NS_LOG_COMPONENT_DEFINE ("Hash-Murmur3");
@@ -207,7 +180,8 @@ void MurmurHash3_x86_32_incr ( const void * key, int len,
           k1 *= c1; k1 = rotl32(k1,15); k1 *= c2; h1 ^= k1;
   };
 
-  *(uint32_t *)out = h1;
+  uint32_t * res = (uint32_t *)out;  //PDB: strict aliasing
+  *res = h1;
 }
 
 //PDB - incremental hashing - finalization
@@ -223,7 +197,8 @@ void MurmurHash3_x86_32_fin ( int len,
 
   h1 = fmix(h1);
 
-  *(uint32_t *)out = h1;
+  uint32_t * res = (uint32_t *)out;  //PDB: strict aliasing
+  *res = h1;
 } 
 
 //-----------------------------------------------------------------------------
@@ -326,10 +301,11 @@ void MurmurHash3_x86_128_incr ( const void * key, const int len,
            k1 *= c1; k1  = rotl32(k1,15); k1 *= c2; h1 ^= k1;
   };
 
-  ((uint32_t *)out)[0] = h1;
-  ((uint32_t *)out)[1] = h2;
-  ((uint32_t *)out)[2] = h3;
-  ((uint32_t *)out)[3] = h4;
+  uint32_t * res = (uint32_t *)out;  //PDB: strict aliasing
+  res[0] = h1;
+  res[1] = h2;
+  res[2] = h3;
+  res[3] = h4;
 }
 
 //PDB - incremental hashing - finalization
@@ -357,10 +333,11 @@ void MurmurHash3_x86_128_fin ( const int len,
   h1 += h2; h1 += h3; h1 += h4;
   h2 += h1; h3 += h1; h4 += h1;
 
-  ((uint32_t *)out)[0] = h1;
-  ((uint32_t *)out)[1] = h2;
-  ((uint32_t *)out)[2] = h3;
-  ((uint32_t *)out)[3] = h4;
+  uint32_t * res = (uint32_t *)out;  //PDB: strict aliasing
+  res[0] = h1;
+  res[1] = h2;
+  res[2] = h3;
+  res[3] = h4;
 }
 
 //-----------------------------------------------------------------------------
@@ -440,8 +417,9 @@ void MurmurHash3_x64_128 ( const void * key, const int len,
   h1 += h2;
   h2 += h1;
 
-  ((uint32_t *)out)[0] = h1;
-  ((uint32_t *)out)[1] = h2;
+  uint32_t * res = (uint32_t *)out;  //PDB: strict aliasing
+  res[0] = h1;
+  res[1] = h2;
 }
 
 

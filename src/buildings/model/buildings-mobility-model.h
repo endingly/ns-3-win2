@@ -18,12 +18,12 @@
  * Author: Marco Miozzo  <marco.miozzo@cttc.es>
  * 
  */
-#ifndef MOBILITY_BUILDING_INFO_H
-#define MOBILITY_BUILDING_INFO_H
+#ifndef BUILDINGS_MOBILITY_MODEL_H
+#define BUILDINGS_MOBILITY_MODEL_H
 
 
 
-#include <ns3/simple-ref-count.h>
+#include <ns3/mobility-model.h>
 #include <ns3/ptr.h>
 #include <ns3/object.h>
 #include <ns3/box.h>
@@ -37,48 +37,43 @@ namespace ns3 {
 
 
 /**
- * \ingroup buildings
- * \brief mobility buildings information (to be used by mobility models)
+ * \ingroup mobility
+ * \brief Buildings mobility model
  *
  * This model implements the managment of scenarios where users might be
  * either indoor (e.g., houses, offices, etc.) and outdoor.
  * 
  */
-class MobilityBuildingInfo : public Object
+class BuildingsMobilityModel : public MobilityModel
 {
 public:
   static TypeId GetTypeId (void);
-  MobilityBuildingInfo ();
-
-  MobilityBuildingInfo (Ptr<Building> building);
+  BuildingsMobilityModel ();
 
   /** 
    * 
-   * \return true if the MobilityBuildingInfo instance is indoor, false otherwise
+   * \return true if the MobilityModel instance is indoor, false otherwise
    */
   bool IsIndoor (void);
 
   /** 
    * 
-   * \return true if the MobilityBuildingInfo instance is outdoor, false otherwise
+   * \return true if the MobilityModel instance is outdoor, false otherwise
    */
   bool IsOutdoor (void);
 
   /** 
-   * Mark this MobilityBuildingInfo instance as indoor
+   * Mark this MobilityModel instance as indoor 
    * 
-   * \param building the building into which the MobilityBuildingInfo instance is located
-   * \param nfloor the floor number 1...nFloors at which the  MobilityBuildingInfo instance is located
-   * \param nroomx the X room number 1...nRoomsX at which the  MobilityBuildingInfo instance is located
-   * \param nroomy the Y room number 1...nRoomsY at which the  MobilityBuildingInfo instance is located
+   * \param building the building into which the MobilityModel instance is located
+   * \param nfloor the floor number 1...nFloors at which the  MobilityModel instance is located
+   * \param nroomx the X room number 1...nRoomsX at which the  MobilityModel instance is located
+   * \param nroomy the Y room number 1...nRoomsY at which the  MobilityModel instance is located
    */
   void SetIndoor (Ptr<Building> building, uint8_t nfloor, uint8_t nroomx, uint8_t nroomy);
 
-
-  void SetIndoor (uint8_t nfloor, uint8_t nroomx, uint8_t nroomy);
-
   /** 
-   * Mark this MobilityBuildingInfo instance as outdoor
+   * Mark this MobilityModel instance as outdoor
    * 
    */
   void SetOutdoor ();
@@ -110,6 +105,11 @@ public:
 
 
 private:
+  virtual void DoDispose (void);
+  virtual Vector DoGetPosition (void) const;
+  virtual void DoSetPosition (const Vector &position);
+  virtual Vector DoGetVelocity (void) const;
+  ConstantVelocityHelper m_helper;
 
   Ptr<Building> m_myBuilding;
   bool m_indoor;
@@ -124,4 +124,4 @@ private:
 } // namespace ns3
 
 
-#endif // MOBILITY_BUILDING_INFO_H
+#endif // BUILDINGS_MOBILITY_MODEL_H

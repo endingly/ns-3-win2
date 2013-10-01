@@ -862,100 +862,100 @@ RrcAsn1Header::SerializeQoffsetRange (int8_t qOffsetRange) const
   switch (qOffsetRange)
     {
     case -24:
-      SerializeEnum (31,0);
+      SerializeEnum (32,0);
       break;
     case -22:
-      SerializeEnum (31,1);
+      SerializeEnum (32,1);
       break;
     case -20:
-      SerializeEnum (31,2);
+      SerializeEnum (32,2);
       break;
     case -18:
-      SerializeEnum (31,3);
+      SerializeEnum (32,3);
       break;
     case -16:
-      SerializeEnum (31,4);
+      SerializeEnum (32,4);
       break;
     case -14:
-      SerializeEnum (31,5);
+      SerializeEnum (32,5);
       break;
     case -12:
-      SerializeEnum (31,6);
+      SerializeEnum (32,6);
       break;
     case -10:
-      SerializeEnum (31,7);
+      SerializeEnum (32,7);
       break;
     case -8:
-      SerializeEnum (31,8);
+      SerializeEnum (32,8);
       break;
     case -6:
-      SerializeEnum (31,9);
+      SerializeEnum (32,9);
       break;
     case -5:
-      SerializeEnum (31,10);
+      SerializeEnum (32,10);
       break;
     case -4:
-      SerializeEnum (31,11);
+      SerializeEnum (32,11);
       break;
     case -3:
-      SerializeEnum (31,12);
+      SerializeEnum (32,12);
       break;
     case -2:
-      SerializeEnum (31,13);
+      SerializeEnum (32,13);
       break;
     case -1:
-      SerializeEnum (31,14);
+      SerializeEnum (32,14);
       break;
     case 0:
-      SerializeEnum (31,15);
+      SerializeEnum (32,15);
       break;
     case 1:
-      SerializeEnum (31,16);
+      SerializeEnum (32,16);
       break;
     case 2:
-      SerializeEnum (31,17);
+      SerializeEnum (32,17);
       break;
     case 3:
-      SerializeEnum (31,18);
+      SerializeEnum (32,18);
       break;
     case 4:
-      SerializeEnum (31,19);
+      SerializeEnum (32,19);
       break;
     case 5:
-      SerializeEnum (31,20);
+      SerializeEnum (32,20);
       break;
     case 6:
-      SerializeEnum (31,21);
+      SerializeEnum (32,21);
       break;
     case 8:
-      SerializeEnum (31,22);
+      SerializeEnum (32,22);
       break;
     case 10:
-      SerializeEnum (31,23);
+      SerializeEnum (32,23);
       break;
     case 12:
-      SerializeEnum (31,24);
+      SerializeEnum (32,24);
       break;
     case 14:
-      SerializeEnum (31,25);
+      SerializeEnum (32,25);
       break;
     case 16:
-      SerializeEnum (31,26);
+      SerializeEnum (32,26);
       break;
     case 18:
-      SerializeEnum (31,27);
+      SerializeEnum (32,27);
       break;
     case 20:
-      SerializeEnum (31,28);
+      SerializeEnum (32,28);
       break;
     case 22:
-      SerializeEnum (31,29);
+      SerializeEnum (32,29);
       break;
     case 24:
-      SerializeEnum (31,30);
+      SerializeEnum (32,30);
       break;
     default:
-      SerializeEnum (31,15);
+      SerializeEnum (32,15);
     }
 }
 
@@ -964,13 +964,11 @@ RrcAsn1Header::SerializeThresholdEutra (LteRrcSap::ThresholdEutra thresholdEutra
 {
   switch (thresholdEutra.choice)
     {
-    case LteRrcSap::ThresholdEutra::THRESHOLD_RSRP:
-      SerializeChoice (2,0,false);
+    case LteRrcSap::ThresholdEutra::thresholdRsrp:
       SerializeInteger (thresholdEutra.range, 0, 97);
       break;
-    case LteRrcSap::ThresholdEutra::THRESHOLD_RSRQ:
+    case LteRrcSap::ThresholdEutra::thresholdRsrq:
     default:
-      SerializeChoice (2,1,false);
       SerializeInteger (thresholdEutra.range, 0, 34);
     }
 }
@@ -1072,7 +1070,9 @@ RrcAsn1Header::SerializeMeasConfig (LteRrcSap::MeasConfig measConfig) const
                   // Serialize cellIndex
                   SerializeInteger (it2->cellIndex, 1, MAX_CELL_MEAS);
 
-                  // Serialize PhysCellId
+                  // Serialize PhysCellIdRange
+                  // range optional and not present
+                  SerializeSequence (std::bitset<1> (0),false);
                   SerializeInteger (it2->physCellId,0,503);
 
                   // Serialize cellIndividualOffset
@@ -1186,47 +1186,47 @@ RrcAsn1Header::SerializeMeasConfig (LteRrcSap::MeasConfig measConfig) const
           SerializeSequence (std::bitset<0> (), true);
           switch (it->reportConfigEutra.triggerType)
             {
-            case LteRrcSap::ReportConfigEutra::PERIODICAL:
+            case LteRrcSap::ReportConfigEutra::periodical:
               SerializeChoice (2, 1, false); 
               SerializeSequence (std::bitset<0> (),false);
               switch (it->reportConfigEutra.purpose)
                 {
-                case LteRrcSap::ReportConfigEutra::REPORT_CGI:
+                case LteRrcSap::ReportConfigEutra::reportCgi:
                   SerializeEnum (2,1);
                   break;
-                case LteRrcSap::ReportConfigEutra::REPORT_STRONGEST_CELLS:
+                case LteRrcSap::ReportConfigEutra::reportStrongestCells:
                 default:
                   SerializeEnum (2,0);
                 }
               break;
-            case LteRrcSap::ReportConfigEutra::EVENT:
+            case LteRrcSap::ReportConfigEutra::event:
             default: 
               SerializeChoice (2, 0, false);
-              SerializeSequence (std::bitset<0> (),false);
+              SerializeSequence (std::bitset<0> (),true);
               switch (it->reportConfigEutra.eventId)
                 {
-                case LteRrcSap::ReportConfigEutra::EVENT_A1:
+                case LteRrcSap::ReportConfigEutra::eventA1:
                   SerializeChoice (5, 0, true);
                   SerializeSequence (std::bitset<0> (),false);
                   SerializeThresholdEutra (it->reportConfigEutra.threshold1);
                   break;
-                case LteRrcSap::ReportConfigEutra::EVENT_A2:
+                case LteRrcSap::ReportConfigEutra::eventA2:
                   SerializeChoice (5, 1, true);
                   SerializeSequence (std::bitset<0> (),false);
                   SerializeThresholdEutra (it->reportConfigEutra.threshold1);
                   break;
-                case LteRrcSap::ReportConfigEutra::EVENT_A3:
+                case LteRrcSap::ReportConfigEutra::eventA3:
                   SerializeChoice (5, 2, true);
                   SerializeSequence (std::bitset<0> (),false);
                   SerializeInteger (it->reportConfigEutra.a3Offset,-30,30);
                   SerializeBoolean (it->reportConfigEutra.reportOnLeave);
                   break;
-                case LteRrcSap::ReportConfigEutra::EVENT_A4:
+                case LteRrcSap::ReportConfigEutra::eventA4:
                   SerializeChoice (5, 3, true);
                   SerializeSequence (std::bitset<0> (),false);
                   SerializeThresholdEutra (it->reportConfigEutra.threshold1);
                   break;
-                case LteRrcSap::ReportConfigEutra::EVENT_A5:
+                case LteRrcSap::ReportConfigEutra::eventA5:
                 default:
                   SerializeChoice (5, 4, true);
                   SerializeSequence (std::bitset<0> (),false);
@@ -1290,7 +1290,7 @@ RrcAsn1Header::SerializeMeasConfig (LteRrcSap::MeasConfig measConfig) const
             } // end trigger type
 
           // Serialize triggerQuantity
-          if (it->reportConfigEutra.triggerQuantity == LteRrcSap::ReportConfigEutra::RSRP)
+          if (it->reportConfigEutra.triggerQuantity == LteRrcSap::ReportConfigEutra::rsrp)
             {
               SerializeEnum (2, 0);
             }
@@ -1300,7 +1300,7 @@ RrcAsn1Header::SerializeMeasConfig (LteRrcSap::MeasConfig measConfig) const
             }
 
           // Serialize reportQuantity
-          if (it->reportConfigEutra.reportQuantity == LteRrcSap::ReportConfigEutra::SAME_AS_TRIGGER_QUANTITY)
+          if (it->reportConfigEutra.reportQuantity == LteRrcSap::ReportConfigEutra::sameAsTriggerQuantity)
             {
               SerializeEnum (2, 0);
             }
@@ -1315,52 +1315,52 @@ RrcAsn1Header::SerializeMeasConfig (LteRrcSap::MeasConfig measConfig) const
           // Serialize reportInterval
           switch (it->reportConfigEutra.reportInterval)
             {
-            case LteRrcSap::ReportConfigEutra::MS120:
+            case LteRrcSap::ReportConfigEutra::ms120:
               SerializeEnum (16, 0);
               break;
-            case LteRrcSap::ReportConfigEutra::MS240:
+            case LteRrcSap::ReportConfigEutra::ms240:
               SerializeEnum (16, 1);
               break;
-            case LteRrcSap::ReportConfigEutra::MS480:
+            case LteRrcSap::ReportConfigEutra::ms480:
               SerializeEnum (16, 2);
               break;
-            case LteRrcSap::ReportConfigEutra::MS640:
+            case LteRrcSap::ReportConfigEutra::ms640:
               SerializeEnum (16, 3);
               break;
-            case LteRrcSap::ReportConfigEutra::MS1024:
+            case LteRrcSap::ReportConfigEutra::ms1024:
               SerializeEnum (16, 4);
               break;
-            case LteRrcSap::ReportConfigEutra::MS2048:
+            case LteRrcSap::ReportConfigEutra::ms2048:
               SerializeEnum (16, 5);
               break;
-            case LteRrcSap::ReportConfigEutra::MS5120:
+            case LteRrcSap::ReportConfigEutra::ms5120:
               SerializeEnum (16, 6);
               break;
-            case LteRrcSap::ReportConfigEutra::MS10240:
+            case LteRrcSap::ReportConfigEutra::ms10240:
               SerializeEnum (16, 7);
               break;
-            case LteRrcSap::ReportConfigEutra::MIN1:
+            case LteRrcSap::ReportConfigEutra::min1:
               SerializeEnum (16, 8);
               break;
-            case LteRrcSap::ReportConfigEutra::MIN6:
+            case LteRrcSap::ReportConfigEutra::min6:
               SerializeEnum (16, 9);
               break;
-            case LteRrcSap::ReportConfigEutra::MIN12:
+            case LteRrcSap::ReportConfigEutra::min12:
               SerializeEnum (16, 10);
               break;
-            case LteRrcSap::ReportConfigEutra::MIN30:
+            case LteRrcSap::ReportConfigEutra::min30:
               SerializeEnum (16, 11);
               break;
-            case LteRrcSap::ReportConfigEutra::MIN60:
+            case LteRrcSap::ReportConfigEutra::min60:
               SerializeEnum (16, 12);
               break;
-            case LteRrcSap::ReportConfigEutra::SPARE3:
+            case LteRrcSap::ReportConfigEutra::spare3:
               SerializeEnum (16, 13);
               break;
-            case LteRrcSap::ReportConfigEutra::SPARE2:
+            case LteRrcSap::ReportConfigEutra::spare2:
               SerializeEnum (16, 14);
               break;
-            case LteRrcSap::ReportConfigEutra::SPARE1:
+            case LteRrcSap::ReportConfigEutra::spare1:
             default:
               SerializeEnum (16, 15);
             }
@@ -1541,11 +1541,11 @@ RrcAsn1Header::SerializeMeasConfig (LteRrcSap::MeasConfig measConfig) const
           SerializeSequence (std::bitset<0> (),false);
           switch (measConfig.measGapConfig.gapOffsetChoice)
             {
-            case LteRrcSap::MeasGapConfig::GP0:
+            case LteRrcSap::MeasGapConfig::gp0:
               SerializeChoice (2, 0, true);
               SerializeInteger (measConfig.measGapConfig.gapOffsetValue, 0, 39);
               break;
-            case LteRrcSap::MeasGapConfig::GP1:
+            case LteRrcSap::MeasGapConfig::gp1:
             default:
               SerializeChoice (2, 1, true);
               SerializeInteger (measConfig.measGapConfig.gapOffsetValue, 0, 79);
@@ -1664,13 +1664,13 @@ RrcAsn1Header::DeserializeThresholdEutra (LteRrcSap::ThresholdEutra * thresholdE
   switch (thresholdEutraChoice)
     {
     case 0:
-      thresholdEutra->choice = LteRrcSap::ThresholdEutra::THRESHOLD_RSRP;
+      thresholdEutra->choice = LteRrcSap::ThresholdEutra::thresholdRsrp;
       bIterator = DeserializeInteger (&range, 0, 97, bIterator);
       thresholdEutra->range = range;
       break;
     case 1:
     default:
-      thresholdEutra->choice = LteRrcSap::ThresholdEutra::THRESHOLD_RSRQ;
+      thresholdEutra->choice = LteRrcSap::ThresholdEutra::thresholdRsrq;
       bIterator = DeserializeInteger (&range, 0, 34, bIterator);
       thresholdEutra->range = range;
     }
@@ -3049,12 +3049,12 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
 
       for (int i = 0; i < measObjectToAddModListElems; i++)
         {
-          LteRrcSap::MeasObjectToAddMod elem;
+          LteRrcSap::MeasObjectToAddMod * elem = new LteRrcSap::MeasObjectToAddMod ();
 
           bIterator = DeserializeSequence (&bitset0, false, bIterator);
 
           bIterator = DeserializeInteger (&n, 1, MAX_OBJECT_ID, bIterator);
-          elem.measObjectId = n;
+          elem->measObjectId = n;
 
           int measObjectChoice;
           bIterator = DeserializeChoice (4, true, &measObjectChoice, bIterator);
@@ -3084,42 +3084,42 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
 
               // carrierFreq
               bIterator = DeserializeInteger (&n, 0, MAX_EARFCN, bIterator);
-              elem.measObjectEutra.carrierFreq = n;
+              elem->measObjectEutra.carrierFreq = n;
 
               // allowedMeasBandwidth
               bIterator = DeserializeEnum (6, &n, bIterator);
               switch (n)
                 {
                 case 0:
-                  elem.measObjectEutra.allowedMeasBandwidth = 6;
+                  elem->measObjectEutra.allowedMeasBandwidth = 6;
                   break;
                 case 1:
-                  elem.measObjectEutra.allowedMeasBandwidth = 15;
+                  elem->measObjectEutra.allowedMeasBandwidth = 15;
                   break;
                 case 2:
-                  elem.measObjectEutra.allowedMeasBandwidth = 25;
+                  elem->measObjectEutra.allowedMeasBandwidth = 25;
                   break;
                 case 3:
-                  elem.measObjectEutra.allowedMeasBandwidth = 50;
+                  elem->measObjectEutra.allowedMeasBandwidth = 50;
                   break;
                 case 4:
-                  elem.measObjectEutra.allowedMeasBandwidth = 75;
+                  elem->measObjectEutra.allowedMeasBandwidth = 75;
                   break;
                 case 5:
                 default:
-                  elem.measObjectEutra.allowedMeasBandwidth = 100;
+                  elem->measObjectEutra.allowedMeasBandwidth = 100;
                   break;
                 }
 
               // presenceAntennaPort1
-              bIterator = DeserializeBoolean (&elem.measObjectEutra.presenceAntennaPort1, bIterator);
+              bIterator = DeserializeBoolean (&elem->measObjectEutra.presenceAntennaPort1, bIterator);
 
               // neighCellConfig
               bIterator = DeserializeBitstring (&bitset2, bIterator);
-              elem.measObjectEutra.neighCellConfig = bitset2.to_ulong ();
+              elem->measObjectEutra.neighCellConfig = bitset2.to_ulong ();
 
               // offsetFreq
-              bIterator = DeserializeQoffsetRange (&elem.measObjectEutra.offsetFreq, bIterator);
+              DeserializeQoffsetRange (&elem->measObjectEutra.offsetFreq, bIterator);
 
               if (measObjectEutraOpts[4])
                 {
@@ -3130,7 +3130,7 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
                   for (int i = 0; i < numElems; i++)
                     {
                       bIterator = DeserializeInteger (&n, 1, MAX_CELL_MEAS, bIterator);
-                      elem.measObjectEutra.cellsToRemoveList.push_back (n);
+                      elem->measObjectEutra.cellsToRemoveList.push_back (n);
                     }
                 }
 
@@ -3142,22 +3142,22 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
 
                   for (int i = 0; i < numElems; i++)
                     {
-                      LteRrcSap::CellsToAddMod cellsToAddMod;
+                      LteRrcSap::CellsToAddMod * cellsToAddMod = new LteRrcSap::CellsToAddMod ();
 
                       bIterator = DeserializeSequence (&bitset0, false, bIterator);
 
                       // cellIndex
                       bIterator = DeserializeInteger (&n, 1, MAX_CELL_MEAS, bIterator);
-                      cellsToAddMod.cellIndex = n;
+                      cellsToAddMod->cellIndex = n;
 
                       // PhysCellId
                       bIterator = DeserializeInteger (&n, 0, 503, bIterator);
-                      cellsToAddMod.physCellId = n;
+                      cellsToAddMod->physCellId = n;
 
                       // cellIndividualOffset
-                      bIterator = DeserializeQoffsetRange ( &cellsToAddMod.cellIndividualOffset, bIterator);
+                      bIterator = DeserializeQoffsetRange ( &cellsToAddMod->cellIndividualOffset, bIterator);
 
-                      elem.measObjectEutra.cellsToAddModList.push_back (cellsToAddMod);
+                      elem->measObjectEutra.cellsToAddModList.push_back (*cellsToAddMod);
                     }
                 }
 
@@ -3170,7 +3170,7 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
                   for (int i = 0; i < numElems; i++)
                     {
                       bIterator = DeserializeInteger (&n, 1, MAX_CELL_MEAS, bIterator);
-                      elem.measObjectEutra.blackCellsToRemoveList.push_back (n);
+                      elem->measObjectEutra.blackCellsToRemoveList.push_back (n);
                     }
                 }
 
@@ -3183,11 +3183,11 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
 
                   for (int i = 0; i < numElems; i++)
                     {
-                      LteRrcSap::BlackCellsToAddMod blackCellsToAddMod;
+                      LteRrcSap::BlackCellsToAddMod * blackCellsToAddMod = new LteRrcSap::BlackCellsToAddMod ();
                       bIterator = DeserializeSequence (&bitset0, false, bIterator);
 
                       bIterator = DeserializeInteger (&n, 1, MAX_CELL_MEAS, bIterator);
-                      blackCellsToAddMod.cellIndex = n;
+                      blackCellsToAddMod->cellIndex = n;
 
                       // PhysCellIdRange
                       std::bitset<1> isRangePresent;
@@ -3195,77 +3195,75 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
 
                       // start
                       bIterator = DeserializeInteger (&n, 0, 503, bIterator);
-                      blackCellsToAddMod.physCellIdRange.start = n;
+                      blackCellsToAddMod->physCellIdRange.start = n;
 
-                      blackCellsToAddMod.physCellIdRange.haveRange = isRangePresent[0];
-                      // initialize range to silence compiler warning
-                      blackCellsToAddMod.physCellIdRange.range = 0;
-                      if (blackCellsToAddMod.physCellIdRange.haveRange)
+                      blackCellsToAddMod->physCellIdRange.haveRange = isRangePresent[0];
+                      if (blackCellsToAddMod->physCellIdRange.haveRange)
                         {
                           // range
                           bIterator = DeserializeEnum (16, &n, bIterator);
                           switch (n)
                             {
                             case 0:
-                              blackCellsToAddMod.physCellIdRange.range = 4;
+                              blackCellsToAddMod->physCellIdRange.range = 4;
                               break;
                             case 1:
-                              blackCellsToAddMod.physCellIdRange.range = 8;
+                              blackCellsToAddMod->physCellIdRange.range = 8;
                               break;
                             case 2:
-                              blackCellsToAddMod.physCellIdRange.range = 12;
+                              blackCellsToAddMod->physCellIdRange.range = 12;
                               break;
                             case 3:
-                              blackCellsToAddMod.physCellIdRange.range = 16;
+                              blackCellsToAddMod->physCellIdRange.range = 16;
                               break;
                             case 4:
-                              blackCellsToAddMod.physCellIdRange.range = 24;
+                              blackCellsToAddMod->physCellIdRange.range = 24;
                               break;
                             case 5:
-                              blackCellsToAddMod.physCellIdRange.range = 32;
+                              blackCellsToAddMod->physCellIdRange.range = 32;
                               break;
                             case 6:
-                              blackCellsToAddMod.physCellIdRange.range = 48;
+                              blackCellsToAddMod->physCellIdRange.range = 48;
                               break;
                             case 7:
-                              blackCellsToAddMod.physCellIdRange.range = 64;
+                              blackCellsToAddMod->physCellIdRange.range = 64;
                               break;
                             case 8:
-                              blackCellsToAddMod.physCellIdRange.range = 84;
+                              blackCellsToAddMod->physCellIdRange.range = 84;
                               break;
                             case 9:
-                              blackCellsToAddMod.physCellIdRange.range = 96;
+                              blackCellsToAddMod->physCellIdRange.range = 96;
                               break;
                             case 10:
-                              blackCellsToAddMod.physCellIdRange.range = 128;
+                              blackCellsToAddMod->physCellIdRange.range = 128;
                               break;
                             case 11:
-                              blackCellsToAddMod.physCellIdRange.range = 168;
+                              blackCellsToAddMod->physCellIdRange.range = 168;
                               break;
                             case 12:
-                              blackCellsToAddMod.physCellIdRange.range = 252;
+                              blackCellsToAddMod->physCellIdRange.range = 252;
                               break;
                             case 13:
-                              blackCellsToAddMod.physCellIdRange.range = 504;
+                              blackCellsToAddMod->physCellIdRange.range = 504;
                               break;
                             default:
-                              blackCellsToAddMod.physCellIdRange.range = 0;
+                              blackCellsToAddMod->physCellIdRange.range = 0;
                             }
                         }
 
-                      elem.measObjectEutra.blackCellsToAddModList.push_back (blackCellsToAddMod);
+                      elem->measObjectEutra.blackCellsToAddModList.push_back (*blackCellsToAddMod);
                     }
                 }
 
-              elem.measObjectEutra.haveCellForWhichToReportCGI = measObjectEutraOpts[0];
+              elem->measObjectEutra.haveCellForWhichToReportCGI = measObjectEutraOpts[0];
               if (measObjectEutraOpts[0])
                 {
                   // cellForWhichToReportCGI
                   bIterator = DeserializeInteger (&n, 0, 503, bIterator);
-                  elem.measObjectEutra.cellForWhichToReportCGI = n;
+                  elem->measObjectEutra.cellForWhichToReportCGI = n;
                 }
             }
-          measConfig->measObjectToAddModList.push_back (elem);
+          measConfig->measObjectToAddModList.push_back (*elem);
         }
     }
 
@@ -3290,11 +3288,11 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
 
       for (int i = 0; i < reportConfigToAddModListElems; i++)
         {
-          LteRrcSap::ReportConfigToAddMod elem;
+          LteRrcSap::ReportConfigToAddMod * elem = new LteRrcSap::ReportConfigToAddMod ();
 
           bIterator = DeserializeSequence (&bitset0, false, bIterator);
           bIterator = DeserializeInteger (&n, 1, MAX_REPORT_CONFIG_ID, bIterator);
-          elem.reportConfigId = n;
+          elem->reportConfigId = n;
 
           // Deserialize reportConfig
           int reportConfigChoice;
@@ -3312,7 +3310,7 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
               if (triggerTypeChoice == 0)
                 {
                   // event
-                  elem.reportConfigEutra.triggerType = LteRrcSap::ReportConfigEutra::EVENT;
+                  elem->reportConfigEutra.triggerType = LteRrcSap::ReportConfigEutra::event;
                   bIterator = DeserializeSequence (&bitset0, false, bIterator);
 
                   // eventId
@@ -3322,93 +3320,93 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
                   switch (eventIdChoice)
                     {
                     case 0:
-                      elem.reportConfigEutra.eventId = LteRrcSap::ReportConfigEutra::EVENT_A1;
+                      elem->reportConfigEutra.eventId = LteRrcSap::ReportConfigEutra::eventA1;
                       bIterator = DeserializeSequence (&bitset0, false, bIterator);
-                      bIterator = DeserializeThresholdEutra (&elem.reportConfigEutra.threshold1, bIterator);
+                      bIterator = DeserializeThresholdEutra (&elem->reportConfigEutra.threshold1, bIterator);
                       break;
 
                     case 1:
-                      elem.reportConfigEutra.eventId = LteRrcSap::ReportConfigEutra::EVENT_A2;
+                      elem->reportConfigEutra.eventId = LteRrcSap::ReportConfigEutra::eventA2;
                       bIterator = DeserializeSequence (&bitset0, false, bIterator);
-                      bIterator = DeserializeThresholdEutra (&elem.reportConfigEutra.threshold1, bIterator);
+                      bIterator = DeserializeThresholdEutra (&elem->reportConfigEutra.threshold1, bIterator);
                       break;
 
                     case 2:
-                      elem.reportConfigEutra.eventId = LteRrcSap::ReportConfigEutra::EVENT_A3;
+                      elem->reportConfigEutra.eventId = LteRrcSap::ReportConfigEutra::eventA3;
                       bIterator = DeserializeSequence (&bitset0, false, bIterator);
                       bIterator = DeserializeInteger (&n, -30, 30, bIterator);
-                      elem.reportConfigEutra.a3Offset = n;
-                      bIterator = DeserializeBoolean (&elem.reportConfigEutra.reportOnLeave, bIterator);
+                      elem->reportConfigEutra.a3Offset = n;
+                      bIterator = DeserializeBoolean (&elem->reportConfigEutra.reportOnLeave, bIterator);
                       break;
 
                     case 3:
-                      elem.reportConfigEutra.eventId = LteRrcSap::ReportConfigEutra::EVENT_A4;
+                      elem->reportConfigEutra.eventId = LteRrcSap::ReportConfigEutra::eventA4;
                       bIterator = DeserializeSequence (&bitset0, false, bIterator);
-                      bIterator = DeserializeThresholdEutra (&elem.reportConfigEutra.threshold1, bIterator);
+                      bIterator = DeserializeThresholdEutra (&elem->reportConfigEutra.threshold1, bIterator);
                       break;
 
-                    case 4:
                     default:
-                      elem.reportConfigEutra.eventId = LteRrcSap::ReportConfigEutra::EVENT_A5;
+                      elem->reportConfigEutra.eventId = LteRrcSap::ReportConfigEutra::eventA5;
                       bIterator = DeserializeSequence (&bitset0, false, bIterator);
-                      bIterator = DeserializeThresholdEutra (&elem.reportConfigEutra.threshold1, bIterator);
-                      bIterator = DeserializeThresholdEutra (&elem.reportConfigEutra.threshold2, bIterator);
+                      bIterator = DeserializeThresholdEutra (&elem->reportConfigEutra.threshold1, bIterator);
+                      bIterator = DeserializeThresholdEutra (&elem->reportConfigEutra.threshold2, bIterator);
+                      break;
                     }
 
                   bIterator = DeserializeInteger (&n, 0, 30, bIterator);
-                  elem.reportConfigEutra.hysteresis = n;
+                  elem->reportConfigEutra.hysteresis = n;
 
                   bIterator = DeserializeEnum (16, &n, bIterator);
                   switch (n)
                     {
                     case 0:
-                      elem.reportConfigEutra.timeToTrigger = 0;
+                      elem->reportConfigEutra.timeToTrigger = 0;
                       break;
                     case 1:
-                      elem.reportConfigEutra.timeToTrigger = 40;
+                      elem->reportConfigEutra.timeToTrigger = 40;
                       break;
                     case 2:
-                      elem.reportConfigEutra.timeToTrigger = 64;
+                      elem->reportConfigEutra.timeToTrigger = 64;
                       break;
                     case 3:
-                      elem.reportConfigEutra.timeToTrigger = 80;
+                      elem->reportConfigEutra.timeToTrigger = 80;
                       break;
                     case 4:
-                      elem.reportConfigEutra.timeToTrigger = 100;
+                      elem->reportConfigEutra.timeToTrigger = 100;
                       break;
                     case 5:
-                      elem.reportConfigEutra.timeToTrigger = 128;
+                      elem->reportConfigEutra.timeToTrigger = 128;
                       break;
                     case 6:
-                      elem.reportConfigEutra.timeToTrigger = 160;
+                      elem->reportConfigEutra.timeToTrigger = 160;
                       break;
                     case 7:
-                      elem.reportConfigEutra.timeToTrigger = 256;
+                      elem->reportConfigEutra.timeToTrigger = 256;
                       break;
                     case 8:
-                      elem.reportConfigEutra.timeToTrigger = 320;
+                      elem->reportConfigEutra.timeToTrigger = 320;
                       break;
                     case 9:
-                      elem.reportConfigEutra.timeToTrigger = 480;
+                      elem->reportConfigEutra.timeToTrigger = 480;
                       break;
                     case 10:
-                      elem.reportConfigEutra.timeToTrigger = 512;
+                      elem->reportConfigEutra.timeToTrigger = 512;
                       break;
                     case 11:
-                      elem.reportConfigEutra.timeToTrigger = 640;
+                      elem->reportConfigEutra.timeToTrigger = 640;
                       break;
                     case 12:
-                      elem.reportConfigEutra.timeToTrigger = 1024;
+                      elem->reportConfigEutra.timeToTrigger = 1024;
                       break;
                     case 13:
-                      elem.reportConfigEutra.timeToTrigger = 1280;
+                      elem->reportConfigEutra.timeToTrigger = 1280;
                       break;
                     case 14:
-                      elem.reportConfigEutra.timeToTrigger = 2560;
+                      elem->reportConfigEutra.timeToTrigger = 2560;
                       break;
                     case 15:
                     default:
-                      elem.reportConfigEutra.timeToTrigger = 5120;
+                      elem->reportConfigEutra.timeToTrigger = 5120;
                       break;
                     }
                 }
@@ -3416,17 +3414,17 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
               if (triggerTypeChoice == 1)
                 {
                   // periodical
-                  elem.reportConfigEutra.triggerType = LteRrcSap::ReportConfigEutra::PERIODICAL;
+                  elem->reportConfigEutra.triggerType = LteRrcSap::ReportConfigEutra::periodical;
 
                   bIterator = DeserializeSequence (&bitset0, false, bIterator);
                   bIterator = DeserializeEnum (2, &n, bIterator);
                   if (n == 0)
                     {
-                      elem.reportConfigEutra.purpose = LteRrcSap::ReportConfigEutra::REPORT_STRONGEST_CELLS;
+                      elem->reportConfigEutra.purpose = LteRrcSap::ReportConfigEutra::reportStrongestCells;
                     }
                   else
                     {
-                      elem.reportConfigEutra.purpose = LteRrcSap::ReportConfigEutra::REPORT_CGI;
+                      elem->reportConfigEutra.purpose = LteRrcSap::ReportConfigEutra::reportCgi;
                     }
                 }
 
@@ -3434,80 +3432,80 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
               bIterator = DeserializeEnum (2, &n, bIterator);
               if (n == 0)
                 {
-                  elem.reportConfigEutra.triggerQuantity = LteRrcSap::ReportConfigEutra::RSRP;
+                  elem->reportConfigEutra.triggerQuantity = LteRrcSap::ReportConfigEutra::rsrp;
                 }
               else
                 {
-                  elem.reportConfigEutra.triggerQuantity = LteRrcSap::ReportConfigEutra::RSRQ;
+                  elem->reportConfigEutra.triggerQuantity = LteRrcSap::ReportConfigEutra::rsrq;
                 }
 
               // reportQuantity
               bIterator = DeserializeEnum (2, &n, bIterator);
               if (n == 0)
                 {
-                  elem.reportConfigEutra.reportQuantity = LteRrcSap::ReportConfigEutra::SAME_AS_TRIGGER_QUANTITY;
+                  elem->reportConfigEutra.reportQuantity = LteRrcSap::ReportConfigEutra::sameAsTriggerQuantity;
                 }
               else
                 {
-                  elem.reportConfigEutra.reportQuantity = LteRrcSap::ReportConfigEutra::BOTH;
+                  elem->reportConfigEutra.reportQuantity = LteRrcSap::ReportConfigEutra::both;
                 }
 
               // maxReportCells
               bIterator = DeserializeInteger (&n, 1, MAX_CELL_REPORT, bIterator);
-              elem.reportConfigEutra.maxReportCells = n;
+              elem->reportConfigEutra.maxReportCells = n;
 
               // reportInterval
               bIterator = DeserializeEnum (16, &n, bIterator);
               switch (n)
                 {
                 case 0:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::MS120;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::ms120;
                   break;
                 case 1:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::MS240;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::ms240;
                   break;
                 case 2:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::MS480;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::ms480;
                   break;
                 case 3:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::MS640;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::ms640;
                   break;
                 case 4:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::MS1024;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::ms1024;
                   break;
                 case 5:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::MS2048;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::ms2048;
                   break;
                 case 6:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::MS5120;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::ms5120;
                   break;
                 case 7:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::MS10240;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::ms10240;
                   break;
                 case 8:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::MIN1;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::min1;
                   break;
                 case 9:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::MIN6;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::min6;
                   break;
                 case 10:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::MIN12;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::min12;
                   break;
                 case 11:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::MIN30;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::min30;
                   break;
                 case 12:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::MIN60;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::min60;
                   break;
                 case 13:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::SPARE3;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::spare3;
                   break;
                 case 14:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::SPARE2;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::spare2;
                   break;
                 case 15:
                 default:
-                  elem.reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::SPARE1;
+                  elem->reportConfigEutra.reportInterval = LteRrcSap::ReportConfigEutra::spare1;
                 }
 
               // reportAmount
@@ -3515,28 +3513,28 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
               switch (n)
                 {
                 case 0:
-                  elem.reportConfigEutra.reportAmount = 1;
+                  elem->reportConfigEutra.reportAmount = 1;
                   break;
                 case 1:
-                  elem.reportConfigEutra.reportAmount = 2;
+                  elem->reportConfigEutra.reportAmount = 2;
                   break;
                 case 2:
-                  elem.reportConfigEutra.reportAmount = 4;
+                  elem->reportConfigEutra.reportAmount = 4;
                   break;
                 case 3:
-                  elem.reportConfigEutra.reportAmount = 8;
+                  elem->reportConfigEutra.reportAmount = 8;
                   break;
                 case 4:
-                  elem.reportConfigEutra.reportAmount = 16;
+                  elem->reportConfigEutra.reportAmount = 16;
                   break;
                 case 5:
-                  elem.reportConfigEutra.reportAmount = 32;
+                  elem->reportConfigEutra.reportAmount = 32;
                   break;
                 case 6:
-                  elem.reportConfigEutra.reportAmount = 64;
+                  elem->reportConfigEutra.reportAmount = 64;
                   break;
                 default:
-                  elem.reportConfigEutra.reportAmount = 0;
+                  elem->reportConfigEutra.reportAmount = 0;
                 }
             }
 
@@ -3546,7 +3544,7 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
               // ...
             }
 
-          measConfig->reportConfigToAddModList.push_back (elem);
+          measConfig->reportConfigToAddModList.push_back (*elem);
         }
     }
 
@@ -3571,20 +3569,20 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
 
       for (int i = 0; i < measIdToAddModListElems; i++)
         {
-          LteRrcSap::MeasIdToAddMod elem;
+          LteRrcSap::MeasIdToAddMod * elem = new LteRrcSap::MeasIdToAddMod ();
 
           bIterator = DeserializeSequence (&bitset0, false, bIterator);
 
           bIterator = DeserializeInteger (&n, 1, MAX_MEAS_ID, bIterator);
-          elem.measId = n;
+          elem->measId = n;
 
           bIterator = DeserializeInteger (&n, 1, MAX_OBJECT_ID, bIterator);
-          elem.measObjectId = n;
+          elem->measObjectId = n;
 
           bIterator = DeserializeInteger (&n, 1, MAX_REPORT_CONFIG_ID, bIterator);
-          elem.reportConfigId = n;
+          elem->reportConfigId = n;
 
-          measConfig->measIdToAddModList.push_back (elem);
+          measConfig->measIdToAddModList.push_back (*elem);
         }
     }
 
@@ -3747,13 +3745,13 @@ RrcAsn1Header::DeserializeMeasConfig (LteRrcSap::MeasConfig * measConfig, Buffer
           switch (gapOffsetChoice)
             {
             case 0:
-              measConfig->measGapConfig.gapOffsetChoice = LteRrcSap::MeasGapConfig::GP0;
+              measConfig->measGapConfig.gapOffsetChoice = LteRrcSap::MeasGapConfig::gp0;
               bIterator = DeserializeInteger (&n, 0, 39, bIterator);
               measConfig->measGapConfig.gapOffsetValue = n;
               break;
             case 1:
             default:
-              measConfig->measGapConfig.gapOffsetChoice = LteRrcSap::MeasGapConfig::GP1;
+              measConfig->measGapConfig.gapOffsetChoice = LteRrcSap::MeasGapConfig::gp1;
               bIterator = DeserializeInteger (&n, 0, 79, bIterator);
               measConfig->measGapConfig.gapOffsetValue = n;
             }
@@ -4723,7 +4721,7 @@ RrcConnectionReconfigurationHeader::Print (std::ostream &os) const
 {
   os << "rrcTransactionIdentifier: " << (int) m_rrcTransactionIdentifier << std::endl;
   os << "haveMeasConfig: " << m_haveMeasConfig << std::endl;
-  if (m_haveMeasConfig)
+  if (m_haveMobilityControlInfo)
     {
       if (!m_measConfig.measObjectToRemoveList.empty ())
         {
@@ -4757,137 +4755,6 @@ RrcConnectionReconfigurationHeader::Print (std::ostream &os) const
               os << (int) *it << ", ";
             }
           os << std::endl;
-        }
-
-      if (!m_measConfig.measObjectToAddModList.empty ())
-        {
-          os << "  measObjectToAddMod: " << std::endl;
-          std::list<LteRrcSap::MeasObjectToAddMod> auxList = m_measConfig.measObjectToAddModList;
-          std::list<LteRrcSap::MeasObjectToAddMod>::iterator it = auxList.begin ();
-          for (; it != auxList.end (); it++)
-            {
-              os << "    measObjectId: " << (int)it->measObjectId << std::endl;
-              os << "    carrierFreq: " << (int)it->measObjectEutra.carrierFreq << std::endl;
-              os << "    allowedMeasBandwidth: " <<  (int)it->measObjectEutra.allowedMeasBandwidth << std::endl;
-              os << "    presenceAntennaPort1: " <<  it->measObjectEutra.presenceAntennaPort1  << std::endl;
-              os << "    neighCellConfig: " << (int) it->measObjectEutra.neighCellConfig  << std::endl;
-              os << "    offsetFreq: " <<  (int)it->measObjectEutra.offsetFreq  << std::endl;
-
-
-              if (!it->measObjectEutra.cellsToRemoveList.empty ())
-                {
-                  os << "    cellsToRemoveList: ";
-                  std::list<uint8_t> auxList = it->measObjectEutra.cellsToRemoveList;
-                  std::list<uint8_t>::iterator it = auxList.begin ();
-                  for (; it != auxList.end (); it++)
-                    {
-                      os << (int) *it << ", ";
-                    }
-                  os << std::endl;
-                }
-
-              if (!it->measObjectEutra.blackCellsToRemoveList.empty ())
-                {
-                  os << "    blackCellsToRemoveList: ";
-                  std::list<uint8_t> auxList = it->measObjectEutra.blackCellsToRemoveList;
-                  std::list<uint8_t>::iterator it = auxList.begin ();
-                  for (; it != auxList.end (); it++)
-                    {
-                      os << (int) *it << ", ";
-                    }
-                  os << std::endl;
-                }
-
-              if (!it->measObjectEutra.cellsToAddModList.empty ())
-                {
-                  os << "    cellsToAddModList: " << std::endl;
-                  std::list<LteRrcSap::CellsToAddMod> auxList = it->measObjectEutra.cellsToAddModList;
-                  std::list<LteRrcSap::CellsToAddMod>::iterator it = auxList.begin ();
-                  for (; it != auxList.end (); it++)
-                    {
-                      os << "      cellIndex: " <<  (int)it->cellIndex << std::endl;
-                      os << "      physCellId: " <<  (int)it->physCellId  << std::endl;
-                      os << "      cellIndividualOffset: " <<  (int)it->cellIndividualOffset << std::endl;
-                      os << "      ------ " << std::endl;
-                    }
-                }
-
-              if (!it->measObjectEutra.blackCellsToAddModList.empty ())
-                {
-                  os << "    blackCellsToAddModList: " << std::endl;
-                  std::list<LteRrcSap::BlackCellsToAddMod> auxList = it->measObjectEutra.blackCellsToAddModList;
-                  std::list<LteRrcSap::BlackCellsToAddMod>::iterator it = auxList.begin ();
-                  for (; it != auxList.end (); it++)
-                    {
-                      os << "      cellIndex: " <<  (int)it->cellIndex << std::endl;
-                      os << "      physCellIdRange.start: " <<  (int)it->physCellIdRange.start  << std::endl;
-                      os << "      physCellIdRange.haveRange: " <<  it->physCellIdRange.haveRange << std::endl;
-                      os << "      physCellIdRange.range: " <<  (int)it->physCellIdRange.range << std::endl;
-                      os << "      ------ " << std::endl;
-                    }
-                }
-
-              os << "    haveCellForWhichToReportCGI: " <<  it->measObjectEutra.haveCellForWhichToReportCGI  << std::endl;
-              os << "    cellForWhichToReportCGI: " <<  (int)it->measObjectEutra.cellForWhichToReportCGI  << std::endl;
-              os << "    ------------- " << std::endl;
-            }
-
-        }
-
-      if (!m_measConfig.reportConfigToAddModList.empty ())
-        {
-          os << "  reportConfigToAddModList: " << std::endl;
-          std::list<LteRrcSap::ReportConfigToAddMod> auxList = m_measConfig.reportConfigToAddModList;
-          std::list<LteRrcSap::ReportConfigToAddMod>::iterator it = auxList.begin ();
-          for (; it != auxList.end (); it++)
-            {
-              os << "    reportConfigId: " << (int)it->reportConfigId << std::endl;
-              os << "    reportConfigEutra.triggerType  " <<  (int)it->reportConfigEutra.triggerType << std::endl;
-              if (it->reportConfigEutra.triggerType == LteRrcSap::ReportConfigEutra::EVENT)
-                {
-                  os << "    reportConfigEutra.eventId  " <<  (int)it->reportConfigEutra.eventId << std::endl;
-                  if (it->reportConfigEutra.eventId == LteRrcSap::ReportConfigEutra::EVENT_A3)
-                    {
-                      os << "    reportConfigEutra.reportOnLeave  " <<  (int)it->reportConfigEutra.reportOnLeave << std::endl;
-                      os << "    reportConfigEutra.a3Offset  " <<  (int)it->reportConfigEutra.a3Offset << std::endl;
-                    }
-                  else
-                    {
-                      os << "    reportConfigEutra.threshold1.choice  " <<  (int)it->reportConfigEutra.threshold1.choice << std::endl;
-                      os << "    reportConfigEutra.threshold1.range  " <<  (int)it->reportConfigEutra.threshold1.range << std::endl;
-                      if (it->reportConfigEutra.eventId == LteRrcSap::ReportConfigEutra::EVENT_A5)
-                        {
-                          os << "    reportConfigEutra.threshold2.choice  " <<  (int)it->reportConfigEutra.threshold2.choice << std::endl;
-                          os << "    reportConfigEutra.threshold2.range  " <<  (int)it->reportConfigEutra.threshold2.range << std::endl;
-                        }
-                    }
-                  os << "    reportConfigEutra.hysteresis  " <<  (int)it->reportConfigEutra.hysteresis << std::endl;
-                  os << "    reportConfigEutra.timeToTrigger  " <<  (int)it->reportConfigEutra.timeToTrigger << std::endl;
-                }
-              else
-                {
-                  os << "    reportConfigEutra.purpose  " <<  (int)it->reportConfigEutra.purpose << std::endl;
-                }
-              os << "    reportConfigEutra.triggerQuantity  " <<  (int)it->reportConfigEutra.triggerQuantity << std::endl;
-              os << "    reportConfigEutra.reportQuantity  " <<  (int)it->reportConfigEutra.reportQuantity << std::endl;
-              os << "    reportConfigEutra.maxReportCells  " <<  (int)it->reportConfigEutra.maxReportCells << std::endl;
-              os << "    reportConfigEutra.reportInterval  " <<  (int)it->reportConfigEutra.reportInterval << std::endl;
-              os << "    reportConfigEutra.reportAmount  " <<  (int)it->reportConfigEutra.reportAmount << std::endl;
-            }
-        }
-
-      if (!m_measConfig.measIdToAddModList.empty ())
-        {
-          os << "  measIdToAddModList: " << std::endl;
-          std::list<LteRrcSap::MeasIdToAddMod> auxList = m_measConfig.measIdToAddModList;
-          std::list<LteRrcSap::MeasIdToAddMod>::iterator it = auxList.begin ();
-          for (; it != auxList.end (); it++)
-            {
-              os << "    measId: " << (int)it->measId << std::endl;
-              os << "    measObjectId: " << (int)it->measObjectId << std::endl;
-              os << "    reportConfigId: " << (int)it->reportConfigId << std::endl;
-              os << "    ------ " << std::endl;
-            }
         }
 
       os << "  haveQuantityConfig: " << m_measConfig.haveQuantityConfig << std::endl;

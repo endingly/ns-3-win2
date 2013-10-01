@@ -176,8 +176,7 @@ EpcSgwPgwApplication::RecvFromS1uSocket (Ptr<Socket> socket)
   packet->RemoveHeader (gtpu);
   uint32_t teid = gtpu.GetTeid ();
 
-  /// \internal
-  /// Workaround for \bugid{231}
+  // workaround for bug 231 https://www.nsnam.org/bugzilla/show_bug.cgi?id=231
   SocketAddressTag tag;
   packet->RemovePacketTag (tag);
 

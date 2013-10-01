@@ -31,7 +31,6 @@
 #include <ns3/hybrid-buildings-propagation-loss-model.h>
 #include <ns3/node-container.h>
 #include <ns3/mobility-helper.h>
-#include <ns3/buildings-helper.h>
 #include <ns3/lte-helper.h>
 #include <ns3/single-model-spectrum-channel.h>
 #include "ns3/string.h"
@@ -232,10 +231,8 @@ LtePathlossModelSystemTestCase::DoRun (void)
   
   // Install Mobility Model
   MobilityHelper mobility;
-  mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+  mobility.SetMobilityModel ("ns3::BuildingsMobilityModel");
   mobility.Install (allNodes);
-  BuildingsHelper::Install (allNodes);
-
   
   // Create Devices and install them in the Nodes (eNB and UE)
   NetDeviceContainer enbDevs;
@@ -244,9 +241,9 @@ LtePathlossModelSystemTestCase::DoRun (void)
   enbDevs = lteHelper->InstallEnbDevice (enbNodes);
   ueDevs = lteHelper->InstallUeDevice (ueNodes);
   
-  Ptr<MobilityModel> mm_enb = enbNodes.Get (0)->GetObject<MobilityModel> ();
+  Ptr<BuildingsMobilityModel> mm_enb = enbNodes.Get (0)->GetObject<BuildingsMobilityModel> ();
   mm_enb->SetPosition (Vector (0.0, 0.0, 30.0));
-  Ptr<MobilityModel> mm_ue = ueNodes.Get (0)->GetObject<MobilityModel> ();
+  Ptr<BuildingsMobilityModel> mm_ue = ueNodes.Get (0)->GetObject<BuildingsMobilityModel> ();
   mm_ue->SetPosition (Vector (m_distance, 0.0, 1.0));
   
   Ptr<LteEnbNetDevice> lteEnbDev = enbDevs.Get (0)->GetObject<LteEnbNetDevice> ();

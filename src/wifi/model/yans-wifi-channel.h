@@ -26,7 +26,6 @@
 #include "wifi-channel.h"
 #include "wifi-mode.h"
 #include "wifi-preamble.h"
-#include "wifi-tx-vector.h"
 
 namespace ns3 {
 
@@ -83,7 +82,7 @@ public:
    * e.g. PHYs that are operating on the same channel.
    */
   void Send (Ptr<YansWifiPhy> sender, Ptr<const Packet> packet, double txPowerDbm,
-             WifiTxVector txVector, WifiPreamble preamble) const;
+             WifiMode wifiMode, WifiPreamble preamble) const;
 
  /**
   * Assign a fixed random variable stream number to the random variables
@@ -101,7 +100,7 @@ private:
 
   typedef std::vector<Ptr<YansWifiPhy> > PhyList;
   void Receive (uint32_t i, Ptr<Packet> packet, double rxPowerDbm,
-                WifiTxVector txVector, WifiPreamble preamble) const;
+                WifiMode txMode, WifiPreamble preamble) const;
 
 
   PhyList m_phyList;

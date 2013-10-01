@@ -26,67 +26,13 @@
 #include "string.h"
 #include "object.h"
 #include "config.h"
-#include "system-mutex.h"
 #include "log.h"
 #include <cmath>
-#include <iomanip>  // showpos
 #include <sstream>
-
-NS_LOG_COMPONENT_DEFINE ("Time");
 
 namespace ns3 {
 
-// The set of marked times
-// static
-Time::MarkedTimes * Time::g_markingTimes = 0;
-
-/**
- * Get mutex for critical sections around modification of Time::g_markingTimes
- *
- * \relates Time
- */
-SystemMutex &
-GetMarkingMutex ()
-{
-  static SystemMutex g_markingMutex;
-  return g_markingMutex;
-}
-
-
-// Function called to force static initialization
-// static
-bool Time::StaticInit ()
-{
-  static bool firstTime = true;
-
-  CriticalSection critical (GetMarkingMutex ());
-
-  if (firstTime)
-    {
-      if (! g_markingTimes)
-        {
-          static MarkedTimes markingTimes;
-          g_markingTimes = & markingTimes;
-        }
-      else
-        {
-          NS_LOG_ERROR ("firstTime but g_markingTimes != 0");
-        }
-
-      // Schedule the cleanup.
-      // We'd really like:
-      //   NS_LOG_LOGIC ("scheduling ClearMarkedTimes()");
-      //   Simulator::Schedule ( Seconds (0), & ClearMarkedTimes);
-      //   [or even better:  Simulator::AtStart ( & ClearMarkedTimes ); ]
-      // But this triggers a static initialization order error,
-      // since the Simulator static initialization may not have occurred.
-      // Instead, we call ClearMarkedTimes directly from Simulator::Run ()
-      firstTime = false;
-    }
-
-  return firstTime;
-}
-
+NS_LOG_COMPONENT_DEFINE ("Time");
 
 Time::Time (const std::string& s)
 {
@@ -102,80 +48,62 @@ Time::Time (const std::string& s)
       if (trailer == std::string ("s"))
         {
           *this = Time::FromDouble (r, Time::S);
+          return;
         }
-      else if (trailer == std::string ("ms"))
+      if (trailer == std::string ("ms"))
         {
           *this = Time::FromDouble (r, Time::MS);
+          return;
         }
-      else if (trailer == std::string ("us"))
+      if (trailer == std::string ("us"))
         {
           *this = Time::FromDouble (r, Time::US);
+          return;
         }
-      else if (trailer == std::string ("ns"))
+      if (trailer == std::string ("ns"))
         {
           *this = Time::FromDouble (r, Time::NS);
+          return;
         }
-      else if (trailer == std::string ("ps"))
+      if (trailer == std::string ("ps"))
         {
           *this = Time::FromDouble (r, Time::PS);
+          return;
         }
-      else if (trailer == std::string ("fs"))
+      if (trailer == std::string ("fs"))
         {
           *this = Time::FromDouble (r, Time::FS);
+          return;
         }
-      else
-        {
-          NS_ABORT_MSG ("Can't Parse Time " << s);
-        }
+      NS_ABORT_MSG ("Can't Parse Time " << s);
     }
-  else
-    {
-      // they didn't provide units, assume seconds
-      std::istringstream iss;
-      iss.str (s);
-      double v;
-      iss >> v;
-      *this = Time::FromDouble (v, Time::S);
-    }
-
-  if (g_markingTimes)
-    {
-      Mark (this);
-    }
+  // else
+  // they didn't provide units, assume seconds
+  std::istringstream iss;
+  iss.str (s);
+  double v;
+  iss >> v;
+  *this = Time::FromDouble (v, Time::S);
 }
 
-// static
 struct Time::Resolution
-Time::SetDefaultNsResolution (void)
+Time::GetNsResolution (void)
 {
   NS_LOG_FUNCTION_NOARGS ();
   struct Resolution resolution;
-  SetResolution (Time::NS, &resolution, false);
+  SetResolution (Time::NS, &resolution);
   return resolution;
 }
-
-// static
-void
+void 
 Time::SetResolution (enum Unit resolution)
 {
   NS_LOG_FUNCTION (resolution);
   SetResolution (resolution, PeekResolution ());
 }
-
-
-// static
-void
-Time::SetResolution (enum Unit unit, struct Resolution *resolution,
-                     const bool convert /* = true */)
+void 
+Time::SetResolution (enum Unit unit, struct Resolution *resolution)
 {
-  NS_LOG_FUNCTION (resolution);
-  if (convert)
-    {
-      // We have to convert existing Times with the old
-      // conversion values, so do it first
-      ConvertTimes (unit);
-    }
-
+  NS_LOG_FUNCTION (unit << resolution);
   int8_t power [LAST] = { 15, 12, 9, 6, 3, 0};
   for (int i = 0; i < Time::LAST; i++)
     {
@@ -208,137 +136,10 @@ Time::SetResolution (enum Unit unit, struct Resolution *resolution,
     }
   resolution->unit = unit;
 }
-
-
-// static
-void
-Time::ClearMarkedTimes ()
-{
-  /**
-   * \internal
-   *
-   * We're called by Simulator::Run, which knows nothing about the mutex,
-   * so we need a critical section here.
-   *
-   * It would seem natural to use this function at the end of
-   * ConvertTimes, but that function already has the mutex.
-   * Our SystemMutex throws a fatal error if we try to lock it more than
-   * once in the same thread (at least in the unix implementation),
-   * so calling this function from ConvertTimes is a bad idea.
-   *
-   * Instead, we copy this body into ConvertTimes.
-   */
-
-  CriticalSection critical (GetMarkingMutex ());
-
-  NS_LOG_FUNCTION_NOARGS ();
-  if (g_markingTimes)
-    {
-      NS_LOG_LOGIC ("clearing MarkedTimes");
-      g_markingTimes->erase (g_markingTimes->begin(), g_markingTimes->end ());
-      g_markingTimes = 0;
-    }
-}  // Time::ClearMarkedTimes
-
-
-// static
-void
-Time::Mark (Time * const time)
-{
-  CriticalSection critical (GetMarkingMutex ());
-
-  NS_LOG_FUNCTION (time);
-  NS_ASSERT (time != 0);
-
-  // Repeat the g_markingTimes test here inside the CriticalSection,
-  // since earlier test was outside and might be stale.
-  if (g_markingTimes)
-    {
-      std::pair< MarkedTimes::iterator, bool> ret;
-
-      ret = g_markingTimes->insert ( time);
-      NS_LOG_LOGIC ("\t[" << g_markingTimes->size () << "] recording " << time);
-
-      if (ret.second == false)
-        {
-          NS_LOG_WARN ("already recorded " << time << "!");
-        }
-   }
-}  // Time::Mark ()
-
-
-// static
-void
-Time::Clear (Time * const time)
-{
-  CriticalSection critical (GetMarkingMutex ());
-
-  NS_LOG_FUNCTION (time);
-  NS_ASSERT (time != 0);
-
-  if (g_markingTimes)
-    {
-      NS_ASSERT_MSG (g_markingTimes->count (time) == 1,
-                     "Time object " << time <<
-                     " registered " << g_markingTimes->count (time) <<
-                     " times (should be 1)." );
-
-      MarkedTimes::size_type num = g_markingTimes->erase (time);
-      if (num != 1)
-        {
-          NS_LOG_WARN ("unexpected result erasing " << time << "!");
-          NS_LOG_WARN ("got " << num << ", expected 1");
-        }
-      else
-        {
-          NS_LOG_LOGIC ("\t[" << g_markingTimes->size () << "] removing  " << time);
-        }
-    }
-}  // Time::Clear ()
-
-
-// static
-void
-Time::ConvertTimes (const enum Unit unit)
-{
-  CriticalSection critical (GetMarkingMutex ());
-
-  NS_LOG_FUNCTION_NOARGS();
-
-  NS_ASSERT_MSG (g_markingTimes != 0,
-                 "No MarkedTimes registry. "
-                 "Time::SetResolution () called more than once?");
-
-  for ( MarkedTimes::iterator it = g_markingTimes->begin();
-        it != g_markingTimes->end();
-        it++ )
-    {
-      Time * const tp = *it;
-      if ( ! (    (tp->m_data == std::numeric_limits<int64_t>::min ())
-               || (tp->m_data == std::numeric_limits<int64_t>::max ())
-             )
-         )
-        {
-      tp->m_data = tp->ToInteger (unit);
-    }
-    }
-
-  NS_LOG_LOGIC ("logged " << g_markingTimes->size () << " Time objects.");
-
-  // Body of ClearMarkedTimes
-  // Assert above already guarantees g_markingTimes != 0
-  NS_LOG_LOGIC ("clearing MarkedTimes");
-  g_markingTimes->erase (g_markingTimes->begin(), g_markingTimes->end ());
-  g_markingTimes = 0;
-
-}  // Time::ConvertTimes ()
-
-
-// static
 enum Time::Unit
 Time::GetResolution (void)
 {
-  // No function log b/c it interferes with operator<<
+  NS_LOG_FUNCTION_NOARGS ();
   return PeekResolution ()->unit;
 }
 
@@ -347,8 +148,7 @@ std::ostream&
 operator<< (std::ostream& os, const Time & time)
 {
   std::string unit;
-  Time::Unit res = Time::GetResolution ();
-  switch (res)
+  switch (Time::GetResolution ())
     {
     case Time::S:
       unit = "s";
@@ -373,21 +173,8 @@ operator<< (std::ostream& os, const Time & time)
       unit = "unreachable";
       break;
     }
-  int64_t v = time.ToInteger (res);
-
-  std::ios_base::fmtflags ff = os.flags ();
-  { // See bug 1737:  gcc libstc++ 4.2 bug
-    if (v == 0)
-      {
-        os << '+';
-      }
-    else
-      {
-        os << std::showpos;
-      }
-  }
-  os << v << ".0" << unit;
-  os.flags (ff);  // Restore stream flags
+  int64x64_t v = time;
+  os << v << unit;
   return os;
 }
 std::istream& operator>> (std::istream& is, Time & time)

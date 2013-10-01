@@ -33,7 +33,6 @@
 #include "ns3/nstime.h"
 #include "ns3/command-line.h"
 #include "ns3/flow-id-tag.h"
-#include "ns3/wifi-tx-vector.h"
 
 using namespace ns3;
 
@@ -70,10 +69,7 @@ PsrExperiment::Send (void)
 {
   Ptr<Packet> p = Create<Packet> (m_input.packetSize);
   WifiMode mode = WifiMode (m_input.txMode);
-  WifiTxVector txVector;
-  txVector.SetTxPowerLevel (m_input.txPowerLevel);
-  txVector.SetMode (mode);
-  m_tx->SendPacket (p, mode, WIFI_PREAMBLE_SHORT, txVector);
+  m_tx->SendPacket (p, mode, WIFI_PREAMBLE_SHORT, m_input.txPowerLevel);
 }
 
 void
@@ -175,11 +171,8 @@ CollisionExperiment::SendA (void) const
 {
   Ptr<Packet> p = Create<Packet> (m_input.packetSizeA);
   p->AddByteTag (FlowIdTag (m_flowIdA));
-  WifiTxVector txVector;
-  txVector.SetTxPowerLevel (m_input.txPowerLevelA);
-  txVector.SetMode (WifiMode (m_input.txModeA));
   m_txA->SendPacket (p, WifiMode (m_input.txModeA),
-                     WIFI_PREAMBLE_SHORT, txVector);
+                     WIFI_PREAMBLE_SHORT, m_input.txPowerLevelA);
 }
 
 void
@@ -187,11 +180,8 @@ CollisionExperiment::SendB (void) const
 {
   Ptr<Packet> p = Create<Packet> (m_input.packetSizeB);
   p->AddByteTag (FlowIdTag (m_flowIdB));
-  WifiTxVector txVector;
-  txVector.SetTxPowerLevel (m_input.txPowerLevelB);
-  txVector.SetMode (WifiMode (m_input.txModeB));
   m_txB->SendPacket (p, WifiMode (m_input.txModeB),
-                     WIFI_PREAMBLE_SHORT, txVector);
+                     WIFI_PREAMBLE_SHORT, m_input.txPowerLevelB);
 }
 
 void
