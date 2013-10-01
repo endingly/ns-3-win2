@@ -73,6 +73,7 @@ copy "$(SolutionDir)\..\..\src\applications\helper\*.h"  "$(SolutionDir)\headers
     <ClCompile Include="..\..\..\src\applications\helper\on-off-helper.cc" />
     <ClCompile Include="..\..\..\src\applications\helper\packet-sink-helper.cc" />
     <ClCompile Include="..\..\..\src\applications\helper\ping6-helper.cc" />
+    <ClCompile Include="..\..\..\src\applications\helper\radvd-helper.cc" />
     <ClCompile Include="..\..\..\src\applications\helper\udp-client-server-helper.cc" />
     <ClCompile Include="..\..\..\src\applications\helper\udp-echo-helper.cc" />
     <ClCompile Include="..\..\..\src\applications\helper\v4ping-helper.cc" />
@@ -97,6 +98,7 @@ copy "$(SolutionDir)\..\..\src\applications\helper\*.h"  "$(SolutionDir)\headers
     <ClInclude Include="..\..\..\src\applications\helper\on-off-helper.h" />
     <ClInclude Include="..\..\..\src\applications\helper\packet-sink-helper.h" />
     <ClInclude Include="..\..\..\src\applications\helper\ping6-helper.h" />
+    <ClInclude Include="..\..\..\src\applications\helper\radvd-helper.h" />
     <ClInclude Include="..\..\..\src\applications\helper\udp-client-server-helper.h" />
     <ClInclude Include="..\..\..\src\applications\helper\udp-echo-helper.h" />
     <ClInclude Include="..\..\..\src\applications\helper\v4ping-helper.h" />

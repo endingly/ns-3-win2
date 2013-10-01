@@ -23,6 +23,9 @@
 #include "ns3/ipv6-address.h"
 #include "ns3/node.h"
 #include "ns3/mac48-address.h"
+#ifdef WIN32
+#include "ns3/simulator.h"
+#endif
 
 NS_LOG_COMPONENT_DEFINE ("TestIpv6");
 
@@ -65,5 +68,8 @@ main (int argc, char *argv[])
       Ipv6Address ipv6address = Ipv6Address::MakeAutoconfiguredAddress (m_addresses[i], prefix2);
       NS_LOG_INFO ("address = " << ipv6address);
     }
+#ifdef WIN32
+  Simulator::Run ();
+#endif
 }
 

@@ -75,6 +75,9 @@
     <ClCompile Include="..\..\..\src\applications\helper\v4ping-helper.cc">
       <Filter>helper</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\applications\helper\radvd-helper.cc">
+      <Filter>helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\applications\model\bulk-send-application.h">
@@ -141,6 +144,9 @@
       <Filter>helper</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\applications\helper\v4ping-helper.h">
+      <Filter>helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\applications\helper\radvd-helper.h">
       <Filter>helper</Filter>
     </ClInclude>
   </ItemGroup>

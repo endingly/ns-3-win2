@@ -18,6 +18,9 @@
 #include "ns3/uinteger.h"
 #include "ns3/traced-value.h"
 #include "ns3/trace-source-accessor.h"
+#ifdef WIN32
+#include "ns3/core-module.h"
+#endif
 
 #include <iostream>
 
@@ -55,4 +58,7 @@ main (int argc, char *argv[])
   myObject->TraceConnectWithoutContext ("MyInteger", MakeCallback (&IntTrace));
 
   myObject->m_myInt = 1234;
+#ifdef WIN32
+  Simulator::Run ();
+#endif
 }
