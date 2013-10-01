@@ -198,12 +198,6 @@
     <ClCompile Include="..\..\..\src\wifi\helper\yans-wifi-helper.cc">
       <Filter>helper</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\wifi\model\wifi-tx-vector.cc">
-      <Filter>model</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\wifi\model\ht-capabilities.cc">
-      <Filter>model</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\wifi\model\aarfcd-wifi-manager.h">
@@ -400,12 +394,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\wifi\helper\yans-wifi-helper.h">
       <Filter>helper</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\wifi\model\wifi-tx-vector.h">
-      <Filter>model</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\wifi\model\ht-capabilities.h">
-      <Filter>model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -95,7 +95,6 @@ copy "$(SolutionDir)\..\..\src\wifi\helper\*.h"  "$(SolutionDir)\headers\ns3"
     <ClCompile Include="..\..\..\src\wifi\model\dsss-error-rate-model.cc" />
     <ClCompile Include="..\..\..\src\wifi\model\edca-txop-n.cc" />
     <ClCompile Include="..\..\..\src\wifi\model\error-rate-model.cc" />
-    <ClCompile Include="..\..\..\src\wifi\model\ht-capabilities.cc" />
     <ClCompile Include="..\..\..\src\wifi\model\ideal-wifi-manager.cc" />
     <ClCompile Include="..\..\..\src\wifi\model\interference-helper.cc" />
     <ClCompile Include="..\..\..\src\wifi\model\mac-low.cc" />
@@ -131,7 +130,6 @@ copy "$(SolutionDir)\..\..\src\wifi\helper\*.h"  "$(SolutionDir)\headers\ns3"
     <ClCompile Include="..\..\..\src\wifi\model\wifi-phy-state-helper.cc" />
     <ClCompile Include="..\..\..\src\wifi\model\wifi-phy.cc" />
     <ClCompile Include="..\..\..\src\wifi\model\wifi-remote-station-manager.cc" />
-    <ClCompile Include="..\..\..\src\wifi\model\wifi-tx-vector.cc" />
     <ClCompile Include="..\..\..\src\wifi\model\yans-error-rate-model.cc" />
     <ClCompile Include="..\..\..\src\wifi\model\yans-wifi-channel.cc" />
     <ClCompile Include="..\..\..\src\wifi\model\yans-wifi-phy.cc" />
@@ -162,7 +160,6 @@ copy "$(SolutionDir)\..\..\src\wifi\helper\*.h"  "$(SolutionDir)\headers\ns3"
     <ClInclude Include="..\..\..\src\wifi\model\dsss-error-rate-model.h" />
     <ClInclude Include="..\..\..\src\wifi\model\edca-txop-n.h" />
     <ClInclude Include="..\..\..\src\wifi\model\error-rate-model.h" />
-    <ClInclude Include="..\..\..\src\wifi\model\ht-capabilities.h" />
     <ClInclude Include="..\..\..\src\wifi\model\ideal-wifi-manager.h" />
     <ClInclude Include="..\..\..\src\wifi\model\interference-helper.h" />
     <ClInclude Include="..\..\..\src\wifi\model\mac-low.h" />
@@ -200,7 +197,6 @@ copy "$(SolutionDir)\..\..\src\wifi\helper\*.h"  "$(SolutionDir)\headers\ns3"
     <ClInclude Include="..\..\..\src\wifi\model\wifi-phy.h" />
     <ClInclude Include="..\..\..\src\wifi\model\wifi-preamble.h" />
     <ClInclude Include="..\..\..\src\wifi\model\wifi-remote-station-manager.h" />
-    <ClInclude Include="..\..\..\src\wifi\model\wifi-tx-vector.h" />
     <ClInclude Include="..\..\..\src\wifi\model\yans-error-rate-model.h" />
     <ClInclude Include="..\..\..\src\wifi\model\yans-wifi-channel.h" />
     <ClInclude Include="..\..\..\src\wifi\model\yans-wifi-phy.h" />

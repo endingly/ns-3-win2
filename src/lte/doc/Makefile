@@ -79,7 +79,6 @@ $(FIGURES)/lte-subframe-structure.pdf_width = 2in
 $(FIGURES)/mac-random-access-contention.pdf_width = 10cm
 $(FIGURES)/mac-random-access-noncontention.pdf_width = 15cm
 $(FIGURES)/lte-ue-rrc-states.pdf_width = 7cm
-$(FIGURES)/lte-handover-algorithm.pdf_width = 10cm
 $(FIGURES)/helpers.pdf_width = 8cm
 
 IMAGES_SEQDIAG = \
@@ -94,8 +93,7 @@ IMAGES_SEQDIAG = \
 
 IMAGES_DOT = \
 	$(FIGURES)/lte-enb-rrc-states.dot \
-	$(FIGURES)/lte-ue-rrc-states.dot \
-	$(FIGURES)/lte-handover-algorithm.dot
+	$(FIGURES)/lte-ue-rrc-states.dot
 
 IMAGES_NOBUILD = $(FIGURES)/fading_pedestrian.png \
 	$(FIGURES)/fading_vehicular.png \
@@ -165,6 +163,11 @@ RESCALE = $(shell hg root)/utils/rescale-pdf.sh
 	$(EPSTOPDF) $< -o=$@
 	if test x$($@_width) != x; then $(RESCALE) $($@_width) $@ ; fi
 
+
+%.png : %.eps; $(CONVERT) $< $@
+%.pdf : %.eps
+	$(EPSTOPDF) $< -o=$@
+	if test x$($@_width) != x; then $(RESCALE) $($@_width) $@ ; fi
 
 # You can set these variables from the command line.
 SPHINXOPTS    =

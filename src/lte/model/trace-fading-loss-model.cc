@@ -39,7 +39,6 @@ NS_OBJECT_ENSURE_REGISTERED (TraceFadingLossModel);
 
 
 TraceFadingLossModel::TraceFadingLossModel ()
-  : m_streamsAssigned (false)
 {
   NS_LOG_FUNCTION (this);
   SetNext (NULL);
@@ -85,11 +84,6 @@ TraceFadingLossModel::GetTypeId (void)
                     UintegerValue (100),
                    MakeUintegerAccessor (&TraceFadingLossModel::m_rbNum),
                    MakeUintegerChecker<uint8_t> ())
-    .AddAttribute ("RngStreamSetSize",
-                    "The number of RNG streams reserved for the fading model. The maximum number of streams that are needed for an LTE FDD scenario is 2 * numUEs * numeNBs.",
-                    UintegerValue (200000),
-                   MakeUintegerAccessor (&TraceFadingLossModel::m_streamSetSize),
-                   MakeUintegerChecker<uint64_t> ())
   ;
   return tid;
 }
@@ -179,12 +173,6 @@ TraceFadingLossModel::DoCalcRxPowerSpectralDensity (
       Ptr<UniformRandomVariable> startV = CreateObject<UniformRandomVariable> ();
       startV->SetAttribute ("Min", DoubleValue (1.0));
       startV->SetAttribute ("Max", DoubleValue ((m_traceLength.GetSeconds () - m_windowSize.GetSeconds ()) * 1000.0));
-      if (m_streamsAssigned)
-        {
-          NS_ASSERT_MSG (m_currentStream <= m_lastStream, "not enough streams, consider increasing the StreamSetSize attribute");
-          startV->SetStream (m_currentStream);
-          m_currentStream += 1;
-        }
       ChannelRealizationId_t mobilityPair = std::make_pair (a,b);
       m_startVariableMap.insert (std::pair<ChannelRealizationId_t,Ptr<UniformRandomVariable> > (mobilityPair, startV));
       m_windowOffsetsMap.insert (std::pair<ChannelRealizationId_t,int> (mobilityPair, startV->GetValue ()));
@@ -236,21 +224,15 @@ int64_t
 TraceFadingLossModel::AssignStreams (int64_t stream)
 {
   NS_LOG_FUNCTION (this << stream);
-  NS_ASSERT (m_streamsAssigned == false);  
-  m_streamsAssigned = true;
-  m_currentStream = stream;
-  m_lastStream = stream + m_streamSetSize - 1;
+  int64_t currentStream = stream;
   std::map <ChannelRealizationId_t, Ptr<UniformRandomVariable> >::iterator itVar;
   itVar = m_startVariableMap.begin ();
-  // the following loop is for eventually pre-existing ChannelRealization instances
-  // note that more instances are expected to be created at run time
   while (itVar!=m_startVariableMap.end ())
     {
-      NS_ASSERT_MSG (m_currentStream <= m_lastStream, "not enough streams, consider increasing the StreamSetSize attribute");
-      (*itVar).second->SetStream (m_currentStream);
-      m_currentStream += 1;
+      (*itVar).second->SetStream (currentStream);
+      currentStream += 1;
     }
-  return m_streamSetSize;
+  return (currentStream - stream);
 }
 
 

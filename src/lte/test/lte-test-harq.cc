@@ -29,7 +29,7 @@
 #include <iostream>
 #include <cmath>
 #include <ns3/radio-bearer-stats-calculator.h>
-#include <ns3/mobility-building-info.h>
+#include <ns3/buildings-mobility-model.h>
 #include <ns3/hybrid-buildings-propagation-loss-model.h>
 #include <ns3/eps-bearer.h>
 #include <ns3/node-container.h>
@@ -48,7 +48,6 @@
 #include <ns3/enum.h>
 #include <ns3/unused.h>
 #include <ns3/ff-mac-scheduler.h>
-#include <ns3/buildings-helper.h>
 
 #include "lte-test-harq.h"
 
@@ -64,16 +63,16 @@ LenaTestHarqSuite::LenaTestHarqSuite ()
 
 
   // Tests on DL/UL Data channels (PDSCH, PUSCH)
-  // MCS 0 TB size of 66 bytes SINR -9.91 dB expected throughput 31822 bytes/s
+  // MCS 0 TB size of 41 bytes SINR -17 expected throughput 18375 bytes/s
   // TBLER 1st tx 1.0
-  // TBLER 2nd tx 0.074
-  AddTestCase (new LenaHarqTestCase (2, 2400, 66, 0.12, 31822), TestCase::QUICK);
+  // TBLER 2nd tx 0.23
+  AddTestCase (new LenaHarqTestCase (2, 4000, 41, 0.17, 18375), TestCase::QUICK);
 
   // Tests on DL/UL Data channels (PDSCH, PUSCH)
-  // MCS 10 TB size of 472 bytes SINR 0.3 dB expected throughput 209964 bytes/s
+  // MCS 10 TB size of 469 bytes SINR 4 expected throughput 236096 bytes/s
   // TBLER 1st tx 1.0
-  // TBLER 2nd tx 0.248
-  AddTestCase (new LenaHarqTestCase (1, 770, 472, 0.06, 209964), TestCase::QUICK);
+  // TBLER 2nd tx 0.0138
+  AddTestCase (new LenaHarqTestCase (1, 640, 469, 0.02, 236096), TestCase::QUICK);
 
 
 
@@ -172,13 +171,10 @@ LenaHarqTestCase::DoRun (void)
 
   // Install Mobility Model
   MobilityHelper mobility;
-  mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+  mobility.SetMobilityModel ("ns3::BuildingsMobilityModel");
   mobility.Install (enbNodes);
-  BuildingsHelper::Install (enbNodes);
-  
-  mobility.SetMobilityModel ("ns3::ConstantPositionMobilityModel");
+  mobility.SetMobilityModel ("ns3::BuildingsMobilityModel");
   mobility.Install (ueNodes);
-  BuildingsHelper::Install (ueNodes);
 
   // remove random shadowing component
   lena->SetAttribute ("PathlossModel", StringValue ("ns3::HybridBuildingsPropagationLossModel"));
@@ -209,13 +205,13 @@ LenaHarqTestCase::DoRun (void)
   enbPhy->SetAttribute ("TxPower", DoubleValue (43.0));
   enbPhy->SetAttribute ("NoiseFigure", DoubleValue (5.0));
   // place the HeNB over the default rooftop level (20 mt.)
-  Ptr<MobilityModel> mm = enbNodes.Get (0)->GetObject<MobilityModel> ();
+  Ptr<BuildingsMobilityModel> mm = enbNodes.Get (0)->GetObject<BuildingsMobilityModel> ();
   mm->SetPosition (Vector (0.0, 0.0, 30.0));
 
   // Set UEs' position and power
   for (int i = 0; i < m_nUser; i++)
     {
-      Ptr<MobilityModel> mm = ueNodes.Get (i)->GetObject<MobilityModel> ();
+      Ptr<BuildingsMobilityModel> mm = ueNodes.Get (i)->GetObject<BuildingsMobilityModel> ();
       mm->SetPosition (Vector (m_dist, 0.0, 1.0));
       Ptr<LteUeNetDevice> lteUeDev = ueDevs.Get (i)->GetObject<LteUeNetDevice> ();
       Ptr<LteUePhy> uePhy = lteUeDev->GetPhy ();
@@ -225,7 +221,7 @@ LenaHarqTestCase::DoRun (void)
 
 
   double statsStartTime = 0.050; // need to allow for RRC connection establishment + SRS 
-  double statsDuration = 2.0;
+  double statsDuration = 4.0;
   Simulator::Stop (Seconds (statsStartTime + statsDuration - 0.0001));
 
   lena->EnableRlcTraces ();

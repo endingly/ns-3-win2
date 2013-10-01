@@ -17,13 +17,12 @@
  *
  * Author: Mathieu Lacage <mathieu.lacage@sophia.inria.fr>
  */
+
 #include "ideal-wifi-manager.h"
 #include "wifi-phy.h"
 #include "ns3/assert.h"
 #include "ns3/double.h"
 #include <cmath>
-
-#define Min(a,b) ((a < b) ? a : b)
 
 namespace ns3 {
 
@@ -134,8 +133,8 @@ IdealWifiManager::DoReportFinalDataFailed (WifiRemoteStation *station)
 {
 }
 
-WifiTxVector
-IdealWifiManager::DoGetDataTxVector (WifiRemoteStation *st, uint32_t size)
+WifiMode
+IdealWifiManager::DoGetDataMode (WifiRemoteStation *st, uint32_t size)
 {
   IdealWifiRemoteStation *station = (IdealWifiRemoteStation *)st;
   // We search within the Supported rate set the mode with the
@@ -154,10 +153,10 @@ IdealWifiManager::DoGetDataTxVector (WifiRemoteStation *st, uint32_t size)
           maxMode = mode;
         }
     }
-  return WifiTxVector (maxMode, GetDefaultTxPowerLevel (), GetLongRetryCount (station), GetShortGuardInterval (station), Min (GetNumberOfReceiveAntennas (station),GetNumberOfTransmitAntennas()), GetNumberOfTransmitAntennas (station), GetStbc (station));
+  return maxMode;
 }
-WifiTxVector
-IdealWifiManager::DoGetRtsTxVector (WifiRemoteStation *st)
+WifiMode
+IdealWifiManager::DoGetRtsMode (WifiRemoteStation *st)
 {
   IdealWifiRemoteStation *station = (IdealWifiRemoteStation *)st;
   // We search within the Basic rate set the mode with the highest
@@ -176,7 +175,7 @@ IdealWifiManager::DoGetRtsTxVector (WifiRemoteStation *st)
           maxMode = mode;
         }
     }
-  return WifiTxVector (maxMode, GetDefaultTxPowerLevel (), GetShortRetryCount (station), GetShortGuardInterval (station), Min (GetNumberOfReceiveAntennas (station),GetNumberOfTransmitAntennas()), GetNumberOfTransmitAntennas (station), GetStbc (station));
+  return maxMode;
 }
 
 bool

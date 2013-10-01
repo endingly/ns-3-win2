@@ -27,7 +27,7 @@
 #include "ns3/pointer.h"
 #include <cmath>
 #include "buildings-propagation-loss-model.h"
-#include <ns3/mobility-building-info.h>
+#include "ns3/buildings-mobility-model.h"
 #include "ns3/enum.h"
 
 
@@ -100,7 +100,7 @@ BuildingsPropagationLossModel::BuildingsPropagationLossModel ()
 }
 
 double
-BuildingsPropagationLossModel::ExternalWallLoss (Ptr<MobilityBuildingInfo> a) const
+BuildingsPropagationLossModel::ExternalWallLoss (Ptr<BuildingsMobilityModel> a) const
 {
   double loss = 0.0;
   Ptr<Building> aBuilding = a->GetBuilding ();
@@ -124,7 +124,7 @@ BuildingsPropagationLossModel::ExternalWallLoss (Ptr<MobilityBuildingInfo> a) co
 }
 
 double
-BuildingsPropagationLossModel::HeightLoss (Ptr<MobilityBuildingInfo> node) const
+BuildingsPropagationLossModel::HeightLoss (Ptr<BuildingsMobilityModel> node) const
 {
   double loss = 0.0;
 
@@ -134,7 +134,7 @@ BuildingsPropagationLossModel::HeightLoss (Ptr<MobilityBuildingInfo> node) const
 }
 
 double
-BuildingsPropagationLossModel::InternalWallsLoss (Ptr<MobilityBuildingInfo> a, Ptr<MobilityBuildingInfo>b) const
+BuildingsPropagationLossModel::InternalWallsLoss (Ptr<BuildingsMobilityModel> a, Ptr<BuildingsMobilityModel>b) const
 {
   // approximate the number of internal walls with the Manhattan distance in "rooms" units
   double dx = std::abs (a->GetRoomNumberX () - b->GetRoomNumberX ());
@@ -148,9 +148,9 @@ double
 BuildingsPropagationLossModel::GetShadowing (Ptr<MobilityModel> a, Ptr<MobilityModel> b)
 const
 {
-    Ptr<MobilityBuildingInfo> a1 = a->GetObject <MobilityBuildingInfo> ();
-    Ptr<MobilityBuildingInfo> b1 = b->GetObject <MobilityBuildingInfo> ();
-    NS_ASSERT_MSG ((a1 != 0) && (b1 != 0), "BuildingsPropagationLossModel only works with MobilityBuildingInfo");
+    Ptr<BuildingsMobilityModel> a1 = DynamicCast<BuildingsMobilityModel> (a);
+    Ptr<BuildingsMobilityModel> b1 = DynamicCast<BuildingsMobilityModel> (b);
+    NS_ASSERT_MSG ((a1 != 0) && (b1 != 0), "BuildingsPropagationLossModel only works with BuildingsMobilityModel");
   
   std::map<Ptr<MobilityModel>,  std::map<Ptr<MobilityModel>, ShadowingLoss> >::iterator ait = m_shadowingLossMap.find (a);
   if (ait != m_shadowingLossMap.end ())
@@ -184,7 +184,7 @@ const
 
 
 double
-BuildingsPropagationLossModel::EvaluateSigma (Ptr<MobilityBuildingInfo> a, Ptr<MobilityBuildingInfo> b)
+BuildingsPropagationLossModel::EvaluateSigma (Ptr<BuildingsMobilityModel> a, Ptr<BuildingsMobilityModel> b)
 const
 {
   if (a->IsOutdoor ())

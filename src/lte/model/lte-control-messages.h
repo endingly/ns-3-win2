@@ -43,11 +43,6 @@ class LteControlMessage : public SimpleRefCount<LteControlMessage>
 public:
   /**
    * The type of the message
-   * NOTE: The messages sent by UE are filtered by the
-   *  LteEnbPhy::ReceiveLteControlMessageList in order to remove the ones 
-   *  that has been already handoff by the eNB for avoiding propagation of
-   *  spurious messages. When new messaged have to been added, consider to
-   *  update the switch statement implementing teh filtering.
    */
   enum MessageType
   {

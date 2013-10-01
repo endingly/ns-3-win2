@@ -446,9 +446,8 @@ int
 TcpSocketBase::Close (void)
 {
   NS_LOG_FUNCTION (this);
-  /// \internal
-  /// First we check to see if there is any unread rx data.
-  /// \bugid{426} claims we should send reset in this case.
+  // First we check to see if there is any unread rx data
+  // Bug number 426 claims we should send reset in this case.
   if (m_rxBuffer.Size () != 0)
     {
       NS_LOG_INFO ("Socket " << this << " << unread rx data during close.  Sending reset");

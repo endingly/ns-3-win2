@@ -50,17 +50,7 @@ MgtProbeRequestHeader::SetSupportedRates (SupportedRates rates)
 {
   m_rates = rates;
 }
-void 
-MgtProbeRequestHeader::SetHtCapabilities(HtCapabilities htcapabilities)
-{
-  m_htCapability=htcapabilities;
-}
 
-HtCapabilities 
-MgtProbeRequestHeader::GetHtCapabilities (void) const
-{
-   return  m_htCapability;
-}
 SupportedRates
 MgtProbeRequestHeader::GetSupportedRates (void) const
 {
@@ -73,7 +63,6 @@ MgtProbeRequestHeader::GetSerializedSize (void) const
   size += m_ssid.GetSerializedSize ();
   size += m_rates.GetSerializedSize ();
   size += m_rates.extended.GetSerializedSize ();
-  size += m_htCapability.GetSerializedSize();
   return size;
 }
 TypeId
@@ -94,8 +83,7 @@ void
 MgtProbeRequestHeader::Print (std::ostream &os) const
 {
   os << "ssid=" << m_ssid << ", "
-     << "rates=" << m_rates << ", "
-     << "HT Capabilities=" << m_htCapability;
+     << "rates=" << m_rates;
 }
 void
 MgtProbeRequestHeader::Serialize (Buffer::Iterator start) const
@@ -104,7 +92,6 @@ MgtProbeRequestHeader::Serialize (Buffer::Iterator start) const
   i = m_ssid.Serialize (i);
   i = m_rates.Serialize (i);
   i = m_rates.extended.Serialize (i);
-   i = m_htCapability.Serialize(i);
 }
 uint32_t
 MgtProbeRequestHeader::Deserialize (Buffer::Iterator start)
@@ -113,7 +100,6 @@ MgtProbeRequestHeader::Deserialize (Buffer::Iterator start)
   i = m_ssid.Deserialize (i);
   i = m_rates.Deserialize (i);
   i = m_rates.extended.DeserializeIfPresent (i);
-  i = m_htCapability.DeserializeIfPresent (i);
   return i.GetDistanceFrom (start);
 }
 
@@ -150,17 +136,7 @@ MgtProbeResponseHeader::GetSupportedRates (void) const
 {
   return m_rates;
 }
-void 
-MgtProbeResponseHeader::SetHtCapabilities(HtCapabilities htcapabilities)
-{
-  m_htCapability=htcapabilities;
-}
 
-HtCapabilities 
-MgtProbeResponseHeader::GetHtCapabilities (void) const
-{
-   return  m_htCapability;
-}
 void
 MgtProbeResponseHeader::SetSsid (Ssid ssid)
 {
@@ -201,7 +177,6 @@ MgtProbeResponseHeader::GetSerializedSize (void) const
   size += m_rates.GetSerializedSize ();
   //size += 3; // ds parameter set
   size += m_rates.extended.GetSerializedSize ();
-  size += m_htCapability.GetSerializedSize();
   // xxx
   return size;
 }
@@ -209,8 +184,7 @@ void
 MgtProbeResponseHeader::Print (std::ostream &os) const
 {
   os << "ssid=" << m_ssid << ", "
-     << "rates=" << m_rates << ", "
-     << "HT Capabilities=" << m_htCapability;
+     << "rates=" << m_rates;
 }
 void
 MgtProbeResponseHeader::Serialize (Buffer::Iterator start) const
@@ -233,7 +207,6 @@ MgtProbeResponseHeader::Serialize (Buffer::Iterator start) const
   i = m_rates.Serialize (i);
   //i.WriteU8 (0, 3); // ds parameter set.
   i = m_rates.extended.Serialize (i);
-  i = m_htCapability.Serialize(i);
 }
 uint32_t
 MgtProbeResponseHeader::Deserialize (Buffer::Iterator start)
@@ -247,7 +220,6 @@ MgtProbeResponseHeader::Deserialize (Buffer::Iterator start)
   i = m_rates.Deserialize (i);
   //i.Next (3); // ds parameter set
   i = m_rates.extended.DeserializeIfPresent (i);
-  i = m_htCapability.DeserializeIfPresent (i);
   return i.GetDistanceFrom (start);
 }
 
@@ -275,20 +247,10 @@ MgtAssocRequestHeader::SetSupportedRates (SupportedRates rates)
 {
   m_rates = rates;
 }
-void 
-MgtAssocRequestHeader::SetHtCapabilities(HtCapabilities htcapabilities)
-{
-  m_htCapability = htcapabilities;
-}
 void
 MgtAssocRequestHeader::SetListenInterval (uint16_t interval)
 {
   m_listenInterval = interval;
-}
-HtCapabilities 
-MgtAssocRequestHeader::GetHtCapabilities (void) const
-{
-   return  m_htCapability;
 }
 Ssid
 MgtAssocRequestHeader::GetSsid (void) const
@@ -328,7 +290,6 @@ MgtAssocRequestHeader::GetSerializedSize (void) const
   size += 2;
   size += m_ssid.GetSerializedSize ();
   size += m_rates.GetSerializedSize ();
-  size += m_htCapability.GetSerializedSize();
   size += m_rates.extended.GetSerializedSize ();
   return size;
 }
@@ -336,8 +297,7 @@ void
 MgtAssocRequestHeader::Print (std::ostream &os) const
 {
   os << "ssid=" << m_ssid << ", "
-     << "rates=" << m_rates<< ", "
-     << "HT Capabilities=" << m_htCapability;
+     << "rates=" << m_rates;
 }
 void
 MgtAssocRequestHeader::Serialize (Buffer::Iterator start) const
@@ -348,7 +308,6 @@ MgtAssocRequestHeader::Serialize (Buffer::Iterator start) const
   i = m_ssid.Serialize (i);
   i = m_rates.Serialize (i);
   i = m_rates.extended.Serialize (i);
-  i = m_htCapability.Serialize(i);
 }
 uint32_t
 MgtAssocRequestHeader::Deserialize (Buffer::Iterator start)
@@ -359,7 +318,6 @@ MgtAssocRequestHeader::Deserialize (Buffer::Iterator start)
   i = m_ssid.Deserialize (i);
   i = m_rates.Deserialize (i);
   i = m_rates.extended.DeserializeIfPresent (i);
-  i = m_htCapability.DeserializeIfPresent (i);
   return i.GetDistanceFrom (start);
 }
 
@@ -397,17 +355,7 @@ MgtAssocResponseHeader::SetSupportedRates (SupportedRates rates)
 {
   m_rates = rates;
 }
-void 
-MgtAssocResponseHeader::SetHtCapabilities(HtCapabilities htcapabilities)
-{
-  m_htCapability=htcapabilities;
-}
 
-HtCapabilities 
-MgtAssocResponseHeader::GetHtCapabilities (void) const
-{
-   return  m_htCapability;
-}
 TypeId
 MgtAssocResponseHeader::GetTypeId (void)
 {
@@ -431,7 +379,6 @@ MgtAssocResponseHeader::GetSerializedSize (void) const
   size += 2; // aid
   size += m_rates.GetSerializedSize ();
   size += m_rates.extended.GetSerializedSize ();
-size += m_htCapability.GetSerializedSize();
   return size;
 }
 
@@ -439,8 +386,7 @@ void
 MgtAssocResponseHeader::Print (std::ostream &os) const
 {
   os << "status code=" << m_code << ", "
-     << "rates=" << m_rates << ", "
-  << "HT Capabilities=" << m_htCapability;
+     << "rates=" << m_rates;
 }
 void
 MgtAssocResponseHeader::Serialize (Buffer::Iterator start) const
@@ -451,7 +397,6 @@ MgtAssocResponseHeader::Serialize (Buffer::Iterator start) const
   i.WriteHtolsbU16 (m_aid);
   i = m_rates.Serialize (i);
   i = m_rates.extended.Serialize (i);
- i = m_htCapability.Serialize(i);
 }
 uint32_t
 MgtAssocResponseHeader::Deserialize (Buffer::Iterator start)
@@ -462,7 +407,6 @@ MgtAssocResponseHeader::Deserialize (Buffer::Iterator start)
   m_aid = i.ReadLsbtohU16 ();
   i = m_rates.Deserialize (i);
   i = m_rates.extended.DeserializeIfPresent (i);
- i = m_htCapability.DeserializeIfPresent (i);
   return i.GetDistanceFrom (start);
 }
 /**********************************************************

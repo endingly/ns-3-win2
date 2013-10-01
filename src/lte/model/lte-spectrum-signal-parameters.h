@@ -118,7 +118,6 @@ struct LteSpectrumSignalParametersDlCtrlFrame : public SpectrumSignalParameters
   std::list<Ptr<LteControlMessage> > ctrlMsgList;
   
   uint16_t cellId;
-  bool pss; // primary synchronization signal
 };
 
 

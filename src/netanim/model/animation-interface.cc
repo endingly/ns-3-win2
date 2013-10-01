@@ -165,7 +165,7 @@ void AnimationInterface::RecursiveIpv4RoutePathSearch (std::string from, std::st
     {
       return;
     }
-  NS_LOG_DEBUG ("Node: " << fromNode->GetId () << " G:" << rt->GetGateway ());
+  NS_LOG_UNCOND ("Node: " << fromNode->GetId () << " G:" << rt->GetGateway ());
   std::ostringstream oss;
   oss << rt->GetGateway ();
   if (oss.str () == "0.0.0.0" && (sockerr != Socket::ERROR_NOROUTETOHOST))
@@ -1471,12 +1471,6 @@ void AnimationInterface::CsmaPhyRxEndTrace (std::string context, Ptr<const Packe
   m_pendingCsmaPackets[AnimUid].ProcessRxBegin (ndev, Simulator::Now ());
   pktInfo.ProcessRxEnd (ndev, Simulator::Now (), UpdatePosition (n));
   NS_LOG_INFO ("CsmaPhyRxEndTrace for packet:" << AnimUid);
-  AnimRxInfo pktrxInfo = pktInfo.GetRxInfo (ndev);
-  if (pktrxInfo.IsPhyRxComplete ())
-    {
-      NS_LOG_INFO ("CsmaPhyRxEndTrace for packet:" << AnimUid << " complete");
-      OutputCsmaPacket (p, pktInfo, pktrxInfo);
-    }
 }
 
 
@@ -2008,7 +2002,7 @@ std::string AnimationInterface::GetXMLOpenClose_rp (uint32_t nodeId, std::string
       Ipv4RoutePathElement rpElement = *i;
       oss << "<rpe" << " n=\"" << rpElement.nodeId << "\"" << " nH=\"" << rpElement.nextHop.c_str () << "\"" << "/>" << std::endl;
     }
-  oss << "</rp>" << std::endl;
+  oss << "<rp/>" << std::endl;
   return oss.str ();
 }
 

@@ -696,8 +696,7 @@ PacketMetadataTest::DoRun (void)
   p = Create<Packet> (16384);
 
 
-  /// \internal
-  /// See \bugid{179}
+  // bug 179.
   p = Create<Packet> (40);
   p2 = p->CreateFragment (5, 5);
   p3 = p->CreateFragment (10, 30);
@@ -769,8 +768,7 @@ PacketMetadataTest::DoRun (void)
   p->RemoveAtStart (10);
   CHECK_HISTORY (p, 1, 490);
 
-  /// \internal
-  /// See \bugid{1072}
+  // bug 1072
   p = Create<Packet> (500);
   ADD_HEADER (p, 10);
   ADD_HEADER (p, 20);
@@ -780,8 +778,7 @@ PacketMetadataTest::DoRun (void)
   p2 = p->CreateFragment (6,535-6);
   p1->AddAtEnd (p2);
 
-  /// \internal
-  /// See \bugid{1072}
+  // bug 1072#2
   p = Create<Packet> (reinterpret_cast<const uint8_t*> ("hello world"), 11);
   ADD_HEADER (p, 2);
   CHECK_HISTORY (p, 2, 2, 11);

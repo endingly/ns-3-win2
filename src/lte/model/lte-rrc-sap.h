@@ -35,7 +35,7 @@ class LteRlcSapUser;
 class LtePdcpSapUser;
 class LteRlcSapProvider;
 class LtePdcpSapProvider;
-class Packet;
+class Packet;  
 
 /**
  * Class holding definition common to all Ue/Enb SAP
@@ -44,22 +44,19 @@ class Packet;
  * ns-3 model are mentioned here. The naming of the variables that are
  * defined here is the same of 36.331, except for removal of "-" and
  * conversion to CamelCase or ALL_CAPS where needed in order to follow
- * the ns-3 coding style. Due to the 1-to-1 mapping with TS 36.331, 
+ * the ns-3 coding style. Due to the 1-to-1 mapping with TS 36.311, 
  * detailed doxygen documentation is omitted, so please refer to
- * 36.331 for the meaning of these data structures / fields.
+ * 36.311 for the meaning of these data structures / fields.
  * 
  */
 class LteRrcSap
 {
 public:
+
   virtual ~LteRrcSap ();
 
-  // Constraint values
-
-  static const uint8_t MaxReportCells = 255;
-
   // Information Elements
-
+  
   struct PlmnIdentityInfo
   {
     uint32_t plmnIdentity;
@@ -72,7 +69,7 @@ public:
     bool csgIndication;
     uint32_t csgIdentity;
   };
-
+  
   struct FreqInfo
   {
     uint16_t ulCarrierFreq;
@@ -82,12 +79,12 @@ public:
   struct RlcConfig
   {
     enum
-    {
-      AM,
-      UM_BI_DIRECTIONAL,
-      UM_UNI_DIRECTIONAL_UL,
-      UM_UNI_DIRECTIONAL_DL
-    } choice;
+      {
+        AM, 
+        UM_BI_DIRECTIONAL,
+        UM_UNI_DIRECTIONAL_UL,
+        UM_UNI_DIRECTIONAL_DL
+      } choice;    
   };
 
   struct LogicalChannelConfig
@@ -100,20 +97,14 @@ public:
 
   struct SoundingRsUlConfigCommon
   {
-    enum
-    {
-      SETUP, RESET
-    } type;
+    enum {SETUP, RESET} type;
     uint8_t srsBandwidthConfig;
     uint8_t srsSubframeConfig;
   };
 
   struct SoundingRsUlConfigDedicated
   {
-    enum
-    {
-      SETUP, RESET
-    } type;
+    enum {SETUP, RESET} type;
     uint8_t srsBandwidth;
     uint16_t srsConfigIndex;
   };
@@ -135,10 +126,10 @@ public:
 
   struct SrbToAddMod
   {
-    uint8_t srbIdentity;
+    uint8_t srbIdentity;   
     LogicalChannelConfig logicalChannelConfig;
   };
-
+  
   struct DrbToAddMod
   {
     uint8_t epsBearerIdentity;
@@ -152,7 +143,7 @@ public:
   {
     uint8_t numberOfRaPreambles;
   };
-
+  
   struct RaSupervisionInfo
   {
     uint8_t preambleTransMax;
@@ -166,24 +157,24 @@ public:
   };
 
   struct RadioResourceConfigCommon
-  {
+  {    
     RachConfigCommon rachConfigCommon;
   };
 
   struct RadioResourceConfigCommonSib
-  {
+  {    
     RachConfigCommon rachConfigCommon;
   };
 
   struct RadioResourceConfigDedicated
   {
     std::list<SrbToAddMod> srbToAddModList;
-    std::list<DrbToAddMod> drbToAddModList;
+    std::list<DrbToAddMod> drbToAddModList;    
     std::list<uint8_t> drbToReleaseList;
     bool havePhysicalConfigDedicated;
     PhysicalConfigDedicated physicalConfigDedicated;
   };
-
+  
   struct QuantityConfig
   {
     uint8_t filterCoefficientRSRP;
@@ -196,7 +187,7 @@ public:
     uint16_t physCellId;
     int8_t cellIndividualOffset;
   };
-
+  
   struct PhysCellIdRange
   {
     uint16_t start;
@@ -209,7 +200,7 @@ public:
     uint8_t cellIndex;
     PhysCellIdRange physCellIdRange;
   };
-
+  
   struct MeasObjectEutra
   {
     uint16_t carrierFreq;
@@ -224,80 +215,35 @@ public:
     bool haveCellForWhichToReportCGI;
     uint8_t cellForWhichToReportCGI;
   };
-
+  
   struct ThresholdEutra
   {
-    enum
-    {
-      THRESHOLD_RSRP,
-      THRESHOLD_RSRQ
-    } choice;
+    enum {thresholdRsrp, thresholdRsrq} choice;
     uint8_t range;
   };
 
   struct ReportConfigEutra
   {
-    enum
-    {
-      EVENT,
-      PERIODICAL
-    } triggerType;
-
-    enum
-    {
-      EVENT_A1,
-      EVENT_A2,
-      EVENT_A3,
-      EVENT_A4,
-      EVENT_A5
-    } eventId;
+    enum {event,periodical} triggerType;
+    enum {eventA1,eventA2,eventA3,eventA4,eventA5} eventId;
     ThresholdEutra threshold1; // used for A1, A2, A4, A5
     ThresholdEutra threshold2; // used for A5
     bool reportOnLeave; // used for A3
     int8_t a3Offset; // used for A3
     uint8_t hysteresis;
     uint16_t timeToTrigger;
-    enum
-    {
-      REPORT_STRONGEST_CELLS,
-      REPORT_CGI
-    } purpose;
-    enum
-    {
-      RSRP,
-      RSRQ
-    } triggerQuantity;
-    enum
-    {
-      SAME_AS_TRIGGER_QUANTITY,
-      BOTH
-    } reportQuantity;
+    enum {reportStrongestCells, reportCgi} purpose;
+    enum {rsrp, rsrq} triggerQuantity;
+    enum {sameAsTriggerQuantity, both} reportQuantity;
     uint8_t maxReportCells;
-    enum
-    {
-      MS120,
-      MS240,
-      MS480,
-      MS640,
-      MS1024,
-      MS2048,
-      MS5120,
-      MS10240,
-      MIN1,
-      MIN6,
-      MIN12,
-      MIN30,
-      MIN60,
-      SPARE3,
-      SPARE2,
-      SPARE1
-    } reportInterval;
+    enum {ms120, ms240, ms480, ms640, ms1024, ms2048, ms5120, ms10240, 
+    min1, min6, min12, min30, min60, spare3, spare2, spare1} reportInterval;
     uint8_t reportAmount;
   };
-
+  
   struct MeasObjectToAddMod
   {
-    uint8_t measObjectId;
+    uint8_t measObjectId; 
     MeasObjectEutra measObjectEutra;
   };
 
@@ -316,17 +262,11 @@ public:
 
   struct MeasGapConfig
   {
-    enum
-    {
-      SETUP, RESET
-    } type;
-    enum
-    {
-      GP0, GP1
-    } gapOffsetChoice;
+    enum {SETUP, RESET} type;
+    enum {gp0, gp1} gapOffsetChoice;
     uint8_t gapOffsetValue;
   };
-
+  
   struct MobilityStateParameters
   {
     uint8_t tEvaluation;
@@ -334,7 +274,7 @@ public:
     uint8_t nCellChangeMedium;
     uint8_t nCellChangeHigh;
   };
-
+  
   struct SpeedStateScaleFactors
   {
     // 25 = oDot25, 50 = oDot5, 75 = oDot75, 100 = lDot0
@@ -344,11 +284,7 @@ public:
 
   struct SpeedStatePars
   {
-    enum
-    {
-      SETUP,
-      RESET
-    } type;
+    enum {SETUP, RESET} type;
     MobilityStateParameters mobilityStateParameters;
     SpeedStateScaleFactors timeToTriggerSf;
   };
@@ -383,7 +319,7 @@ public:
     uint8_t ulBandwidth;
   };
 
-  struct RachConfigDedicated
+  struct RachConfigDedicated 
   {
     uint8_t raPreambleIndex;
     uint8_t raPrachMaskIndex;
@@ -393,9 +329,9 @@ public:
   {
     uint16_t targetPhysCellId;
     bool haveCarrierFreq;
-    CarrierFreqEutra carrierFreq;
+    CarrierFreqEutra carrierFreq;    
     bool haveCarrierBandwidth;
-    CarrierBandwidthEutra carrierBandwidth;
+    CarrierBandwidthEutra carrierBandwidth;   
     uint16_t newUeIdentity;
     RadioResourceConfigCommon radioResourceConfigCommon;
     bool haveRachConfigDedicated;
@@ -405,11 +341,11 @@ public:
   struct ReestabUeIdentity
   {
     uint16_t cRnti;
-    uint16_t physCellId;
+    uint16_t physCellId;    
   };
 
-  enum ReestablishmentCause
-  {
+  enum ReestablishmentCause 
+  { 
     RECONFIGURATION_FAILURE,
     HANDOVER_FAILURE,
     OTHER_FAILURE
@@ -420,7 +356,7 @@ public:
     uint8_t dlBandwidth;
     uint8_t systemFrameNumber;
   };
-
+  
   struct SystemInformationBlockType1
   {
     CellAccessRelatedInfo cellAccessRelatedInfo;
@@ -429,7 +365,7 @@ public:
   struct SystemInformationBlockType2
   {
     RadioResourceConfigCommonSib radioResourceConfigCommon;
-    FreqInfo freqInfo;
+    FreqInfo freqInfo;    
   };
 
   struct SystemInformation
@@ -442,7 +378,7 @@ public:
   {
     MeasConfig sourceMeasConfig;
     RadioResourceConfigDedicated sourceRadioResourceConfig;
-    uint16_t sourceUeIdentity;
+    uint16_t sourceUeIdentity;      
     MasterInformationBlock sourceMasterInformationBlock;
     SystemInformationBlockType1 sourceSystemInformationBlockType1;
     SystemInformationBlockType2 sourceSystemInformationBlockType2;
@@ -489,7 +425,7 @@ public:
     uint8_t rrcTransactionIdentifier;
     RadioResourceConfigDedicated radioResourceConfigDedicated;
   };
-
+   
   struct RrcConnectionSetupCompleted
   {
     uint8_t rrcTransactionIdentifier;
@@ -505,25 +441,25 @@ public:
     bool haveRadioResourceConfigDedicated;
     RadioResourceConfigDedicated radioResourceConfigDedicated;
   };
-
+    
   struct RrcConnectionReconfigurationCompleted
   {
     uint8_t rrcTransactionIdentifier;
   };
-
-
+    
+      
   struct RrcConnectionReestablishmentRequest
   {
     ReestabUeIdentity ueIdentity;
     ReestablishmentCause reestablishmentCause;
   };
-
+    
   struct RrcConnectionReestablishment
   {
     uint8_t rrcTransactionIdentifier;
     RadioResourceConfigDedicated radioResourceConfigDedicated;
   };
-
+      
   struct RrcConnectionReestablishmentComplete
   {
     uint8_t rrcTransactionIdentifier;
@@ -547,12 +483,11 @@ public:
   {
     AsConfig asConfig;
   };
-
+  
   struct MeasurementReport
   {
     MeasResults measResults;
   };
-
 };
 
 
@@ -561,15 +496,16 @@ public:
  * Service Access Point (SAP) used by the UE RRC to send messages to
  * the eNB. Each method defined in this class correspond to the
  * transmission of a message that is defined in section 6.2.2 of TS
- * 36.331.
+ * 36.331. 
  */
 class LteUeRrcSapUser : public LteRrcSap
 {
 public:
-  struct SetupParameters
+
+  struct SetupParameters 
   {
     LteRlcSapProvider* srb0SapProvider;
-    LtePdcpSapProvider* srb1SapProvider;
+    LtePdcpSapProvider* srb1SapProvider;       
   };
 
   virtual void Setup (SetupParameters params) = 0;
@@ -578,7 +514,7 @@ public:
   virtual void SendRrcConnectionReconfigurationCompleted (RrcConnectionReconfigurationCompleted msg) = 0;
   virtual void SendRrcConnectionReestablishmentRequest (RrcConnectionReestablishmentRequest msg) = 0;
   virtual void SendRrcConnectionReestablishmentComplete (RrcConnectionReestablishmentComplete msg) = 0;
-  virtual void SendMeasurementReport (MeasurementReport msg) = 0;
+
 };
 
 
@@ -586,15 +522,16 @@ public:
  * Service Access Point (SAP) used to let the UE RRC receive a message
  * from the eNB RRC. Each method defined in this class correspond to
  * the reception of a message that is defined in section 6.2.2 of TS
- * 36.331.
+ * 36.331. 
  */
 class LteUeRrcSapProvider : public LteRrcSap
 {
 public:
-  struct CompleteSetupParameters
+
+  struct CompleteSetupParameters 
   {
     LteRlcSapUser* srb0SapUser;
-    LtePdcpSapUser* srb1SapUser;
+    LtePdcpSapUser* srb1SapUser;       
   };
 
   virtual void CompleteSetup (CompleteSetupParameters params) = 0;
@@ -615,15 +552,16 @@ public:
  * Service Access Point (SAP) used by the eNB RRC to send messages to
  * the UE RC.  Each method defined in this class correspond to
  * the transmission of a message that is defined in section 6.2.2 of TS
- * 36.331.
+ * 36.331. 
  */
 class LteEnbRrcSapUser : public LteRrcSap
 {
 public:
-  struct SetupUeParameters
+
+  struct SetupUeParameters 
   {
     LteRlcSapProvider* srb0SapProvider;
-    LtePdcpSapProvider* srb1SapProvider;
+    LtePdcpSapProvider* srb1SapProvider;       
   };
 
   virtual void SetupUe (uint16_t rnti, SetupUeParameters params) = 0;
@@ -648,15 +586,17 @@ public:
  * Service Access Point (SAP) used to let the eNB RRC receive a
  * message from a UE RRC.  Each method defined in this class correspond to
  * the reception of a message that is defined in section 6.2.2 of TS
- * 36.331.
+ * 36.331. 
  */
 class LteEnbRrcSapProvider : public LteRrcSap
 {
 public:
-  struct CompleteSetupUeParameters
+   
+
+  struct CompleteSetupUeParameters 
   {
     LteRlcSapUser* srb0SapUser;
-    LtePdcpSapUser* srb1SapUser;
+    LtePdcpSapUser* srb1SapUser;       
   };
 
   virtual void CompleteSetupUe (uint16_t rnti, CompleteSetupUeParameters params) = 0;
@@ -682,7 +622,7 @@ public:
 /**
  * Template for the implementation of the LteUeRrcSapUser as a member
  * of an owner class of type C to which all methods are forwarded
- *
+ * 
  */
 template <class C>
 class MemberLteUeRrcSapUser : public LteUeRrcSapUser
@@ -697,7 +637,6 @@ public:
   virtual void SendRrcConnectionReconfigurationCompleted (RrcConnectionReconfigurationCompleted msg);
   virtual void SendRrcConnectionReestablishmentRequest (RrcConnectionReestablishmentRequest msg);
   virtual void SendRrcConnectionReestablishmentComplete (RrcConnectionReestablishmentComplete msg);
-  virtual void SendMeasurementReport (MeasurementReport msg);
 
 private:
   MemberLteUeRrcSapUser ();
@@ -716,58 +655,51 @@ MemberLteUeRrcSapUser<C>::MemberLteUeRrcSapUser ()
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapUser<C>::Setup (SetupParameters params)
 {
   m_owner->DoSetup (params);
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapUser<C>::SendRrcConnectionRequest (RrcConnectionRequest msg)
 {
   m_owner->DoSendRrcConnectionRequest (msg);
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapUser<C>::SendRrcConnectionSetupCompleted (RrcConnectionSetupCompleted msg)
 {
   m_owner->DoSendRrcConnectionSetupCompleted (msg);
 }
 
 template <class C>
-void
-MemberLteUeRrcSapUser<C>::SendRrcConnectionReconfigurationCompleted (RrcConnectionReconfigurationCompleted msg)
+void 
+MemberLteUeRrcSapUser<C>::SendRrcConnectionReconfigurationCompleted (RrcConnectionReconfigurationCompleted msg) 
 {
-  m_owner->DoSendRrcConnectionReconfigurationCompleted (msg);
+  m_owner->DoSendRrcConnectionReconfigurationCompleted (msg) ;
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapUser<C>::SendRrcConnectionReestablishmentRequest (RrcConnectionReestablishmentRequest msg)
 {
   m_owner->DoSendRrcConnectionReestablishmentRequest (msg);
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapUser<C>::SendRrcConnectionReestablishmentComplete (RrcConnectionReestablishmentComplete msg)
 {
   m_owner->DoSendRrcConnectionReestablishmentComplete (msg);
 }
 
-template <class C>
-void
-MemberLteUeRrcSapUser<C>::SendMeasurementReport (MeasurementReport msg)
-{
-  m_owner->DoSendMeasurementReport (msg);
-}
-
 /**
  * Template for the implementation of the LteUeRrcSapProvider as a member
  * of an owner class of type C to which all methods are forwarded
- *
+ * 
  */
 template <class C>
 class MemberLteUeRrcSapProvider : public LteUeRrcSapProvider
@@ -775,7 +707,7 @@ class MemberLteUeRrcSapProvider : public LteUeRrcSapProvider
 public:
   MemberLteUeRrcSapProvider (C* owner);
 
-  // methods inherited from LteUeRrcSapProvider go here
+  // methods inherited from LteUeRrcSapProvider go here  
   virtual void CompleteSetup (CompleteSetupParameters params);
   virtual void RecvMasterInformationBlock (MasterInformationBlock msg);
   virtual void RecvSystemInformationBlockType1 (SystemInformationBlockType1 msg);
@@ -804,70 +736,70 @@ MemberLteUeRrcSapProvider<C>::MemberLteUeRrcSapProvider ()
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapProvider<C>::CompleteSetup (CompleteSetupParameters params)
 {
   m_owner->DoCompleteSetup (params);
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapProvider<C>::RecvMasterInformationBlock (MasterInformationBlock msg)
 {
   Simulator::ScheduleNow (&C::DoRecvMasterInformationBlock, m_owner, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapProvider<C>::RecvSystemInformationBlockType1 (SystemInformationBlockType1 msg)
 {
   Simulator::ScheduleNow (&C::DoRecvSystemInformationBlockType1, m_owner, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapProvider<C>::RecvSystemInformation (SystemInformation msg)
 {
   Simulator::ScheduleNow (&C::DoRecvSystemInformation, m_owner, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapProvider<C>::RecvRrcConnectionSetup (RrcConnectionSetup msg)
 {
   Simulator::ScheduleNow (&C::DoRecvRrcConnectionSetup, m_owner, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapProvider<C>::RecvRrcConnectionReconfiguration (RrcConnectionReconfiguration msg)
 {
   Simulator::ScheduleNow (&C::DoRecvRrcConnectionReconfiguration, m_owner, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapProvider<C>::RecvRrcConnectionReestablishment (RrcConnectionReestablishment msg)
 {
   Simulator::ScheduleNow (&C::DoRecvRrcConnectionReestablishment, m_owner, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapProvider<C>::RecvRrcConnectionReestablishmentReject (RrcConnectionReestablishmentReject msg)
 {
   Simulator::ScheduleNow (&C::DoRecvRrcConnectionReestablishmentReject, m_owner, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapProvider<C>::RecvRrcConnectionRelease (RrcConnectionRelease msg)
 {
   Simulator::ScheduleNow (&C::DoRecvRrcConnectionRelease, m_owner, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteUeRrcSapProvider<C>::RecvRrcConnectionReject (RrcConnectionReject msg)
 {
   Simulator::ScheduleNow (&C::DoRecvRrcConnectionReject, m_owner, msg);
@@ -877,7 +809,7 @@ MemberLteUeRrcSapProvider<C>::RecvRrcConnectionReject (RrcConnectionReject msg)
 /**
  * Template for the implementation of the LteEnbRrcSapUser as a member
  * of an owner class of type C to which all methods are forwarded
- *
+ * 
  */
 template <class C>
 class MemberLteEnbRrcSapUser : public LteEnbRrcSapUser
@@ -920,91 +852,91 @@ MemberLteEnbRrcSapUser<C>::MemberLteEnbRrcSapUser ()
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapUser<C>::SetupUe (uint16_t rnti, SetupUeParameters params)
 {
   m_owner->DoSetupUe (rnti, params);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapUser<C>::RemoveUe (uint16_t rnti)
 {
   m_owner->DoRemoveUe (rnti);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapUser<C>::SendMasterInformationBlock (MasterInformationBlock msg)
 {
   m_owner->DoSendMasterInformationBlock (msg);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapUser<C>::SendSystemInformationBlockType1 (SystemInformationBlockType1 msg)
 {
   m_owner->DoSendSystemInformationBlockType1 (msg);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapUser<C>::SendSystemInformation (SystemInformation msg)
 {
   m_owner->DoSendSystemInformation (msg);
 }
 
 template <class C>
-void
-MemberLteEnbRrcSapUser<C>::SendRrcConnectionSetup (uint16_t rnti, RrcConnectionSetup msg)
+void 
+MemberLteEnbRrcSapUser<C>::SendRrcConnectionSetup (uint16_t rnti, RrcConnectionSetup msg) 
 {
-  m_owner->DoSendRrcConnectionSetup (rnti, msg);
+  m_owner->DoSendRrcConnectionSetup (rnti, msg) ;
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapUser<C>::SendRrcConnectionReconfiguration (uint16_t rnti, RrcConnectionReconfiguration msg)
 {
   m_owner->DoSendRrcConnectionReconfiguration (rnti, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapUser<C>::SendRrcConnectionReestablishment (uint16_t rnti, RrcConnectionReestablishment msg)
 {
   m_owner->DoSendRrcConnectionReestablishment (rnti, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapUser<C>::SendRrcConnectionReestablishmentReject (uint16_t rnti, RrcConnectionReestablishmentReject msg)
 {
   m_owner->DoSendRrcConnectionReestablishmentReject (rnti, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapUser<C>::SendRrcConnectionRelease (uint16_t rnti, RrcConnectionRelease msg)
 {
   m_owner->DoSendRrcConnectionRelease (rnti, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapUser<C>::SendRrcConnectionReject (uint16_t rnti, RrcConnectionReject msg)
 {
   m_owner->DoSendRrcConnectionReject (rnti, msg);
 }
 
 template <class C>
-Ptr<Packet>
+Ptr<Packet> 
 MemberLteEnbRrcSapUser<C>::EncodeHandoverPreparationInformation (HandoverPreparationInfo msg)
 {
   return m_owner->DoEncodeHandoverPreparationInformation (msg);
 }
 
 template <class C>
-LteRrcSap::HandoverPreparationInfo
+LteRrcSap::HandoverPreparationInfo 
 MemberLteEnbRrcSapUser<C>::DecodeHandoverPreparationInformation (Ptr<Packet> p)
 {
   return m_owner->DoDecodeHandoverPreparationInformation (p);
@@ -1012,14 +944,14 @@ MemberLteEnbRrcSapUser<C>::DecodeHandoverPreparationInformation (Ptr<Packet> p)
 
 
 template <class C>
-Ptr<Packet>
+Ptr<Packet>  
 MemberLteEnbRrcSapUser<C>::EncodeHandoverCommand (RrcConnectionReconfiguration msg)
 {
   return m_owner->DoEncodeHandoverCommand (msg);
 }
 
 template <class C>
-LteRrcSap::RrcConnectionReconfiguration
+LteRrcSap::RrcConnectionReconfiguration  
 MemberLteEnbRrcSapUser<C>::DecodeHandoverCommand (Ptr<Packet> p)
 {
   return m_owner->DoDecodeHandoverCommand (p);
@@ -1028,7 +960,7 @@ MemberLteEnbRrcSapUser<C>::DecodeHandoverCommand (Ptr<Packet> p)
 /**
  * Template for the implementation of the LteEnbRrcSapProvider as a member
  * of an owner class of type C to which all methods are forwarded
- *
+ * 
  */
 template <class C>
 class MemberLteEnbRrcSapProvider : public LteEnbRrcSapProvider
@@ -1036,8 +968,8 @@ class MemberLteEnbRrcSapProvider : public LteEnbRrcSapProvider
 public:
   MemberLteEnbRrcSapProvider (C* owner);
 
-  // methods inherited from LteEnbRrcSapProvider go here
-
+  // methods inherited from LteEnbRrcSapProvider go here  
+  
   virtual void CompleteSetupUe (uint16_t rnti, CompleteSetupUeParameters params);
   virtual void RecvRrcConnectionRequest (uint16_t rnti, RrcConnectionRequest msg);
   virtual void RecvRrcConnectionSetupCompleted (uint16_t rnti, RrcConnectionSetupCompleted msg);
@@ -1063,49 +995,49 @@ MemberLteEnbRrcSapProvider<C>::MemberLteEnbRrcSapProvider ()
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapProvider<C>::CompleteSetupUe (uint16_t rnti, CompleteSetupUeParameters params)
 {
   m_owner->DoCompleteSetupUe (rnti, params);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapProvider<C>::RecvRrcConnectionRequest (uint16_t rnti, RrcConnectionRequest msg)
 {
   Simulator::ScheduleNow (&C::DoRecvRrcConnectionRequest, m_owner, rnti, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapProvider<C>::RecvRrcConnectionSetupCompleted (uint16_t rnti, RrcConnectionSetupCompleted msg)
 {
   Simulator::ScheduleNow (&C::DoRecvRrcConnectionSetupCompleted, m_owner, rnti, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapProvider<C>::RecvRrcConnectionReconfigurationCompleted (uint16_t rnti, RrcConnectionReconfigurationCompleted msg)
 {
   Simulator::ScheduleNow (&C::DoRecvRrcConnectionReconfigurationCompleted, m_owner, rnti, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapProvider<C>::RecvRrcConnectionReestablishmentRequest (uint16_t rnti, RrcConnectionReestablishmentRequest msg)
 {
   Simulator::ScheduleNow (&C::DoRecvRrcConnectionReestablishmentRequest, m_owner, rnti, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapProvider<C>::RecvRrcConnectionReestablishmentComplete (uint16_t rnti, RrcConnectionReestablishmentComplete msg)
 {
   Simulator::ScheduleNow (&C::DoRecvRrcConnectionReestablishmentComplete, m_owner, rnti, msg);
 }
 
 template <class C>
-void
+void 
 MemberLteEnbRrcSapProvider<C>::RecvMeasurementReport (uint16_t rnti, MeasurementReport msg)
 {
   Simulator::ScheduleNow (&C::DoRecvMeasurementReport, m_owner, rnti, msg);

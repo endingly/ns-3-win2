@@ -23,6 +23,8 @@
 
 #include "ns3/test.h"
 
+#include <ns3/buildings-mobility-model.h>
+#include <ns3/buildings-propagation-loss-model.h>
 
 
 namespace ns3 {

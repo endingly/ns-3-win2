@@ -97,10 +97,7 @@ Ipv6StaticRouting::PrintRoutingTable (Ptr<OutputStreamWrapper> stream) const
 void Ipv6StaticRouting::AddHostRouteTo (Ipv6Address dst, Ipv6Address nextHop, uint32_t interface, Ipv6Address prefixToUse, uint32_t metric)
 {
   NS_LOG_FUNCTION (this << dst << nextHop << interface << prefixToUse << metric);
-  if (nextHop.IsLinkLocal())
-    {
-      NS_LOG_WARN ("Ipv6StaticRouting::AddHostRouteTo - Next hop should be link-local");
-    }
+  NS_ASSERT_MSG(nextHop.IsLinkLocal(), "Ipv6StaticRouting::AddHostRouteTo - Next hop must be link-local");
 
   AddNetworkRouteTo (dst, Ipv6Prefix::GetOnes (), nextHop, interface, prefixToUse, metric);
 }
@@ -122,10 +119,7 @@ void Ipv6StaticRouting::AddNetworkRouteTo (Ipv6Address network, Ipv6Prefix netwo
 void Ipv6StaticRouting::AddNetworkRouteTo (Ipv6Address network, Ipv6Prefix networkPrefix, Ipv6Address nextHop, uint32_t interface, Ipv6Address prefixToUse, uint32_t metric)
 {
   NS_LOG_FUNCTION (this << network << networkPrefix << nextHop << interface << prefixToUse << metric);
-  if (nextHop.IsLinkLocal())
-    {
-      NS_LOG_WARN ("Ipv6StaticRouting::AddNetworkRouteTo - Next hop should be link-local");
-    }
+  NS_ASSERT_MSG(nextHop.IsLinkLocal(), "Ipv6StaticRouting::AddNetworkRouteTo - Next hop must be link-local");
 
   Ipv6RoutingTableEntry* route = new Ipv6RoutingTableEntry ();
   *route = Ipv6RoutingTableEntry::CreateNetworkRouteTo (network, networkPrefix, nextHop, interface, prefixToUse);
@@ -575,7 +569,7 @@ bool Ipv6StaticRouting::RouteInput (Ptr<const Packet> p, const Ipv6Header &heade
         }
     }
 
-  /// \todo  Configurable option to enable \RFC{1222} Strong End System Model
+  /// \todo  Configurable option to enable RFC 1222 Strong End System Model
   // Right now, we will be permissive and allow a source to send us
   // a packet to one of our other interface addresses; that is, the
   // destination unicast address does not match one of the iif addresses,

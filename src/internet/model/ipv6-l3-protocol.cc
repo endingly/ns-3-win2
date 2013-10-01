@@ -44,9 +44,6 @@
 #include "icmpv6-l4-protocol.h"
 #include "ndisc-cache.h"
 
-/// Minimum IPv6 MTU, as defined by \RFC{2460}
-#define IPV6_MIN_MTU 1280
-
 namespace ns3 {
 
 NS_OBJECT_ENSURE_REGISTERED (Ipv6L3Protocol);
@@ -91,7 +88,6 @@ Ipv6L3Protocol::Ipv6L3Protocol ()
   : m_nInterfaces (0)
 {
   NS_LOG_FUNCTION_NOARGS ();
-  m_pmtuCache = CreateObject<Ipv6PmtuCache> ();
 }
 
 Ipv6L3Protocol::~Ipv6L3Protocol ()
@@ -135,7 +131,6 @@ void Ipv6L3Protocol::DoDispose ()
 
   m_node = 0;
   m_routingProtocol = 0;
-  m_pmtuCache = 0;
   Object::DoDispose ();
 }
 
@@ -454,23 +449,9 @@ uint16_t Ipv6L3Protocol::GetMetric (uint32_t i) const
 uint16_t Ipv6L3Protocol::GetMtu (uint32_t i) const
 {
   NS_LOG_FUNCTION (this << i);
-
-  // RFC 1981, if PMTU is disabled, return the minimum MTU
-  if (!m_mtuDiscover)
-    {
-      return IPV6_MIN_MTU;
-    }
-
   Ptr<Ipv6Interface> interface = GetInterface (i);
   return interface->GetDevice ()->GetMtu ();
 }
-
-void Ipv6L3Protocol::SetPmtu (Ipv6Address dst, uint32_t pmtu)
-{
-  NS_LOG_FUNCTION (this << dst << int(pmtu));
-  m_pmtuCache->SetPmtu (dst, pmtu);
-}
-
 
 bool Ipv6L3Protocol::IsUp (uint32_t i) const
 {
@@ -573,18 +554,6 @@ bool Ipv6L3Protocol::GetIpForward () const
 {
   NS_LOG_FUNCTION_NOARGS ();
   return m_ipForward;
-}
-
-void Ipv6L3Protocol::SetMtuDiscover (bool mtuDiscover)
-{
-  NS_LOG_FUNCTION (this << int(mtuDiscover));
-  m_mtuDiscover = mtuDiscover;
-}
-
-bool Ipv6L3Protocol::GetMtuDiscover () const
-{
-  NS_LOG_FUNCTION (this);
-  return m_mtuDiscover;
 }
 
 void Ipv6L3Protocol::SetSendIcmpv6Redirect (bool sendIcmpv6Redirect)
@@ -879,14 +848,7 @@ void Ipv6L3Protocol::SendRealOut (Ptr<Ipv6Route> route, Ptr<Packet> packet, Ipv6
   // Check packet size
   std::list<Ptr<Packet> > fragments;
 
-  // Check if we have a Path MTU stored. If so, use it. Else, use the link MTU.
-  size_t targetMtu = (size_t)(m_pmtuCache->GetPmtu (ipHeader.GetDestinationAddress()));
-  if (targetMtu == 0)
-    {
-      targetMtu = dev->GetMtu ();
-    }
-
-  if (packet->GetSize () > targetMtu + 40) /* 40 => size of IPv6 header */
+  if (packet->GetSize () > (size_t)(dev->GetMtu () + 40)) /* 40 => size of IPv6 header */
     {
       // Router => drop
 
@@ -920,7 +882,7 @@ void Ipv6L3Protocol::SendRealOut (Ptr<Ipv6Route> route, Ptr<Packet> packet, Ipv6
       // To get specific method GetFragments from Ipv6ExtensionFragmentation
       Ipv6ExtensionFragment *ipv6Fragment = dynamic_cast<Ipv6ExtensionFragment *> (PeekPointer (ipv6ExtensionDemux->GetExtension (Ipv6Header::IPV6_EXT_FRAGMENTATION)));
       NS_ASSERT (ipv6Fragment != 0);
-      ipv6Fragment->GetFragments (packet, targetMtu, fragments);
+      ipv6Fragment->GetFragments (packet, outInterface->GetDevice ()->GetMtu (), fragments);
     }
 
   if (!route->GetGateway ().IsEqual (Ipv6Address::GetAny ()))

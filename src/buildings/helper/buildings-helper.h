@@ -30,39 +30,13 @@
 
 namespace ns3 {
 
-class MobilityModel;
-class Building;
+class BuildingsMobilityModel;
 
 class BuildingsHelper
 {
-public:
-  /**
-  * Install the MobilityBuildingInfo to a node
-  *
-  * \param node the mobility model of the node to be updated
-  */
-  static void Install (Ptr<Node> node);     // for any nodes
-  /**
-  * Install the MobilityBuildingInfo to the set of nodes in a NodeContainer
-  *
-  * \param c the NodeContainer including the nodes to be updated
-  */
-  static void Install (NodeContainer c);     // for any nodes
-  /**
-  * This method goes through the whole NodeList and, for each node in
-  * the list, calls BuildingsHelper::MakeConsistent() passing to it
-  * the MobilityModel of that node. 
-  *
-  */
+public:  
   static void MakeMobilityModelConsistent ();
-  /**
-  * Make the given mobility model consistent, by determining whether
-  * its position falls inside any of the building in BuildingList, and
-  * updating accordingly the BuildingInfo aggregated with the MobilityModel.
-  *
-  * \param bmm the mobility model to be made consistent
-  */
-  static void MakeConsistent (Ptr<MobilityModel> bmm);
+  static void MakeConsistent (Ptr<BuildingsMobilityModel> bmm);
   
 };
 

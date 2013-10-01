@@ -279,9 +279,6 @@
     <ClCompile Include="..\..\..\src\internet\model\tcp-westwood.cc">
       <Filter>model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\internet\model\ipv6-pmtu-cache.cc">
-      <Filter>model</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\internet\model\arp-cache.h">
@@ -561,9 +558,6 @@
       <Filter>helper</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\internet\model\tcp-westwood.h">
-      <Filter>model</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\internet\model\ipv6-pmtu-cache.h">
       <Filter>model</Filter>
     </ClInclude>
   </ItemGroup>
