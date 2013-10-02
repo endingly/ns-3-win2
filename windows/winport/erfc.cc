@@ -4,7 +4,7 @@
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or (at
+ * the Free Software Foundation; either version 2 of the License, or (at
  * your option) any later version.
  * 
  * This program is distributed in the hope that it will be useful, but
@@ -26,7 +26,9 @@
  *  the other stuff with Chebyshev fits. These are simpler and
  *  more precise than the original approximations. [GJ])
  */
-// Adapted for ns3 from GNU Scientific library version 1.9 file:erfc.c by John Abraham<jabraham3@mail.gatech.edu>
+
+/* copied from gsl-1.9 release under GPLv2 */
+/* Adapted by John Abraham john.abraham@gatech.edu*/
 
 #include "eval.h"
 #include "gsl_math.h"
@@ -36,11 +38,8 @@
 #include "gsl_errno.h"
 #include "cheb_eval.cc"
 
-int gsl_sf_erfc_e(double x, gsl_sf_result * result);
-double  gsl_sf_erfc(double x)
-{
-   EVAL_RESULT(gsl_sf_erfc_e(x, &result));
-}
+#define LogRootPi_  0.57236494292470008706
+
 
 static double erfc8_sum(double x)
 {
@@ -79,13 +78,63 @@ static double erfc8_sum(double x)
   return num/den;
 }
 
-
+inline
 static double erfc8(double x)
 {
   double e;
   e = erfc8_sum(x);
   e *= exp(-x*x);
   return e;
+}
+
+inline
+static double log_erfc8(double x)
+{
+  double e;
+  e = erfc8_sum(x);
+  e = log(e) - x*x;
+  return e;
+}
+
+#if 0
+/* Abramowitz+Stegun, 7.2.14 */
+static double erfcasympsum(double x)
+{
+  int i;
+  double e = 1.;
+  double coef = 1.;
+  for (i=1; i<5; ++i) {
+    /* coef *= -(2*i-1)/(2*x*x); ??? [GJ] */
+    coef *= -(2*i+1)/(i*(4*x*x*x*x));
+    e += coef;
+    /*
+    if (fabs(coef) < 1.0e-15) break;
+    if (fabs(coef) > 1.0e10) break;
+    
+    [GJ]: These tests are not useful. This function is only
+    used below. Took them out; they gum up the pipeline.
+    */
+  }
+  return e;
+}
+#endif /* 0 */
+
+
+/* Abramowitz+Stegun, 7.1.5 */
+static int erfseries(double x, gsl_sf_result * result)
+{
+  double coef = x;
+  double e    = coef;
+  double del;
+  int k;
+  for (k=1; k<30; ++k) {
+    coef *= -x*x/k;
+    del   = coef/(2.0*k+1.0);
+    e += del;
+  }
+  result->val = 2.0 / M_SQRTPI * e;
+  result->err = 2.0 / M_SQRTPI * (fabs(del) + GSL_DBL_EPSILON);
+  return GSL_SUCCESS;
 }
 
 
@@ -119,7 +168,6 @@ static cheb_series erfc_xlt1_cs = {
   -1, 1,
   12
 };
-
 
 /* Chebyshev fit for erfc(x) exp(x^2), 1 < x < 5, x = 2t + 3, -1 < t < 1
  */
@@ -188,6 +236,22 @@ static cheb_series erfc_x510_cs = {
   12
 };
 
+#if 0
+inline
+static double
+erfc_asymptotic(double x)
+{
+  return exp(-x*x)/x * erfcasympsum(x) / M_SQRTPI;
+}
+inline
+static double
+log_erfc_asymptotic(double x)
+{
+  return log(erfcasympsum(x)/x) - x*x - LogRootPi_;
+}
+#endif /* 0 */
+
+
 /*-*-*-*-*-*-*-*-*-*-*-* Functions with Error Codes *-*-*-*-*-*-*-*-*-*-*-*/
 
 int gsl_sf_erfc_e(double x, gsl_sf_result * result)
@@ -237,5 +301,137 @@ int gsl_sf_erfc_e(double x, gsl_sf_result * result)
   }
 
   return GSL_SUCCESS;
+}
+
+
+int gsl_sf_log_erfc_e(double x, gsl_sf_result * result)
+{
+  /* CHECK_POINTER(result) */
+
+  if(x*x < 10.0*GSL_ROOT6_DBL_EPSILON) {
+    const double y = x / M_SQRTPI;
+    /* series for -1/2 Log[Erfc[Sqrt[Pi] y]] */
+    const double c3 = (4.0 - M_PI)/3.0;
+    const double c4 = 2.0*(1.0 - M_PI/3.0);
+    const double c5 = -0.001829764677455021;  /* (96.0 - 40.0*M_PI + 3.0*M_PI*M_PI)/30.0  */
+    const double c6 =  0.02629651521057465;   /* 2.0*(120.0 - 60.0*M_PI + 7.0*M_PI*M_PI)/45.0 */
+    const double c7 = -0.01621575378835404;
+    const double c8 =  0.00125993961762116;
+    const double c9 =  0.00556964649138;
+    const double c10 = -0.0045563339802;
+    const double c11 =  0.0009461589032;
+    const double c12 =  0.0013200243174;
+    const double c13 = -0.00142906;
+    const double c14 =  0.00048204;
+    double series = c8 + y*(c9 + y*(c10 + y*(c11 + y*(c12 + y*(c13 + c14*y)))));
+    series = y*(1.0 + y*(1.0 + y*(c3 + y*(c4 + y*(c5 + y*(c6 + y*(c7 + y*series)))))));
+    result->val = -2.0 * series;
+    result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
+    return GSL_SUCCESS;
+  }
+  /*
+  don't like use of log1p(); added above series stuff for small x instead, should be ok [GJ]
+  else if (fabs(x) < 1.0) {
+    gsl_sf_result result_erf;
+    gsl_sf_erf_e(x, &result_erf);
+    result->val  = log1p(-result_erf.val);
+    result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
+    return GSL_SUCCESS;
+  }
+  */
+  else if(x > 8.0) {
+    result->val = log_erfc8(x);
+    result->err = 2.0 * GSL_DBL_EPSILON * fabs(result->val);
+    return GSL_SUCCESS;
+  }
+  else {
+    gsl_sf_result result_erfc;
+    gsl_sf_erfc_e(x, &result_erfc);
+    result->val  = log(result_erfc.val);
+    result->err  = fabs(result_erfc.err / result_erfc.val);
+    result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
+    return GSL_SUCCESS;
+  }
+}
+
+
+int gsl_sf_erf_e(double x, gsl_sf_result * result)
+{
+  /* CHECK_POINTER(result) */
+
+  if(fabs(x) < 1.0) {
+    return erfseries(x, result);
+  }
+  else {
+    gsl_sf_result result_erfc;
+    gsl_sf_erfc_e(x, &result_erfc);
+    result->val  = 1.0 - result_erfc.val;
+    result->err  = result_erfc.err;
+    result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
+    return GSL_SUCCESS;
+  }
+}
+
+
+int gsl_sf_erf_Z_e(double x, gsl_sf_result * result)
+{
+  /* CHECK_POINTER(result) */
+
+  {
+    const double ex2 = exp(-x*x/2.0);
+    result->val  = ex2 / (M_SQRT2 * M_SQRTPI);
+    result->err  = fabs(x * result->val) * GSL_DBL_EPSILON;
+    result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
+//    CHECK_UNDERFLOW(result);
+    return GSL_SUCCESS;
+  }
+}
+
+
+int gsl_sf_erf_Q_e(double x, gsl_sf_result * result)
+{
+  /* CHECK_POINTER(result) */
+
+  {
+    gsl_sf_result result_erfc;
+    int stat = gsl_sf_erfc_e(x/M_SQRT2, &result_erfc);
+    result->val  = 0.5 * result_erfc.val;
+    result->err  = 0.5 * result_erfc.err;
+    result->err += 2.0 * GSL_DBL_EPSILON * fabs(result->val);
+    return stat;
+  }
+}
+
+
+
+
+
+/*-*-*-*-*-*-*-*-*-* Functions w/ Natural Prototypes *-*-*-*-*-*-*-*-*-*-*/
+
+#include "eval.h"
+
+double gsl_sf_erfc(double x)
+{
+  EVAL_RESULT(gsl_sf_erfc_e(x, &result));
+}
+
+double gsl_sf_log_erfc(double x)
+{
+  EVAL_RESULT(gsl_sf_log_erfc_e(x, &result));
+}
+
+double gsl_sf_erf(double x)
+{
+  EVAL_RESULT(gsl_sf_erf_e(x, &result));
+}
+
+double gsl_sf_erf_Z(double x)
+{
+  EVAL_RESULT(gsl_sf_erf_Z_e(x, &result));
+}
+
+double gsl_sf_erf_Q(double x)
+{
+  EVAL_RESULT(gsl_sf_erf_Q_e(x, &result));
 }
 
