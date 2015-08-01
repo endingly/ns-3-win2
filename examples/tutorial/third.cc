@@ -168,5 +168,6 @@ main (int argc, char *argv[])
 
   Simulator::Run ();
   Simulator::Destroy ();
+  NS_LOG_UNCOND("Done");
   return 0;
 }

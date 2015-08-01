@@ -61,11 +61,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\headers;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);WIN32;NS3_LOG_ENABLE</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>$(SolutionDir)\core\Release\*.obj;$(SolutionDir)\applications\Release\*.obj;$(SolutionDir)\aodv\Release\*.obj;$(SolutionDir)\antenna\Release\*.obj;$(SolutionDir)\bridge\Release\*.obj;$(SolutionDir)\tools\Release\*.obj;$(SolutionDir)\buildings\Release\*.obj;$(SolutionDir)\csma\Release\*.obj;$(SolutionDir)\csma-layout\Release\*.obj;$(SolutionDir)\dsdn\Release\*.obj;$(SolutionDir)\dsr\Release\*.obj;$(SolutionDir)\energy\Release\*.obj;$(SolutionDir)\flow-monitor\Release\*.obj;$(SolutionDir)\internet\Release\*.obj;$(SolutionDir)\lte\Release\*.obj;$(SolutionDir)\mesh\Release\*.obj;$(SolutionDir)\mobility\Release\*.obj;$(SolutionDir)\network\Release\*.obj;$(SolutionDir)\propagation\Release\*.obj;$(SolutionDir)\stats\Release\*.obj;$(SolutionDir)\wifi\Release\*.obj;$(SolutionDir)\winport\Release\*.obj;$(SolutionDir)\point-to-point\Release\*.obj;$(SolutionDir)\point-to-point-layout\Release\*.obj;$(SolutionDir)\nix-vector-routing\Release\*.obj;$(SolutionDir)\olsr\Release\*.obj;$(SolutionDir)\mpi\Release\*.obj;$(SolutionDir)\netanim\Release\*.obj;$(SolutionDir)\spectrum\Release\*.obj;$(SolutionDir)\uan\Release\*.obj;$(SolutionDir)\wimax\Release\*.obj;$(SolutionDir)\virtual-net-device\Release\*.obj;$(SolutionDir)\config-store\Release\*.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
